@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dishcovery</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="container">
+    <div class="brand">Dishcovery</div>
+
+    <div class="search-wrap">
+      <input type="text" placeholder="찾고싶은 레시피 또는 꿀팁 검색하세요" aria-label="검색" />
+      <button class="icon-btn" aria-label="검색">
+        <!-- search icon -->
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/>
+          <path d="M20 20L17 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <a href="#" class="auth">
+                <span class="user-icon" aria-hidden="true">
+
+                </span>
+      로그인 / 회원가입
+    </a>
+  </div>
+  <hr class="divider" />
+</header>
+
+<main class="page">
+  <section class="controls container">
+    <div class="segmented" role="tablist" aria-label="콘텐츠 종류">
+      <button class="seg-btn active" role="tab" aria-selected="true">레시피</button>
+      <button class="seg-btn" role="tab" aria-selected="false">꿀팁</button>
+    </div>
+    <div class="sorts" aria-label="정렬">
+      <span class="dot">·</span>
+      <button class="sort active">인기순</button>
+      <span class="dot">·</span>
+      <button class="sort">추천순</button>
+      <span class="dot">·</span>
+      <button class="sort">최신순</button>
+    </div>
+  </section>
+  <section class="content container">
+  </section>
+</main>
+
+<script src="main.js"></script>
+</body>
+</html>
