@@ -1,0 +1,80 @@
+/* Dishcovery UI - CSS refresh */
+:root{
+    --brand:#ff6b42;
+    --text:#111;
+    --muted:#9aa0a6;
+    --bg:#f6f7f8;
+    --line:#d7d9dd;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+    margin:0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Noto Sans KR", "Helvetica Neue", Arial, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    color:var(--text);
+    background:var(--bg);
+}
+
+.container{width:min(1180px, 94%); margin:0 auto}
+
+/* Top bar */
+.topbar{background:transparent}
+.topbar .container{
+    display:flex; align-items:center; gap:24px;
+    padding:28px 0 16px;
+}
+
+.brand{font-weight:800; font-size:34px; letter-spacing:.2px; color:var(--brand)}
+
+.search-wrap{position:relative; flex:1}
+.search-wrap input{
+    width:100%; height:44px; border:2px solid var(--brand); border-radius:4px;
+    background:#fff; color:var(--text); padding:0 44px 0 16px; font-size:16px;
+}
+.search-wrap input::placeholder{color:#c7c7c7}
+.search-wrap input:focus{outline:none; box-shadow:0 0 0 3px rgba(255,107,66,.15)}
+.search-wrap .icon-btn{
+    position:absolute; right:8px; top:50%; transform:translateY(-50%);
+    width:36px; height:36px; border:none; background:transparent; color:var(--brand);
+    display:grid; place-items:center; cursor:pointer;
+}
+
+.auth{margin-left:auto; display:flex; align-items:center; gap:8px; color:var(--brand); font-weight:700; text-decoration:none}
+.auth .user-icon{display:grid; place-items:center}
+
+.divider{border:none; height:1px; background:var(--line)}
+
+/* Controls: segmented + sorts */
+.controls{
+    display:grid; grid-template-columns: 1fr auto; align-items:center;
+    gap:24px; padding:26px 0 18px;
+}
+
+.segmented{
+    background:#eaeaea; border-radius:28px; padding:10px;
+    display:flex; gap:10px; width:min(820px, 80%); justify-self:center;
+}
+.segmented .seg-btn{
+    flex:1; height:56px; border:none; border-radius:20px; background:transparent; color:var(--text);
+    font-size:26px; font-weight:800; cursor:pointer; transition:background-color .15s ease, color .15s ease;
+}
+.segmented .seg-btn:hover{background:#f4f4f4}
+.segmented .seg-btn.active{background:var(--brand); color:#fff}
+
+.sorts{display:flex; align-items:center; gap:10px; color:#b8bcc2; font-weight:800; justify-self:end}
+.sorts .dot{color:#d9d9d9; font-size:28px; line-height:1}
+.sorts .sort{background:transparent; border:none; cursor:pointer; color:#b8bcc2; font-size:24px; font-weight:800}
+.sorts .sort.active{color:var(--brand)}
+.sorts .sort:hover{color:#ff8b6a}
+
+.content{min-height:40vh; padding:24px 0}
+
+@media (max-width: 860px){
+    .brand{font-size:26px}
+    .controls{grid-template-columns: 1fr}
+    .segmented{width:100%}
+    .segmented .seg-btn{font-size:18px; height:48px}
+    .sorts{justify-self:center}
+    .sorts .sort{font-size:18px}
+}
