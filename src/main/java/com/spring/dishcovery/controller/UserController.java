@@ -10,33 +10,25 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class UserController {
 
-    @GetMapping("/dishcovery_signup")
-    public String dishcoverySignup() {
-        return "html/signup";
-    }
-
-    @PostMapping("/dishcovery_signup")
-    public String dishcoverySignup(@RequestParam String username,
-                                   @RequestParam String password,
-                                   @RequestParam String password2,
-                                   Model model) {
-
-        return "redirect:/login";
-    }
-
+    // 로그인
     @GetMapping("/dishcovery_login")
-    public String dishcoveryLogin() {
+    public String dishcoveryLogin(@RequestParam String gubun, Model model) {
+
+        String loginTab = "";
+        String signUpTab = "";
+
+        if (gubun.equals("login")) {
+
+            loginTab = "tab active";
+            signUpTab = "tab";
+        }else{
+            loginTab = "tab";
+            signUpTab = "tab active";
+        }
+
+        model.addAttribute("loginTab", loginTab);
+        model.addAttribute("signUpTab", signUpTab);
+
         return "html/login";
     }
-
-    @PostMapping("/dishcovery_login")
-    public String dishcoveryLogin(@RequestParam String username,
-                                  @RequestParam String password,
-                                  Model model) {
-
-        model.addAttribute("username", username);
-
-        return "redirect:/login";
-    }
-
 }
