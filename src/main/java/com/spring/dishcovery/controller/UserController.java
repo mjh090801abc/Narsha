@@ -11,18 +11,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class UserController {
 
     @GetMapping("/dishcovery_signup")
-    public String dishcoverySignup(Model model) {
+    public String dishcoverySignup() {
         return "html/signup";
     }
 
     @PostMapping("/dishcovery_signup")
     public String dishcoverySignup(@RequestParam String username,
                                    @RequestParam String password,
+                                   @RequestParam String password2,
                                    Model model) {
 
-        model.addAttribute("username", username);
-        return "html/signup";
+        return "redirect:/login";
     }
+
 
 
 }
