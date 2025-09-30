@@ -29,4 +29,14 @@ public class UserController {
         return "html/login";
     }
 
+    @PostMapping("/dishcovery_login")
+    public String dishcoveryLogin(@RequestParam String username,
+                                  @RequestParam String password,
+                                  Model model) {
+
+        model.addAttribute("username", username);
+
+        return "redirect:/login";
+    }
+
 }
