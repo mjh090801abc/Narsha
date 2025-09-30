@@ -24,6 +24,9 @@ public class UserController {
         return "redirect:/login";
     }
 
-
+    @GetMapping("/dishcovery_login")
+    public String dishcoveryLogin() {
+        return "html/login";
+    }
 
 }
