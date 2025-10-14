@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dishcovery</title>
-  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="/css/mainPage.css">
 </head>
 <body>
+<form id="loginForm" name="loginForm" method="get">
 <header class="topbar">
   <div class="container">
     <div class="brand">Dishcovery</div>
@@ -22,15 +23,20 @@
       </button>
     </div>
 
-    <a href="#" class="auth">
-                <span class="user-icon" aria-hidden="true">
-
-                </span>
-      로그인 / 회원가입
+    <a href="/dishcovery_login?gubun=login" class="auth">
+      <span class="user-icon" aria-hidden="true">
+        로그인 /
+      </span>
+    </a>
+    <a href="/dishcovery_login?gubun=sign" class="logout">
+      <span class="user-icon" aria-hidden="true">
+        회원가입
+      </span>
     </a>
   </div>
   <hr class="divider" />
 </header>
+</form>
 
 <main class="page">
   <section class="controls container">
@@ -51,6 +57,6 @@
   </section>
 </main>
 
-<script src="main.js"></script>
+<script src="/js/mainPage.js"></script>
 </body>
 </html>

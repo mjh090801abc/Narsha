@@ -1,62 +1,66 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Dishcovery | 로그인</title>
-  <link rel="stylesheet" href="login.css" />
+  <link rel="stylesheet" href="/css/login.css" />
 </head>
 <body>
-<main class="page">
-  <h1 class="brand">Dishcovery</h1>
-  <p class="subtitle">레시피 하나로 일상이 특별해지는 순간</p>
 
-  <section class="auth-card" aria-label="인증 폼">
-    <div class="tabs" role="tablist" aria-label="인증 유형">
-      <button class="tab active" id="tab-login" role="tab" aria-selected="true" aria-controls="panel-login">로그인</button>
-      <button class="tab" id="tab-signup" role="tab" aria-selected="false" aria-controls="panel-signup">회원가입</button>
-    </div>
-
-    <form id="panel-login" class="panel show" role="tabpanel" aria-labelledby="tab-login" autocomplete="on">
-      <label class="field-label" for="login-email">이메일</label>
-      <input id="login-email" name="email" type="email" class="input" placeholder="이메일을 입력하세요" required />
-
-      <label class="field-label" for="login-password">비밀번호</label>
-      <input id="login-password" name="password" type="password" class="input" placeholder="비밀번호를 입력하세요" required />
-
-      <div class="hint-row">
-        <a href="#" class="hint">비밀번호를 잊으셨나요?</a>
-      </div>
-
-      <div class="options">
-        <label class="option">
-          <input type="checkbox" id="save-email" />
-          이메일 저장
-        </label>
-        <label class="option">
-          <input type="checkbox" id="auto-login" />
-          자동 로그인
-        </label>
-      </div>
-
-      <button type="submit" class="btn primary">로그인</button>
+  <main class="page">
+    <form id="userForm" name="userForm" method="get">
+    <a class="brand" href="/mainPage">Dishcovery</a>
+    <p class="subtitle">레시피 하나로 일상이 특별해지는 순간</p>
     </form>
 
-    <form id="panel-signup" class="panel" role="tabpanel" aria-labelledby="tab-signup" autocomplete="off">
-      <label class="field-label" for="signup-email">이메일</label>
-      <input id="signup-email" name="email" type="email" class="input" placeholder="이메일을 입력하세요" required />
+    <section class="auth-card" aria-label="인증 폼">
+      <div class="tabs" role="tablist" aria-label="인증 유형">
+        <button th:class="${loginTab}" id="tab-login" role="tab" aria-selected="true" aria-controls="panel-login">로그인</button>
+        <button th:class="${signUpTab}" id="tab-signup" role="tab" aria-selected="false" aria-controls="panel-signup">회원가입</button>
+      </div>
 
-      <label class="field-label" for="signup-password">비밀번호</label>
-      <input id="signup-password" name="password" type="password" class="input" placeholder="비밀번호 (8자 이상)" minlength="8" required />
+      <form id="panel-login" class="panel show" role="tabpanel" aria-labelledby="tab-login" autocomplete="on">
+        <label class="field-label" for="login-email">이메일</label>
+        <input id="login-email" name="email" type="email" class="input" placeholder="이메일을 입력하세요" required />
 
-      <label class="field-label" for="signup-password2">비밀번호 확인</label>
-      <input id="signup-password2" name="password2" type="password" class="input" placeholder="비밀번호를 다시 입력" minlength="8" required />
+        <label class="field-label" for="login-password">비밀번호</label>
+        <input id="login-password" name="password" type="password" class="input" placeholder="비밀번호를 입력하세요" required />
 
-      <button type="submit" class="btn primary">회원가입</button>
-    </form>
-  </section>
-</main>
+        <div class="hint-row">
+          <a href="#" class="hint">비밀번호를 잊으셨나요?</a>
+        </div>
 
-<script src="login.js"></script>
+        <div class="options">
+          <label class="option">
+            <input type="checkbox" id="save-email" />
+            이메일 저장
+          </label>
+          <label class="option">
+            <input type="checkbox" id="auto-login" />
+            자동 로그인
+          </label>
+        </div>
+
+        <button type="submit" class="btn primary">로그인</button>
+      </form>
+
+      <form id="panel-signup" class="panel" role="tabpanel" aria-labelledby="tab-signup" autocomplete="off">
+        <label class="field-label" for="signup-email">이메일</label>
+        <input id="signup-email" name="email" type="email" class="input" placeholder="이메일을 입력하세요" required />
+
+        <label class="field-label" for="signup-password">비밀번호</label>
+        <input id="signup-password" name="password" type="password" class="input" placeholder="비밀번호 (8자 이상)" minlength="8" required />
+
+        <label class="field-label" for="signup-password2">비밀번호 확인</label>
+        <input id="signup-password2" name="password2" type="password" class="input" placeholder="비밀번호를 다시 입력" minlength="8" required />
+
+        <button type="submit" class="btn primary">회원가입</button>
+      </form>
+    </section>
+  </main>
+
+
+<script src="/js/login.js"></script>
 </body>
 </html>
