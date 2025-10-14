@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
 
-    @GetMapping("/mainPage")
+    @GetMapping("/MainPage")
     public String mainPage() {
 
-        return "mainPage";
+        return "html/mainPage";
     }
 
 }
