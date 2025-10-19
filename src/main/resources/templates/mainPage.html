@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dishcovery</title>
-  <link rel="stylesheet" href="/css/mainPage.css">
+    <link rel="stylesheet" th:href="@{/css/mainPage.css}" />
+    <script th:src="@{/js/mainPage.js}"></script>
 </head>
 <body>
 <form id="loginForm" name="loginForm" method="get">
@@ -57,6 +58,6 @@
   </section>
 </main>
 
-<script src="/js/mainPage.js"></script>
+
 </body>
 </html>

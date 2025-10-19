@@ -9,6 +9,7 @@
     const panelSignup = $('#panel-signup');
 
     function activate(tab) {
+        alert("test");
         const map = {
             'tab-login': panelLogin,
             'tab-signup': panelSignup,

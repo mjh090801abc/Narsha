@@ -10,7 +10,7 @@
 
   <main class="page">
     <form id="userForm" name="userForm" method="get">
-    <a class="brand" href="/mainPage">Dishcovery</a>
+    <a class="brand" href="/MainPage">Dishcovery</a>
     <p class="subtitle">레시피 하나로 일상이 특별해지는 순간</p>
     </form>
 
@@ -20,7 +20,7 @@
         <button th:class="${signUpTab}" id="tab-signup" role="tab" aria-selected="false" aria-controls="panel-signup">회원가입</button>
       </div>
 
-      <form id="panel-login" class="panel show" role="tabpanel" aria-labelledby="tab-login" autocomplete="on">
+      <form id="panel-login" th:class="${loginPanel}" role="tabpanel" aria-labelledby="tab-login" autocomplete="on">
         <label class="field-label" for="login-email">이메일</label>
         <input id="login-email" name="email" type="email" class="input" placeholder="이메일을 입력하세요" required />
 
@@ -45,7 +45,7 @@
         <button type="submit" class="btn primary">로그인</button>
       </form>
 
-      <form id="panel-signup" class="panel" role="tabpanel" aria-labelledby="tab-signup" autocomplete="off">
+      <form id="panel-signup" th:class="${signUpPanel}" role="tabpanel" aria-labelledby="tab-signup" autocomplete="off">
         <label class="field-label" for="signup-email">이메일</label>
         <input id="signup-email" name="email" type="email" class="input" placeholder="이메일을 입력하세요" required />
 

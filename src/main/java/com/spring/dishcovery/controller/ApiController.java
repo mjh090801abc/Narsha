@@ -1,5 +1,6 @@
 package com.spring.dishcovery.controller;
 
+import com.spring.dishcovery.entity.DataRequest;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,10 +17,5 @@ public class ApiController {
         return "Received: " + request.getMessage();
     }
 
-    // 내부 클래스 (요청 DTO)
-    public static class DataRequest {
-        private String message;
-        public String getMessage() { return message; }
-        public void setMessage(String message) { this.message = message; }
-    }
+
 }
