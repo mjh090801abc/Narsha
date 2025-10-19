@@ -123,6 +123,7 @@ body {
     border-radius: 999px;
     font-weight: 800;
     cursor: pointer;
+    margin-top: 15px;
 }
 
 .btn.primary {
