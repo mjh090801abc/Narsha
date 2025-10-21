@@ -8,11 +8,12 @@ import lombok.Setter;
 
 public class UserEntity {
 
-    private String userID;
+    private String userMail;
 
-    private String username;
+    private String userName;
 
-    private String password;
+    private String userId;
 
-    private String email;
+    private String userPswd;
+
 }

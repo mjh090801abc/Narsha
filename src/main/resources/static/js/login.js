@@ -60,13 +60,5 @@
         alert('로그인 시도: ' + email);
     });
 
-    panelSignup.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const e1 = document.getElementById('signup-email').value.trim();
-        const p1 = document.getElementById('signup-password').value;
-        const p2 = document.getElementById('signup-password2').value;
-        if (!e1 || !p1 || !p2) return alert('모든 항목을 입력해 주세요.');
-        if (p1 !== p2) return alert('비밀번호가 일치하지 않습니다.');
-        alert('회원가입 시도: ' + e1);
-    });
+
 })();

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.dishcovery.mapper.UserMapper">
+
+    <insert id="saveUserData" parameterType="com.spring.dishcovery.entity.UserEntity">
+        INSERT INTO USER_MASTER (
+                                 USER_ID,
+                                 USER_NAME,
+                                 USER_PSWD,
+                                 USER_MAIL,
+                                 JOIN_DATE,
+                                 USER_ROLE,
+                                 USER_STATUS
+
+        ) VALUES (#{userId},
+                  #{userName},
+                  #{userPswd},
+                  #{userMail},
+                  NOW(),
+                  'U',
+                  'Y'
+                )
+    </insert>
+
+</mapper>
