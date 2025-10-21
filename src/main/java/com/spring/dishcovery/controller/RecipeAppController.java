@@ -20,6 +20,7 @@ public class RecipeAppController {
 
     @GetMapping
     public List<RecipeVo> getRecipes() {
+
         return recipeAppService.getAllRecipes();
     }
 

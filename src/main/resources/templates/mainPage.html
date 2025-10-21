@@ -4,11 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dishcovery</title>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" th:href="@{/css/mainPage.css}" />
     <script th:src="@{/js/mainPage.js}"></script>
 </head>
 <body>
-<form id="loginForm" name="loginForm" method="get">
+<form id="mainForm" name="mainForm" method="get">
 <header class="topbar">
   <div class="container">
     <div class="brand">Dishcovery</div>
@@ -26,10 +27,11 @@
 
     <a href="/dishcovery_login?gubun=login" class="auth">
       <span class="user-icon" aria-hidden="true">
-        로그인 /
+        로그인
       </span>
     </a>
-    <a href="/dishcovery_login?gubun=sign" class="logout">
+
+    <a href="/dishcovery_login?gubun=sign" class="auth">
       <span class="user-icon" aria-hidden="true">
         회원가입
       </span>
@@ -55,6 +57,17 @@
     </div>
   </section>
   <section class="content container">
+
+          <div class="recipe-grid">
+          <!-- 반복 영역 -->
+          <div class="recipe-card" th:each="recipe : ${recipes}">
+              <a th:href="@{'/recipes/' + ${recipe.recipeId}}">
+                  <img th:src="${recipe.imgUrl}" alt="레시피 이미지">
+                  <div class="recipe-title" th:text="${recipe.title}">레시피 제목</div>
+              </a>
+          </div>
+      </div>
+
   </section>
 </main>
 
