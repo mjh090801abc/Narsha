@@ -12,8 +12,8 @@ public class UserEntity {
 
     private String userName;
 
-    private String userNickName;
+    private String userId;
 
-    private String userPSWD;
+    private String userPswd;
 
 }
