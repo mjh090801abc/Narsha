@@ -46,14 +46,17 @@
       </form>
 
       <form id="panel-signup" th:class="${signUpPanel}" role="tabpanel" aria-labelledby="tab-signup" autocomplete="off">
-        <label class="field-label" for="signup-email">이메일</label>
-        <input id="signup-email" name="email" type="email" class="input" placeholder="이메일을 입력하세요" required />
+        <label class="field-label" for="userMail">이메일</label>
+        <input id="userMail" name="userMail" type="email" class="input" placeholder="이메일을 입력하세요" required />
 
-        <label class="field-label" for="signup-password">비밀번호</label>
-        <input id="signup-password" name="password" type="password" class="input" placeholder="비밀번호 (8자 이상)" minlength="8" required />
+        <label class="field-label" for="userName">이름</label>
+        <input id="userName" name="userName" type="text" class="input" placeholder="이름 (8자 이상)" minlength="8" required />
 
-        <label class="field-label" for="signup-password2">비밀번호 확인</label>
-        <input id="signup-password2" name="password2" type="password" class="input" placeholder="비밀번호를 다시 입력" minlength="8" required />
+        <label class="field-label" for="userName">닉네임</label>
+        <input id="userNickName" name="userNickName" type="text" class="input" placeholder="닉네임 (8자 이상)" minlength="8" required />
+
+        <label class="field-label" for="userPSWD">비밀번호</label>
+        <input id="userPSWD" name="userPSWD" type="password" class="input" placeholder="비밀번호 (8자 이상)" minlength="8" required />
 
         <button type="submit" class="btn primary">회원가입</button>
       </form>
