@@ -15,4 +15,5 @@ public class UserEntity {
     private String userNickName;
 
     private String userPSWD;
+
 }
