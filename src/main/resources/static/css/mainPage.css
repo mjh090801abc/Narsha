@@ -40,7 +40,26 @@ body{
     display:grid; place-items:center; cursor:pointer;
 }
 
-.auth{margin-left:auto; display:flex; align-items:center; gap:8px; color:var(--brand); font-weight:700; text-decoration:none}
+.auth-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logout-btn {
+    color: #ff6b42;
+    font-weight: bold;
+}
+
+/*.auth{margin-left:auto; display:flex; align-items:center; gap:8px; color:var(--brand); font-weight:700; text-decoration:none}*/
+.auth {
+    text-decoration: none;
+    color: #ff6b42;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+}
 .auth .user-icon{display:grid; place-items:center}
 
 .divider{border:none; height:1px; background:var(--line)}

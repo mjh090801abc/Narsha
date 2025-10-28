@@ -33,10 +33,12 @@ body {
     line-height: 1.1;
     color: var(--primary);
     font-weight: 800;
+    text-decoration: none;
+
 }
 
 .subtitle {
-    margin: 0 0 28px;
+    margin: 8px 0 28px;
     text-align: center;
     color: #343a40;
     font-size: 16px;
