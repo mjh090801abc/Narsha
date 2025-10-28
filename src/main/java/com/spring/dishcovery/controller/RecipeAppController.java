@@ -18,7 +18,7 @@ public class RecipeAppController {
     @Autowired
     RecipeAppService recipeAppService;
 
-    @GetMapping
+    @GetMapping("/getRecipes")
     public List<RecipeVo> getRecipes() {
 
         return recipeAppService.getAllRecipes();
