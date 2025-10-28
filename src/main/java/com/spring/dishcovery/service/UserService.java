@@ -35,7 +35,7 @@ public class UserService {
 
         UserEntity user = userMapper.findByUserId(userId);
 
-        if(user == null && passwordEncoder.matches(userPswd, user.getUserPswd())) {
+        if(user != null && passwordEncoder.matches(userPswd, user.getUserPswd())) {
             return user;
         }
         return null;

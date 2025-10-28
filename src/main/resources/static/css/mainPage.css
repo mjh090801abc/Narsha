@@ -25,7 +25,13 @@ body{
     padding:28px 0 16px;
 }
 
-.brand{font-weight:800; font-size:34px; letter-spacing:.2px; color:var(--brand)}
+.brand{
+    font-weight:800;
+    font-size:34px;
+    letter-spacing:.2px;
+    color:var(--brand);
+    text-decoration: none;
+}
 
 .search-wrap{position:relative; flex:1}
 .search-wrap input{
@@ -51,8 +57,11 @@ body{
     font-weight: bold;
 }
 
-/*.auth{margin-left:auto; display:flex; align-items:center; gap:8px; color:var(--brand); font-weight:700; text-decoration:none}*/
+/*.auth{
+margin-left:auto; display:flex; align-items:center; gap:8px; color:var(--brand); font-weight:700; text-decoration:none}*/
 .auth {
+    display: flex;
+    gap: 10px;
     text-decoration: none;
     color: #ff6b42;
     font-weight: 700;

@@ -20,7 +20,7 @@
         <button th:class="${signUpTab}" id="tab-signup" role="tab" aria-selected="false" aria-controls="panel-signup">회원가입</button>
       </div>
 
-      <form id="panel-login" th:class="${loginPanel}" role="tabpanel" aria-labelledby="tab-login" autocomplete="on">
+      <form id="panel-login" th:class="${loginPanel}" role="tabpanel" aria-labelledby="tab-login" autocomplete="on" method="post" th:action="@{/userLogin}">
         <input type="hidden" name="msg" id="msg" th:value="${msg}"/>
 
         <label class="field-label" for="login-userId">아이디</label>
@@ -47,12 +47,12 @@
         <button type="submit" class="btn primary">로그인</button>
       </form>
 
-      <form id="panel-signup" th:class="${signUpPanel}" role="tabpanel" method="post" action="/save_user" aria-labelledby="tab-signup" autocomplete="off">
+      <form id="panel-signup" th:class="${signUpPanel}" role="tabpanel" method="post" th:action="@{/save_user}" aria-labelledby="tab-signup" autocomplete="off">
         <label class="field-label" for="userMail">이메일</label>
         <input id="userMail" name="userMail" type="email" class="input" placeholder="이메일을 입력하세요" required />
 
         <label class="field-label" for="userId">아이디</label>
-        <input id="userId" name="userId" type="text" class="input" placeholder="이메일을 입력하세요" required />
+        <input id="userId" name="userId" type="text" class="input" placeholder="아이디를 입력하세요" required />
 
         <label class="field-label" for="userName">이름</label>
         <input id="userName" name="userName" type="text" class="input" placeholder="이름 (1자 이상)" minlength="1" required />

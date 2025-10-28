@@ -91,8 +91,9 @@ public class UserController {
 
             return "redirect:/MainPage";
         }else
+            redirectAttributes.addAttribute("gubun", "login");
             redirectAttributes.addFlashAttribute("msg", "로그인 실패 아이디 또는 비밀번호 화인.");
-            return "redirect:/MainPage";
+            return "redirect:/dishcovery_login";
 
         }
 }
