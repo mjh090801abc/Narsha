@@ -1,4 +1,11 @@
 // Tab toggle + small UX niceties
+window.addEventListener('DOMContentLoaded', function(){
+    const msg = document.querySelector('.msg')?.value;
+    if (msg) {
+        alert(msg);
+    }
+});
+
 (function () {
     const $ = (sel) => document.querySelector(sel);
     const $$ = (sel) => Array.from(document.querySelectorAll(sel));
