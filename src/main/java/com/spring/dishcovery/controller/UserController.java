@@ -1,7 +1,9 @@
 package com.spring.dishcovery.controller;
 
+import com.spring.dishcovery.config.JwtUtil;
 import com.spring.dishcovery.entity.UserEntity;
 import com.spring.dishcovery.service.UserService;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,8 @@ public class UserController {
 
     @Autowired
     UserService userService;
+    @Autowired
+    private JwtUtil jwtUtil;
 
     // 로그인
     @GetMapping("/dishcovery_login")
@@ -72,6 +76,21 @@ public class UserController {
                             @RequestParam String userPswd,
                             HttpServletResponse response,
                             RedirectAttributes redirectAttributes) {
+
+        UserEntity user = userService.getUserData(userId, userPswd);
+        if (user != null) {
+            // JWT 발급
+            String token = jwtUtil.generateToken(user.getUserId(), user.getUserName());
+
+            // JWT를 HttpOnly 쿠키로 브라우저에 저장
+            Cookie jwtCookie = new Cookie("JWT_TOKEN", token);
+            jwtCookie.setHttpOnly(true);
+            jwtCookie.setPath("/"); // 전체경로 사용가능
+            jwtCookie.setMaxAge(3600); // 1시간
+            response.addCookie(jwtCookie);
+        }
+
+
 
         return "redirect:/dishcovery_login";
     }
