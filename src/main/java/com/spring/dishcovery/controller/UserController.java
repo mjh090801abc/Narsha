@@ -88,11 +88,11 @@ public class UserController {
             jwtCookie.setPath("/"); // 전체경로 사용가능
             jwtCookie.setMaxAge(3600); // 1시간
             response.addCookie(jwtCookie);
+
+            return "redirect:/MainPage";
+        }else
+            redirectAttributes.addFlashAttribute("msg", "로그인 실패 아이디 또는 비밀번호 화인.");
+            return "redirect:/MainPage";
+
         }
-
-
-
-        return "redirect:/dishcovery_login";
-    }
-
 }
