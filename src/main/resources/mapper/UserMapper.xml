@@ -22,4 +22,10 @@
                 )
     </insert>
 
+    <select id="findByUserId" parameterType="string" resultType="com.spring.dishcovery.entity.UserEntity">
+        SELECT USER_ID, USER_NAME, USER_PSWD, USER_MAIL, JOIN_DATE
+        FROM USER_MASTER
+        WHERE USER_ID = #{userId}
+    </select>
+
 </mapper>

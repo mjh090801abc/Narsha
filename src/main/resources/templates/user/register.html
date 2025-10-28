@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dishcovery | 레시피 등록</title>
+  <link rel="stylesheet" href="register.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="container">
+    <a class="brand" href="main.html">Dishcovery</a>
+    <nav class="top-actions">
+      <a href="main.html" class="ghost-link">메인으로</a>
+      <a href="login.html" class="ghost-link">로그인</a>
+    </nav>
+  </div>
+</header>
+
+<main class="page">
+  <section class="intro container">
+    <span class="eyebrow">Creator Studio</span>
+    <h1>레시피 등록으로 Dishcovery 셰프가 되어보세요</h1>
+    <p>사진, 재료, 스텝을 정리해 공유하면 더 많은 이웃들이 당신의 노하우를 맛볼 수 있어요.</p>
+  </section>
+
+  <section class="form-section container">
+    <form class="recipe-form" action="#" method="post" enctype="multipart/form-data">
+      <div class="form-card">
+        <h2>기본 정보</h2>
+        <div class="form-grid">
+          <div class="form-row">
+            <label for="recipeTitle">레시피 이름</label>
+            <input type="text" id="recipeTitle" name="title" placeholder="예: 새우 크림 파스타" required>
+          </div>
+          <div class="form-row">
+            <label for="recipeCategory">카테고리</label>
+            <select id="recipeCategory" name="category" required>
+              <option value="" disabled selected>선택하세요</option>
+              <option value="한식">한식</option>
+              <option value="양식">양식</option>
+              <option value="일식">일식</option>
+              <option value="중식">중식</option>
+              <option value="베트남/아시안">베트남/아시안</option>
+              <option value="베이킹">베이킹</option>
+              <option value="기타">기타</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="recipeTime">조리 시간</label>
+            <input type="text" id="recipeTime" name="time" placeholder="예: 20분" required>
+          </div>
+          <div class="form-row">
+            <label for="recipeLevel">난이도</label>
+            <select id="recipeLevel" name="level" required>
+              <option value="" disabled selected>선택하세요</option>
+              <option value="쉬움">쉬움</option>
+              <option value="중간">중간</option>
+              <option value="어려움">어려움</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <h2>소개와 준비물</h2>
+        <div class="form-row">
+          <label for="recipeThumbnail">대표 이미지</label>
+          <input type="file" id="recipeThumbnail" name="thumbnail" accept="image/*">
+          <span class="input-hint">최소 1200px 권장 · JPG 혹은 PNG</span>
+        </div>
+        <div class="form-row">
+          <label for="recipeIntro">요리 소개</label>
+          <textarea id="recipeIntro" name="intro" rows="3" placeholder="레시피의 매력을 짧게 소개해주세요." required></textarea>
+        </div>
+        <div class="form-row">
+          <label for="recipeIngredients">필수 재료</label>
+          <textarea id="recipeIngredients" name="ingredients" rows="3" placeholder="예: 새우 200g, 생크림 1컵, 파마산 치즈 2큰술..." required></textarea>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <div class="label-with-action">
+          <h2>조리 단계</h2>
+          <button type="button" class="ghost-btn" data-add-step>단계 추가</button>
+        </div>
+        <p class="card-hint">각 단계마다 사진을 업로드하면 추천 노출 확률이 높아져요.</p>
+        <div class="step-list" data-step-list>
+          <div class="step-row" data-step>
+            <span class="step-index">1</span>
+            <textarea name="steps[]" rows="2" placeholder="예: 팬에 올리브유를 두르고 다진 마늘을 볶습니다." required></textarea>
+            <button type="button" class="step-remove" data-remove-step aria-label="1단계 삭제">&times;</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <h2>마무리</h2>
+        <div class="form-row">
+          <label for="recipeTips">팁 &amp; 노하우</label>
+          <textarea id="recipeTips" name="tips" rows="2" placeholder="예: 새우는 오버쿡되지 않도록 투명해질 때까지만 볶아주세요."></textarea>
+        </div>
+        <div class="form-row">
+          <label for="recipeTags">해시태그</label>
+          <input type="text" id="recipeTags" name="tags" placeholder="예: #크림파스타 #새우 #집들이">
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <a href="main.html" class="ghost-btn">취소</a>
+        <button type="submit" class="primary-btn">등록 완료</button>
+      </div>
+    </form>
+  </section>
+</main>
+
+<div class="toast" role="status" aria-live="polite" hidden>레시피 등록 요청이 전송되었습니다.</div>
+
+<script src="register.js"></script>
+</body>
+</html>

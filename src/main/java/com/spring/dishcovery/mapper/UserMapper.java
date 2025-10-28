@@ -8,4 +8,7 @@ public interface UserMapper {
 
     public int saveUserData(UserEntity user);
 
+    public UserEntity findByUserId(String userId);
 }
+
+
