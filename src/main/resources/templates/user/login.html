@@ -21,6 +21,8 @@
       </div>
 
       <form id="panel-login" th:class="${loginPanel}" role="tabpanel" aria-labelledby="tab-login" autocomplete="on">
+        <input type="text" name="msg" id="msg" th:value="${msg}"/>
+
         <label class="field-label" for="login-email">이메일</label>
         <input id="login-email" name="email" type="email" class="input" placeholder="이메일을 입력하세요" required />
 
