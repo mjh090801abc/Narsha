@@ -1,20 +1,24 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dishcovery | 레시피 등록</title>
-  <link rel="stylesheet" href="register.css">
+  <link rel="stylesheet" th:href="@{/css/register.css}">
+  <link rel="stylesheet" th:href="@{/css/mainPage.css}" />
 </head>
 <body>
 <header class="topbar">
+  <div th:insert="fragments/header :: site-header"></div>
+ <!--
   <div class="container">
-    <a class="brand" href="main.html">Dishcovery</a>
+    <a class="brand" th:href="@{/MainPage}">Dishcovery</a>
     <nav class="top-actions">
-      <a href="main.html" class="ghost-link">메인으로</a>
-      <a href="../user/login.html" class="ghost-link">로그인</a>
+      <a th:href="@{/MainPage}" class="ghost-link">메인으로</a>
+      <a href="/dishcovery_login?gubun=login" class="ghost-link">로그인</a>
     </nav>
   </div>
+ -->
 </header>
 
 <main class="page">
@@ -116,6 +120,6 @@
 
 <div class="toast" role="status" aria-live="polite" hidden>레시피 등록 요청이 전송되었습니다.</div>
 
-<script src="register.js"></script>
+<script th:src="@{/js/register.js}"></script>
 </body>
 </html>

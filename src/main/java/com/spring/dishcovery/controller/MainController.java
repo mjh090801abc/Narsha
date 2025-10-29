@@ -55,4 +55,10 @@ public class MainController {
         return "mainPage";
     }
 
+    @GetMapping("/myPage")
+    public String myPage(Model model, HttpServletRequest request) {
+
+        return "/recipe/register";
+    }
+
 }
