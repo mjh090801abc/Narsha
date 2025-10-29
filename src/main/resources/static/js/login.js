@@ -1,4 +1,11 @@
 // Tab toggle + small UX niceties
+window.addEventListener('DOMContentLoaded', function(){
+    const msg = document.querySelector('.msg')?.value;
+    if (msg) {
+        alert(msg);
+    }
+});
+
 (function () {
     const $ = (sel) => document.querySelector(sel);
     const $$ = (sel) => Array.from(document.querySelectorAll(sel));
@@ -51,14 +58,14 @@
         }
     });
 
-    // Prevent real submission for demo; show simple alerts
-    panelLogin.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const email = loginEmail.value.trim();
-        const pw = document.getElementById('login-password').value;
-        if (!email || !pw) return alert('이메일과 비밀번호를 입력해 주세요.');
-        alert('로그인 시도: ' + email);
-    });
+    // // Prevent real submission for demo; show simple alerts
+    // panelLogin.addEventListener('submit', (e) => {
+    //     e.preventDefault();
+    //     const email = loginEmail.value.trim();
+    //     const pw = document.getElementById('login-password').value;
+    //     if (!email || !pw) return alert('이메일과 비밀번호를 입력해 주세요.');
+    //     alert('로그인 시도: ' + email);
+    // });
 
 
 })();
