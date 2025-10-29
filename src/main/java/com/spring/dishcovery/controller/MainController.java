@@ -23,34 +23,12 @@ public class MainController {
     private JwtUtil jwtUtil;
 
     @GetMapping("/MainPage")
-    public String mainPage(Model model, HttpServletRequest request,
-                           @CookieValue(value = "JWT_TOKEN", required = false) String token) {
+    public String mainPage(Model model) {
 
         List<RecipeVo> recipes = new ArrayList<>();
         recipes = service.getAllRecipes();
 
-        // 쿠키에서 JWT 추출
-        if (request.getCookies() != null) {
-            for (Cookie cookie : request.getCookies()) {
-                if ("JWT_TOKEN".equals(cookie.getName())) {
-                    token = cookie.getValue();
-                    break;
-                }
-            }
-        }
-
-        // JWT가 있고 유효하면 로그인 상태
-        if (token != null && jwtUtil.validateToken(token)) {
-            String userId = jwtUtil.getUserIdFromToken(token);
-            String userName = jwtUtil.getUserNameFromToken(token);
-            model.addAttribute("isLoggedIn", true);
-            model.addAttribute("userId", userId);
-            model.addAttribute("userName", userName);
-            model.addAttribute("recipes", recipes);
-        } else {
-            model.addAttribute("recipes", recipes);
-            model.addAttribute("isLoggedIn", false);
-        }
+        model.addAttribute("recipes", recipes);
 
         return "mainPage";
     }
