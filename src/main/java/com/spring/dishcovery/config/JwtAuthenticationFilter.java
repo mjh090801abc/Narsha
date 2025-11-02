@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.List;
 
 //요청마다 JWT 확인하는 필터
 @Component
@@ -28,7 +29,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String header = request.getHeader("Authorization");
 
         if (header != null && header.startsWith("Bearer ")) {
-            String token = header.substring(7);
+        String token = header.substring(7);
             if (jwtUtil.validateToken(token)) {
                 String username = jwtUtil.getUserNameFromToken(token);
                 UsernamePasswordAuthenticationToken auth =

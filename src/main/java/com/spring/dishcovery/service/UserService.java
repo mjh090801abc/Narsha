@@ -41,6 +41,10 @@ public class UserService {
         return null;
     }
 
+    public UserEntity findByUserId(String userId) {
+        return  userMapper.findByUserId(userId);
+    }
+
 
 
 }

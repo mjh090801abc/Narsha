@@ -87,7 +87,7 @@ a{text-decoration:none; color:inherit}
     margin:22px 0 0;
     font-size:18px;
     color:#4f5257;
-    max-width:560px;
+    max-width:700px;
 }
 
 .form-section{
@@ -107,6 +107,7 @@ a{text-decoration:none; color:inherit}
     padding:30px 32px;
     box-shadow:0 24px 52px rgba(15,23,42,.08);
     border:1px solid rgba(15,23,42,.06);
+    margin-top: 30px;
 }
 
 .form-card h2{
@@ -149,6 +150,7 @@ a{text-decoration:none; color:inherit}
     color:var(--text);
     background:var(--surface);
     transition:border-color .15s ease, box-shadow .15s ease;
+    margin-bottom: 20px;
 }
 
 .form-row input:focus,
@@ -164,6 +166,7 @@ a{text-decoration:none; color:inherit}
 .input-hint{
     font-size:13px;
     color:var(--muted);
+    margin-bottom: 5px;
 }
 
 .label-with-action{

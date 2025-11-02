@@ -65,8 +65,15 @@
           </div>
         </div>
       </div>
+        <div>
+            <label>레시피 이미지</label><br>
+            <div class="preview" id="imagePreview" onclick="document.getElementById('imageInput').click()">
+                <span id="placeholderText">+ 사진 추가</span>
+            </div>
+            <input type="file" id="imageInput" name="imageFile" accept="image/*" class="hidden-input">
+        </div>
 
-      <div class="form-card">
+        <div class="form-card">
         <h2>소개와 준비물</h2>
         <div class="form-row">
           <label for="recipeThumbnail">대표 이미지</label>
