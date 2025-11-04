@@ -17,5 +17,13 @@ public class RecipeAppService {
         return recipeAppMapper.getAllRecipes();
     }
 
+    public List<RecipeVo> getSearchRecipes(String searchName) {
+        return recipeAppMapper.getSearchRecipes(searchName);
+    }
 
+
+    public int SaveRecipeData(RecipeVo recipeVo) {
+        int result = 0;
+        return recipeAppMapper.SaveRecipeData(recipeVo);
+    }
 }
