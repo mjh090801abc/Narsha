@@ -9,7 +9,7 @@
     <script th:src="@{/js/mainPage.js}"></script>
 </head>
 <body>
-<form id="mainForm" name="mainForm" method="get">
+<form id="mainForm" name="mainForm" method="get" th:action="@{/searchRecipe}">
     <div th:insert="fragments/header :: site-header"></div>
 </form>
 
