@@ -22,6 +22,28 @@
 
     </select>
 
+    <select id="getSearchRecipes"  resultType="com.spring.dishcovery.entity.RecipeVo" >
+       SELECT RECIPE_ID
+             ,USER_ID
+             ,CATEGORY_ID
+             ,TITLE
+             ,RCP_DISC
+             ,COOK_TIME
+             ,COOK_DFCT
+             ,RGT_DATE
+             ,UPD_DATE
+             ,IMG_URL
+             ,STATUS
+        FROM RECIPE_MASTER
+       WHERE TITLE LIKE '%' ||  #{searchName} || '%'
+
+    </select>
+    <insert id="SaveRecipeData" parameterType="com.spring.dishcovery.entity.RecipeVo">
+
+
+
+    </insert>
+
 
     <!--
 
