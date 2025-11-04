@@ -35,7 +35,9 @@ public class MainController {
     @GetMapping("/myPage")
     public String myPage(Model model, HttpServletRequest request) {
 
-        return "recipe/RecipeReg";
+//        return "recipe/RecipeReg";
+
+        return "user/MyPage";
     }
 
 
