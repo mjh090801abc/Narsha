@@ -10,4 +10,7 @@ public interface RecipeAppMapper {
 
     List<RecipeVo> getAllRecipes();
 
+    List<RecipeVo> getSearchRecipes(String searchName);
+
+    int SaveRecipeData(RecipeVo recipeVo);
 }
