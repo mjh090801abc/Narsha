@@ -1,210 +1,134 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>마이페이지 | Dishcovery</title>
-    <style>
-        body {
-            font-family: "Pretendard", sans-serif;
-            background-color: #f8f9fa;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 900px;
-            margin: 40px auto;
-            background-color: #fff;
-            border-radius: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            padding: 30px;
-        }
-
-        h2 {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        /* 탭 메뉴 */
-        .tab-menu {
-            display: flex;
-            justify-content: space-around;
-            border-bottom: 2px solid #eee;
-            margin-bottom: 25px;
-        }
-
-        .tab-btn {
-            padding: 12px 20px;
-            cursor: pointer;
-            font-weight: 600;
-            color: #666;
-            border: none;
-            background: none;
-            transition: 0.2s;
-        }
-
-        .tab-btn.active {
-            color: #007bff;
-            border-bottom: 3px solid #007bff;
-        }
-
-        /* 섹션 공통 */
-        .tab-content {
-            display: none;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* 프로필 영역 */
-        .profile-card {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            border: 1px solid #eee;
-            border-radius: 15px;
-            padding: 20px;
-        }
-
-        .profile-img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            overflow: hidden;
-        }
-
-        .profile-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .profile-info h3 {
-            margin: 0;
-            font-size: 22px;
-        }
-
-        .profile-info p {
-            color: #777;
-        }
-
-        .btn-edit {
-            margin-top: 10px;
-            padding: 6px 12px;
-            background-color: #007bff;
-            color: white;
-            border-radius: 6px;
-            text-decoration: none;
-        }
-
-        /* 등록 폼 */
-        form {
-            margin-top: 20px;
-        }
-
-        label {
-            font-weight: 600;
-            display: block;
-            margin-top: 15px;
-        }
-
-        input[type="text"], textarea {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-        }
-
-        button[type="submit"] {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            margin-top: 20px;
-            cursor: pointer;
-        }
-
-        button[type="submit"]:hover {
-            background-color: #0056b3;
-        }
-    </style>
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dishcovery | Mypage</title>
+    <link rel="stylesheet" th:href="@{/css/register.css}">
     <link rel="stylesheet" th:href="@{/css/mainPage.css}" />
-    <script th:src="@{/js/mainPage.js}"></script>
 </head>
 <body>
+<header class="topbar">
+    <div th:insert="fragments/header :: site-header"></div>
+    <!--
+     <div class="container">
+       <a class="brand" th:href="@{/MainPage}">Dishcovery</a>
+       <nav class="top-actions">
+         <a th:href="@{/MainPage}" class="ghost-link">메인으로</a>
+         <a href="/dishcovery_login?gubun=login" class="ghost-link">로그인</a>
+       </nav>
+     </div>
+    -->
+</header>
 
-<div th:insert="fragments/header :: site-header"></div>
-<div class="container">
-    <h2>👤 마이페이지</h2>
-    <!-- 탭 메뉴 -->
-    <div class="tab-menu">
-        <button class="tab-btn active" onclick="openTab('profile')">나의 프로필</button>
-        <button class="tab-btn" onclick="openTab('recipe')">레시피 등록</button>
-        <button class="tab-btn" onclick="openTab('tip')">꿀팁 등록</button>
-    </div>
+<main class="page">
+    <section class="intro container">
+        <span class="eyebrow">Creator Studio</span>
+        <h1>레시피 등록으로 Dishcovery 셰프가 되어보세요</h1>
+        <p>사진, 재료, 스텝을 정리해 공유하면 더 많은 이웃들이 당신의 노하우를 맛볼 수 있어요.</p>
+    </section>
 
-    <!-- 나의 프로필 -->
-    <div id="profile" class="tab-content active">
-        <div class="profile-card">
-
-            <div class="profile-info">
-                <p th:text="${userName}"></p>
-                <a href="/user/edit" class="btn-edit">프로필 수정</a>
+    <section class="form-section container">
+        <form class="recipe-form" action="#" method="post" enctype="multipart/form-data">
+            <div class="form-card">
+                <h2>기본 정보</h2>
+                <div class="form-grid">
+                    <div class="form-row">
+                        <label for="recipeTitle">레시피 이름</label>
+                        <input type="text" id="recipeTitle" name="title" placeholder="예: 새우 크림 파스타" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="recipeCategory">카테고리</label>
+                        <select id="recipeCategory" name="category" required>
+                            <option value="" disabled selected>선택하세요</option>
+                            <option value="한식">한식</option>
+                            <option value="양식">양식</option>
+                            <option value="일식">일식</option>
+                            <option value="중식">중식</option>
+                            <option value="베트남/아시안">베트남/아시안</option>
+                            <option value="베이킹">베이킹</option>
+                            <option value="기타">기타</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <label for="recipeTime">조리 시간</label>
+                        <input type="text" id="recipeTime" name="time" placeholder="예: 20분" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="recipeLevel">난이도</label>
+                        <select id="recipeLevel" name="level" required>
+                            <option value="" disabled selected>선택하세요</option>
+                            <option value="쉬움">쉬움</option>
+                            <option value="중간">중간</option>
+                            <option value="어려움">어려움</option>
+                        </select>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
+            <div class="form-card">
+                <div class="form-row">
+                    <h2>레시피 이미지</h2>
+                    <div class="preview" id="imagePreview" onclick="document.getElementById('imageInput').click()">
+                        <span id="placeholderText">사진 추가</span>
+                    </div>
+                    <input type="file" id="imageInput" name="imageFile" accept="image/*" class="hidden-input">
+                </div>
+            </div>
 
-    <!-- 레시피 등록 -->
-    <div id="recipe" class="tab-content">
-        <form th:action="@{/recipes/register}" method="post" enctype="multipart/form-data">
-            <label>레시피 제목</label>
-            <input type="text" name="title" placeholder="레시피 제목을 입력하세요" required>
+            <div class="form-card">
+                <h2>소개와 준비물</h2>
+                <div class="form-row">
+                    <label for="recipeThumbnail">대표 이미지</label>
+                    <input type="file" id="recipeThumbnail" name="thumbnail" accept="image/*">
+                    <span class="input-hint">최소 1200px 권장 · JPG 혹은 PNG</span>
+                </div>
+                <div class="form-row">
+                    <label for="recipeIntro">요리 소개</label>
+                    <textarea id="recipeIntro" name="intro" rows="3" placeholder="레시피의 매력을 짧게 소개해주세요." required></textarea>
+                </div>
+            </div>
 
-            <label>레시피 내용</label>
-            <textarea name="description" rows="4" placeholder="간단한 설명을 입력하세요"></textarea>
+            <div class="form-row">
+                <label for="recipeIngredients">필수 재료</label>
+                <textarea id="recipeIngredients" name="ingredients" rows="3" placeholder="예: 새우 200g, 생크림 1컵, 파마산 치즈 2큰술..." required></textarea>
+            </div>
 
-            <label>레시피 이미지</label>
-            <input type="file" name="imageFile" accept="image/*">
+            <div class="form-card">
+                <div class="label-with-action">
+                    <h2>조리 단계</h2>
+                    <button type="button" class="ghost-btn" data-add-step>단계 추가</button>
+                </div>
+                <p class="card-hint">각 단계마다 사진을 업로드하면 추천 노출 확률이 높아져요.</p>
+                <div class="step-list" data-step-list>
+                    <div class="step-row" data-step>
+                        <span class="step-index">1</span>
+                        <textarea name="steps[]" rows="2" placeholder="예: 팬에 올리브유를 두르고 다진 마늘을 볶습니다." required></textarea>
+                        <button type="button" class="step-remove" data-remove-step aria-label="1단계 삭제">&times;</button>
+                    </div>
+                </div>
 
-            <button type="submit">등록하기</button>
+                <h2>마무리</h2>
+                <div class="form-row">
+                    <label for="recipeTips">팁 &amp; 노하우</label>
+                    <textarea id="recipeTips" name="tips" rows="2"
+                              placeholder="예: 새우는 오버쿡되지 않도록 투명해질 때까지만 볶아주세요."></textarea>
+                </div>
+                <div class="form-row">
+                    <label for="recipeTags">해시태그</label>
+                    <input type="text" id="recipeTags" name="tags" placeholder="예: #크림파스타 #새우 #집들이">
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <a href="main.html" class="ghost-btn">취소</a>
+                <button type="submit" class="primary-btn">등록 완료</button>
+            </div>
         </form>
-    </div>
+    </section>
+</main>
 
-    <!-- 꿀팁 등록 -->
-    <div id="tip" class="tab-content">
-        <form th:action="@{/tips/register}" method="post">
-            <label>꿀팁 제목</label>
-            <input type="text" name="title" placeholder="꿀팁 제목을 입력하세요" required>
+<div class="toast" role="status" aria-live="polite" hidden>레시피 등록 요청이 전송되었습니다.</div>
 
-            <label>꿀팁 내용</label>
-            <textarea name="content" rows="4" placeholder="유용한 팁을 입력하세요"></textarea>
-
-            <button type="submit">등록하기</button>
-        </form>
-    </div>
-</div>
-
-<script>
-    function openTab(tabName) {
-        const tabs = document.querySelectorAll('.tab-content');
-        const btns = document.querySelectorAll('.tab-btn');
-        tabs.forEach(tab => tab.classList.remove('active'));
-        btns.forEach(btn => btn.classList.remove('active'));
-        document.getElementById(tabName).classList.add('active');
-        event.target.classList.add('active');
-    }
-</script>
-
+<script th:src="@{/js/register.js}"></script>
 </body>
 </html>
