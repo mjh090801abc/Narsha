@@ -65,15 +65,17 @@
           </div>
         </div>
       </div>
-        <div>
-            <label>레시피 이미지</label><br>
+      <div class="form-card">
+        <div class="form-row">
+            <h2>레시피 이미지</h2>
             <div class="preview" id="imagePreview" onclick="document.getElementById('imageInput').click()">
                 <span id="placeholderText">+ 사진 추가</span>
             </div>
             <input type="file" id="imageInput" name="imageFile" accept="image/*" class="hidden-input">
         </div>
+      </div>
 
-        <div class="form-card">
+      <div class="form-card">
         <h2>소개와 준비물</h2>
         <div class="form-row">
           <label for="recipeThumbnail">대표 이미지</label>
@@ -84,40 +86,40 @@
           <label for="recipeIntro">요리 소개</label>
           <textarea id="recipeIntro" name="intro" rows="3" placeholder="레시피의 매력을 짧게 소개해주세요." required></textarea>
         </div>
-        <div class="form-row">
+      </div>>
+
+      <div class="form-row">
           <label for="recipeIngredients">필수 재료</label>
           <textarea id="recipeIngredients" name="ingredients" rows="3" placeholder="예: 새우 200g, 생크림 1컵, 파마산 치즈 2큰술..." required></textarea>
-        </div>
       </div>
 
-      <div class="form-card">
-        <div class="label-with-action">
-          <h2>조리 단계</h2>
-          <button type="button" class="ghost-btn" data-add-step>단계 추가</button>
-        </div>
-        <p class="card-hint">각 단계마다 사진을 업로드하면 추천 노출 확률이 높아져요.</p>
-        <div class="step-list" data-step-list>
-          <div class="step-row" data-step>
-            <span class="step-index">1</span>
-            <textarea name="steps[]" rows="2" placeholder="예: 팬에 올리브유를 두르고 다진 마늘을 볶습니다." required></textarea>
-            <button type="button" class="step-remove" data-remove-step aria-label="1단계 삭제">&times;</button>
-          </div>
-        </div>
-      </div>
+        <div class="form-card">
+            <div class="label-with-action">
+                <h2>조리 단계</h2>
+                <button type="button" class="ghost-btn" data-add-step>단계 추가</button>
+            </div>
+            <p class="card-hint">각 단계마다 사진을 업로드하면 추천 노출 확률이 높아져요.</p>
+            <div class="step-list" data-step-list>
+                <div class="step-row" data-step>
+                    <span class="step-index">1</span>
+                    <textarea name="steps[]" rows="2" placeholder="예: 팬에 올리브유를 두르고 다진 마늘을 볶습니다." required></textarea>
+                    <button type="button" class="step-remove" data-remove-step aria-label="1단계 삭제">&times;</button>
+                </div>
+            </div>
 
-      <div class="form-card">
-        <h2>마무리</h2>
-        <div class="form-row">
-          <label for="recipeTips">팁 &amp; 노하우</label>
-          <textarea id="recipeTips" name="tips" rows="2" placeholder="예: 새우는 오버쿡되지 않도록 투명해질 때까지만 볶아주세요."></textarea>
+            <h2>마무리</h2>
+            <div class="form-row">
+                <label for="recipeTips">팁 &amp; 노하우</label>
+                <textarea id="recipeTips" name="tips" rows="2"
+                          placeholder="예: 새우는 오버쿡되지 않도록 투명해질 때까지만 볶아주세요."></textarea>
+            </div>
+            <div class="form-row">
+                <label for="recipeTags">해시태그</label>
+                <input type="text" id="recipeTags" name="tags" placeholder="예: #크림파스타 #새우 #집들이">
+            </div>
         </div>
-        <div class="form-row">
-          <label for="recipeTags">해시태그</label>
-          <input type="text" id="recipeTags" name="tags" placeholder="예: #크림파스타 #새우 #집들이">
-        </div>
-      </div>
 
-      <div class="form-actions">
+        <div class="form-actions">
         <a href="main.html" class="ghost-btn">취소</a>
         <button type="submit" class="primary-btn">등록 완료</button>
       </div>

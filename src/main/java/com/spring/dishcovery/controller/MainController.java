@@ -2,7 +2,6 @@ package com.spring.dishcovery.controller;
 
 import com.spring.dishcovery.config.JwtUtil;
 import com.spring.dishcovery.entity.RecipeVo;
-import com.spring.dishcovery.entity.UserEntity;
 import com.spring.dishcovery.service.RecipeAppService;
 import com.spring.dishcovery.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -36,7 +35,7 @@ public class MainController {
     @GetMapping("/myPage")
     public String myPage(Model model, HttpServletRequest request) {
 
-        return "/user/MyPage";
+        return "recipe/RecipeReg";
     }
 
 

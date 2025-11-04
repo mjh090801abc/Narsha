@@ -71,6 +71,12 @@ margin-left:auto; display:flex; align-items:center; gap:8px; color:var(--brand);
 }
 .auth .user-icon{display:grid; place-items:center}
 
+.auth .auth_icon{
+    display:flex;
+    width:30px;
+    height:29px;
+}
+
 .divider{border:none; height:1px; background:var(--line)}
 
 /* Controls: segmented + sorts */
