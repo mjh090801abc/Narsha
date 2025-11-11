@@ -19,7 +19,10 @@ body{
 
 a{text-decoration:none; color:inherit}
 
-.container{width:min(940px, 92%); margin:0 auto}
+.container-reg{
+    width:min(1180px, 94%);
+    margin: 0 auto 30px auto;
+}
 
 
 
@@ -63,7 +66,6 @@ a{text-decoration:none; color:inherit}
 
 .intro{
     text-align:left;
-    margin-bottom:36px;
 }
 
 .intro .eyebrow{
@@ -107,7 +109,7 @@ a{text-decoration:none; color:inherit}
     padding:30px 32px;
     box-shadow:0 24px 52px rgba(15,23,42,.08);
     border:1px solid rgba(15,23,42,.06);
-    margin-top: 30px;
+
 }
 
 .form-card h2{
@@ -329,4 +331,24 @@ a{text-decoration:none; color:inherit}
     .step-remove{
         justify-self:flex-end;
     }
+}
+
+
+/* 여러장 미리보기 */
+.multi-preview-area {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    border: 1px dashed #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #fafafa;
+    min-height: 120px;
+}
+.multi-preview-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 10px;
+    object-fit: cover;
 }
