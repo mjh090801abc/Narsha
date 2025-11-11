@@ -7,7 +7,7 @@
 
 
     <select id="getAllRecipes" resultType="com.spring.dishcovery.entity.RecipeVo">
-       SELECT RECIPE_ID
+        SELECT RECIPE_ID
              ,USER_ID
              ,CATEGORY_ID
              ,TITLE
@@ -17,7 +17,9 @@
              ,RGT_DATE
              ,UPD_DATE
              ,IMG_URL
-             ,STATUS
+             ,recipe_ingr
+             ,recipe_tip
+             ,recipe_tag
         FROM RECIPE_MASTER
 
     </select>
@@ -42,17 +44,19 @@
     </select>
 
     <select id="getMyRecipes" parameterType="string"    resultType="com.spring.dishcovery.entity.RecipeVo" >
-            SELECT RECIPE_ID
-                    ,USER_ID
-                    ,CATEGORY_ID
-                    ,TITLE
-                    ,RCP_DISC
-                    ,COOK_TIME
-                    ,COOK_DFCT
-                    ,RGT_DATE
-                    ,UPD_DATE
-                    ,IMG_URL
-                    ,STATUS
+        SELECT RECIPE_ID
+             ,USER_ID
+             ,CATEGORY_ID
+             ,TITLE
+             ,RCP_DISC
+             ,COOK_TIME
+             ,COOK_DFCT
+             ,RGT_DATE
+             ,UPD_DATE
+             ,IMG_URL
+             ,recipe_ingr
+             ,recipe_tip
+             ,recipe_tag
             FROM RECIPE_MASTER
             WHERE USER_ID =  #{userId}
 
@@ -60,6 +64,38 @@
 
 
     <insert id="SaveRecipeData" parameterType="com.spring.dishcovery.entity.RecipeVo">
+
+        INSERT INTO RECIPE_MASTER(
+                  RECIPE_ID
+                 ,USER_ID
+                 ,CATEGORY_ID
+                 ,TITLE
+                 ,RCP_DISC
+                 ,COOK_TIME
+                 ,COOK_DFCT
+                 ,RGT_DATE
+                 ,UPD_DATE
+                 ,IMG_URL
+                 ,recipe_ingr
+                 ,recipe_tip
+                 ,recipe_tag
+        )
+
+        VALUES (
+                #{recipeId},
+                #{userId},
+                #{categoryId},
+                #{title},
+                #{rcpDisc},
+                #{cookTime},
+                #{cookDfct},
+                #{rgtDate},
+                #{updDate},
+                #{imgUrl},
+                #{recipeIngr},
+                #{recipeTip},
+                #{recipeTag}
+                                );
 
 
 

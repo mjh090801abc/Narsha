@@ -18,8 +18,12 @@ public class RecipeVo {
     private String rgtDate;
     private String updDate;
     private String imgUrl;
-    private String status;
+    private String recipeIngr;
+    private String recipeTip;
+    private String recipeTag;
     private String searchName;
+
+
 
 
 

@@ -61,15 +61,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    const form = document.querySelector('.recipe-form');
-    if (form) {
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const data = Object.fromEntries(new FormData(form).entries());
-            console.log('레시피 등록 요청', data);
-            form.reset();
-            ensureStepList(document.querySelector('[data-step-list]'));
-            showToast('레시피 등록 요청이 전송되었습니다.');
-        });
-    }
 });
