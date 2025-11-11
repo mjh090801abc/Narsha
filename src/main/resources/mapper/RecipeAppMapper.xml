@@ -33,7 +33,9 @@
              ,RGT_DATE
              ,UPD_DATE
              ,IMG_URL
-             ,STATUS
+             ,recipe_ingr
+             ,recipe_tip
+             ,recipe_tag
         FROM RECIPE_MASTER
        WHERE TITLE LIKE '%' ||  #{searchName} || '%'
 
@@ -58,6 +60,9 @@
 
 
     <insert id="SaveRecipeData" parameterType="com.spring.dishcovery.entity.RecipeVo">
+
+
+
 
 
 
