@@ -55,7 +55,7 @@ public class RecipeController {
 
         result = service.SaveRecipeData(recipeVo);
 
-        return "redirect:/RecipeReg";
+        return "redirect:/MainPage";
     }
 
 

@@ -16,10 +16,10 @@ document.addEventListener('click', (e) => {
 });
 
 // Submit search on button click or Enter
-const searchWrap = document.querySelector('.search-wrap');
-if (searchWrap) {
-    const input = searchWrap.querySelector('input');
-    const btn = searchWrap.querySelector('.icon-btn');
+const searchWrapClass = document.querySelector('.search-wrap');
+if (searchWrapClass) {
+    const input = searchWrapClass.querySelector('input');
+    const btn = searchWrapClass.querySelector('.icon-btn');
     const submit = () => {
         const q = input.value.trim();
         if (!q) return;
@@ -30,4 +30,10 @@ if (searchWrap) {
     input?.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') submit();
     });
+}
+
+function selectDetail(recipeId){
+
+    alert(recipeId);
+
 }

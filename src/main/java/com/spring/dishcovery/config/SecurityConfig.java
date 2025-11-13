@@ -27,7 +27,7 @@ public class SecurityConfig {
                 //요청권한 설정
                 .authorizeHttpRequests(auth -> auth
                                 .requestMatchers(
-                                        "/MainPage",   // ✅ 메인페이지
+                                        "/MainPage",
                                         "/",           // 루트
                                         "/signup",
                                         "/login",

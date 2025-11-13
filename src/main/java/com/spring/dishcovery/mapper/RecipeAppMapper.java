@@ -16,4 +16,6 @@ public interface RecipeAppMapper {
 
     List<RecipeVo> getMyRecipes(String userId);
 
+    public int insertRecipeSteps(List<RecipeVo> stepList);
+
 }

@@ -4,7 +4,7 @@ const createStepRow = (index) => {
     row.dataset.step = '';
     row.innerHTML = `
     <span class="step-index">${index}</span>
-    <textarea name="steps[]" rows="2" placeholder="예: 팬에 올리브유를 두르고 다진 마늘을 볶습니다." required></textarea>
+    <textarea name="stepDescriptions" rows="2" placeholder="예: 팬에 올리브유를 두르고 다진 마늘을 볶습니다." required></textarea>
     <button type="button" class="step-remove" data-remove-step aria-label="${index}단계 삭제">&times;</button>
   `;
     return row;
@@ -62,3 +62,26 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 });
+
+function previewSingleImage(event) {
+    const previewArea = document.getElementById('mainPreviewArea');
+    const file = event.target.files[0]; // 첫 번째 파일만 가져오기
+    previewArea.innerHTML = ''; // 이전 미리보기 삭제
+
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const img = document.createElement('img');
+            img.src = e.target.result;
+            img.alt = '대표 이미지 미리보기';
+            img.style.width = '150px';
+            img.style.height = '150px';
+            img.style.objectFit = 'cover';
+            img.style.borderRadius = '10px';
+            previewArea.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+    } else {
+        previewArea.innerHTML = '<span>미리보기</span>';
+    }
+}

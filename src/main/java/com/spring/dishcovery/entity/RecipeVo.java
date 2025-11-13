@@ -3,6 +3,9 @@ package com.spring.dishcovery.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -23,6 +26,15 @@ public class RecipeVo {
     private String recipeTag;
     private String searchName;
 
+    private String[] stepDescriptions;
+    private String stepDescription;
+
+    private int stepOrder;
+
+
+
+
+    List<MultipartFile> mainImages;
 
 
 

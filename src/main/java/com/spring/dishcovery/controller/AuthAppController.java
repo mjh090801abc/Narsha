@@ -21,6 +21,8 @@ public class AuthAppController {
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
 
+    // CORS 허용 (필요 시)
+    @CrossOrigin(origins = "*")
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody UserEntity request) {
 

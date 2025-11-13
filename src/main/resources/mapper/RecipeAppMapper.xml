@@ -96,14 +96,23 @@
                 #{recipeTip},
                 #{recipeTag}
                                 );
-
-
-
-
-
-
     </insert>
 
+    <insert id="insertRecipeSteps"  parameterType="java.util.List">
+        INSERT INTO RECIPE_STEP
+        (RECIPE_ID
+        ,STEP_ORDER
+        ,STEP_DESCRIPTION
+        )
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.recipeId}
+            ,#{item.stepOrder}
+            ,#{item.stepDescription}
+            )
+        </foreach>
+    </insert>
 
     <!--
 

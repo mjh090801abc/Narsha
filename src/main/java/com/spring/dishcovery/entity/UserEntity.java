@@ -1,11 +1,10 @@
 package com.spring.dishcovery.entity;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
-
+@Data
 public class UserEntity {
 
     private String userMail;

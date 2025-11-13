@@ -110,6 +110,7 @@ margin-left:auto; display:flex; align-items:center; gap:8px; color:var(--brand);
     grid-template-columns: repeat(4, 1fr);
     gap: 40px;
     justify-items: center;
+    text-decoration: none !important;
 }
 
 
@@ -120,7 +121,10 @@ margin-left:auto; display:flex; align-items:center; gap:8px; color:var(--brand);
     border-radius: 12px;
     transition: transform 0.2s, box-shadow 0.2s;
     overflow: hidden;
+    text-decoration: none !important;
 }
+
+
 
 .recipe-card:hover {
     transform: translateY(-5px);
@@ -137,9 +141,10 @@ margin-left:auto; display:flex; align-items:center; gap:8px; color:var(--brand);
 
 .recipe-title {
     margin-top: 8px;
-    font-size: 14px;
+    font-size: 16px;
     color: #fff;
-    text-decoration: none;
+    text-decoration: none !important;
+    text-align: center;
 }
 
 @media (max-width: 1200px) {
