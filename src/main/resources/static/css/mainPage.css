@@ -84,23 +84,27 @@ margin-left:auto; display:flex; align-items:center; gap:8px; color:var(--brand);
     display:grid; grid-template-columns: 1fr auto; align-items:center;
     gap:24px; padding:26px 0 18px;
 }
-
-.segmented{
+.segmented {
     background:#eaeaea; border-radius:28px; padding:10px;
     display:flex; gap:10px; width:min(820px, 80%); justify-self:center;
 }
-.segmented .seg-btn{
+.segmented .seg-btn {
     flex:1; height:56px; border:none; border-radius:20px; background:transparent; color:var(--text);
     font-size:26px; font-weight:800; cursor:pointer; transition:background-color .15s ease, color .15s ease;
 }
-.segmented .seg-btn:hover{background:#f4f4f4}
-.segmented .seg-btn.active{background:var(--brand); color:#fff}
+.segmented .seg-btn:hover { background:#f4f4f4; }
+.segmented .seg-btn.active { background:var(--brand); color:#fff; }
 
-.sorts{display:flex; align-items:center; gap:10px; color:#b8bcc2; font-weight:800; justify-self:end}
-.sorts .dot{color:#d9d9d9; font-size:28px; line-height:1}
-.sorts .sort{background:transparent; border:none; cursor:pointer; color:#b8bcc2; font-size:24px; font-weight:800}
-.sorts .sort.active{color:var(--brand)}
-.sorts .sort:hover{color:#ff8b6a}
+.sorts {
+    display:flex; align-items:center; gap:10px; color:#b8bcc2; font-weight:800; justify-self:end;
+}
+.sorts .dot { color:#d9d9d9; font-size:28px; line-height:1; pointer-events: none; }
+
+.sorts .sort {
+    background:transparent; border:none; cursor:pointer; color:#b8bcc2; font-size:24px; font-weight:800;
+}
+.sorts .sort.active { color:var(--brand); }
+.sorts .sort:hover { color:#ff8b6a; }
 
 .content{min-height:40vh; padding:24px 0}
 
@@ -110,7 +114,6 @@ margin-left:auto; display:flex; align-items:center; gap:8px; color:var(--brand);
     grid-template-columns: repeat(4, 1fr);
     gap: 40px;
     justify-items: center;
-    text-decoration: none !important;
 }
 
 
@@ -121,7 +124,6 @@ margin-left:auto; display:flex; align-items:center; gap:8px; color:var(--brand);
     border-radius: 12px;
     transition: transform 0.2s, box-shadow 0.2s;
     overflow: hidden;
-    text-decoration: none !important;
 }
 
 
@@ -139,12 +141,31 @@ margin-left:auto; display:flex; align-items:center; gap:8px; color:var(--brand);
     border-top-right-radius: 12px;
 }
 
-.recipe-title {
+.recipe-info {
+    display: flex;
+    justify-content: space-between; /* 좌/우 정렬 */
+    align-items: center;
     margin-top: 8px;
+    padding: 0 4px;
+}
+
+.recipe-title {
     font-size: 16px;
+    font-weight: 600;
     color: #fff;
-    text-decoration: none !important;
-    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-left: 20px;
+}
+
+.recipe-views {
+    font-size: 14px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-right: 20px;
 }
 
 @media (max-width: 1200px) {

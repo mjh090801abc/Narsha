@@ -17,9 +17,10 @@
              ,RGT_DATE
              ,UPD_DATE
              ,IMG_URL
-             ,recipe_ingr
-             ,recipe_tip
-             ,recipe_tag
+             ,RECIPE_INGR
+             ,RECIPE_TIP
+             ,RECIPE_TAG
+             ,VIEW_COUNT
         FROM RECIPE_MASTER
 
     </select>
@@ -35,9 +36,10 @@
              ,RGT_DATE
              ,UPD_DATE
              ,IMG_URL
-             ,recipe_ingr
-             ,recipe_tip
-             ,recipe_tag
+             ,RECIPE_INGR
+             ,RECIPE_TIP
+             ,RECIPE_TAG
+             ,VIEW_COUNT
         FROM RECIPE_MASTER
        WHERE TITLE LIKE '%' ||  #{searchName} || '%'
 
@@ -54,9 +56,10 @@
              ,RGT_DATE
              ,UPD_DATE
              ,IMG_URL
-             ,recipe_ingr
-             ,recipe_tip
-             ,recipe_tag
+             ,RECIPE_INGR
+             ,RECIPE_TIP
+             ,RECIPE_TAG
+             ,VIEW_COUNT
             FROM RECIPE_MASTER
             WHERE USER_ID =  #{userId}
 
@@ -100,19 +103,81 @@
 
     <insert id="insertRecipeSteps"  parameterType="java.util.List">
         INSERT INTO RECIPE_STEP
-        (RECIPE_ID
-        ,STEP_ORDER
-        ,STEP_DESCRIPTION
-        )
+                    (RECIPE_ID
+                    ,STEP_ORDER
+                    ,STEP_DESCRIPTION
+                    )
         VALUES
-        <foreach collection="list" item="item" separator=",">
-            (
-            #{item.recipeId}
-            ,#{item.stepOrder}
-            ,#{item.stepDescription}
-            )
-        </foreach>
+                <foreach collection="list" item="item" separator=",">
+                    (
+                    #{item.recipeId}
+                    ,#{item.stepOrder}
+                    ,#{item.stepDescription}
+                    )
+                </foreach>
     </insert>
+
+    <select id="getRecipeDataDetail" parameterType="string"    resultType="com.spring.dishcovery.entity.RecipeVo" >
+        SELECT RECIPE_ID
+             ,USER_ID
+             ,CATEGORY_ID
+             ,TITLE
+             ,RCP_DISC
+             ,COOK_TIME
+             ,COOK_DFCT
+             ,RGT_DATE
+             ,UPD_DATE
+             ,IMG_URL
+             ,recipe_ingr
+             ,recipe_tip
+             ,recipe_tag
+        FROM RECIPE_MASTER
+       WHERE RECIPE_ID =  #{recipeId}
+
+    </select>
+
+    <select id="selectStepList" parameterType="string"    resultType="com.spring.dishcovery.entity.RecipeVo">
+
+        SELECT RECIPE_ID
+              ,STEP_ORDER
+              ,STEP_DESCRIPTION
+          FROM RECIPE_STEP
+         WHERE RECIPE_ID =  #{recipeId}
+         ORDER BY STEP_ORDER
+
+    </select>
+
+
+    <!-- 유저의 조회 여부 확인 -->
+    <select id="checkUserView" resultType="int">
+        SELECT COUNT(*) CNT
+          FROM RECIPE_VIEW_LOG
+         WHERE RECIPE_ID = #{recipeId}
+           AND USER_ID = #{userId}
+    </select>
+
+    <!-- 조회 기록 저장 -->
+    <insert id="insertUserView"      parameterType="string">
+        INSERT INTO RECIPE_VIEW_LOG
+                  ( RECIPE_ID
+                   ,USER_ID
+                   ,VIEWED_AT
+                  )
+            VALUES(
+                    #{recipeId}
+                   ,#{userId}
+                   ,NOW()
+                  )
+    </insert>
+
+    <!-- 레시피 조회수 증가 -->
+    <update id="updateViewCount"   parameterType="string">
+        UPDATE RECIPE_MASTER
+           SET VIEW_COUNT = VIEW_COUNT + 1
+         WHERE RECIPE_ID = #{recipeId}
+    </update>
+
+
 
     <!--
 

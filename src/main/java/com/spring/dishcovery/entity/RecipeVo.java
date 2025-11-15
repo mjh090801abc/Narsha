@@ -30,11 +30,11 @@ public class RecipeVo {
     private String stepDescription;
 
     private int stepOrder;
-
-
+    private int viewCount;
 
 
     List<MultipartFile> mainImages;
+    List<RecipeVo> stepList;
 
 
 

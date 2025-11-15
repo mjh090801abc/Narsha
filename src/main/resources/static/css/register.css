@@ -335,7 +335,7 @@ a{text-decoration:none; color:inherit}
 
 
 /* 여러장 미리보기 */
-.multi-preview-area {
+.single-preview-area {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
@@ -346,7 +346,7 @@ a{text-decoration:none; color:inherit}
     background-color: #fafafa;
     min-height: 120px;
 }
-.multi-preview-image {
+.single-preview-image {
     width: 120px;
     height: 120px;
     border-radius: 10px;

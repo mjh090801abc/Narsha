@@ -68,9 +68,39 @@ public class RecipeAppService {
     }
 
 
-
     public List<RecipeVo> getMyRecipes(String userId) {
         return recipeAppMapper.getMyRecipes(userId);
+    }
+
+    public RecipeVo getRecipeDataDetail(String recipeId, String userId) {
+        int result;
+
+        RecipeVo recipeVo = new  RecipeVo();
+
+       // userid가 있을때만 조회수 증가 시키기
+        if (userId != null && !"".equals(userId)) {
+
+            //1) 이 유저가 이미 조회했는지 확인
+            Integer exists = recipeAppMapper.checkUserView(recipeId, userId);
+
+            if (exists != null && exists > 0) {
+                recipeVo = recipeAppMapper.getRecipeDataDetail(recipeId);
+                recipeVo.setStepList(recipeAppMapper.selectStepList(recipeId));
+
+                return recipeVo;  // 이미 조회한 유저 → 증가 X
+            }
+            // 2) 조회 기록 추가
+            result = recipeAppMapper.insertUserView(recipeId, userId);
+
+            // 3) 실제 조회수 증가
+            result = recipeAppMapper.updateViewCount(recipeId);
+
+        }
+
+        recipeVo = recipeAppMapper.getRecipeDataDetail(recipeId);
+        recipeVo.setStepList(recipeAppMapper.selectStepList(recipeId));
+
+        return recipeVo;
     }
 
 

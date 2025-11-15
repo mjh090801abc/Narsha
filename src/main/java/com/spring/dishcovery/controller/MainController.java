@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +32,8 @@ public class MainController {
         recipes = service.getAllRecipes();
 
         model.addAttribute("recipes", recipes);
+        model.addAttribute("rcpClassNm", "seg-btn active");
+        model.addAttribute("rankClassNm", "seg-btn");
 
         return "mainPage";
     }
@@ -56,9 +59,30 @@ public class MainController {
         return "user/MyPage";
     }
 
-    @GetMapping("/recipeWrite")
-    public String recipeWrite(Model model, HttpServletRequest request) {
+    @GetMapping("/pageGubun")
+    public String pageGubun(@RequestParam String gubun, Model model, HttpServletRequest request) {
 
-        return "recipe/RecipeReg";
+
+        String rcpClassNm = "";
+        String rankClassNm = "";
+
+        if("recipe".equals(gubun)) {
+            rcpClassNm = "seg-btn active";
+            rankClassNm = "seg-btn";
+        }else{
+            rcpClassNm = "seg-btn";
+            rankClassNm = "seg-btn active";
+        }
+        List<RecipeVo> recipes = new ArrayList<>();
+        recipes = service.getAllRecipes();
+
+        model.addAttribute("recipes", recipes);
+        model.addAttribute("gubun", gubun);
+        model.addAttribute("rcpClassNm", rcpClassNm);
+        model.addAttribute("rankClassNm", rankClassNm);
+
+        return "mainPage";
     }
+
+
 }

@@ -21,24 +21,24 @@
   </section>
 
   <section class="form-section container">
-    <form class="recipe-form" th:action="@{/SaveRecipeData}"  method="post" enctype="multipart/form-data">
+    <form class="recipe-form" th:object="${recipe}" method="post" enctype="multipart/form-data">
       <div class="form-card">
         <h2>기본 정보</h2>
         <div class="form-grid">
           <div class="form-row">
             <label for="title">레시피 이름</label>
-            <input type="text" id="title" name="title" placeholder="예: 새우 크림 파스타" required>
+            <input type="text" id="title" name="title" th:value="${recipe.title}">
           </div>
           <div class="form-row">
-            <label for="categoryId">카테고리</label>
+              <label for="categoryId">카테고리</label>
               <select id="categoryId" name="categoryId" required>
                   <option value="">선택</option>
-                  <option th:each="cat : ${categoryList}" th:value="${cat.code}" th:text="${cat.codeName}"></option>
+                  <option th:each="cat : ${categoryList}" th:value="${cat.code}" th:text="${cat.codeName}" th:selected="${cat.code == recipe.categoryId}"></option>
               </select>
           </div>
           <div class="form-row">
             <label for="cookTime">조리 시간</label>
-            <input type="text" id="cookTime" name="cookTime" placeholder="예: 20분" required>
+            <input type="text" id="cookTime" name="cookTime"   th:value="${recipe.cookTime}">
           </div>
           <div class="form-row">
             <label for="recipeLevel">난이도</label>
@@ -55,9 +55,10 @@
         <div class="form-card">
             <div class="form-row">
                 <h2>대표 이미지</h2>
-                <input type="file" id="mainImages"   name="mainImages" accept="image/*" onchange="previewSingleImage(event)">
                 <div id="mainPreviewArea" class="single-preview-area">
-                    <span>미리보기</span>
+                    <span>
+                         <img th:src="${recipe.imgUrl}" alt="레시피 이미지" class="single-preview-image">
+                    </span>
                 </div>
             </div>
         </div>
@@ -65,11 +66,11 @@
         <h2>요리 소개와 준비물</h2>
         <div class="form-row">
           <label for="rcpDisc">요리 소개</label>
-          <textarea id="rcpDisc" name="rcpDisc" rows="3" placeholder="레시피의 매력을 짧게 소개해주세요." required></textarea>
+          <textarea id="rcpDisc" name="rcpDisc" rows="3" th:text="${recipe.rcpDisc}"> </textarea>
         </div>
         <div class="form-row">
           <label for="recipeIngr">필수 재료</label>
-          <textarea id="recipeIngr" name="recipeIngr" rows="3" placeholder="예: 새우 200g, 생크림 1컵, 파마산 치즈 2큰술..." required></textarea>
+          <textarea id="recipeIngr" name="recipeIngr" rows="3" th:text="${recipe.recipeIngr}"></textarea>
         </div>
       </div>
 
@@ -80,9 +81,10 @@
         </div>
         <p class="card-hint">각 단계마다 자세히 작성하면 노출 확률이 높아져요.</p>
         <div class="step-list" data-step-list>
-            <div class="step-row" data-step>
+            <div class="step-row" data-step  th:each="step : ${stepList}">
                 <span class="step-index">1</span>
-                <textarea id="stepDescriptions" name="stepDescriptions" rows="2" placeholder="예: 팬에 올리브유를 두르고 다진 마늘을 볶습니다." required></textarea>
+                <textarea id="stepDescriptions" name="stepDescriptions" rows="2" th:text="${step.stepDescription}"></textarea>
+                <input type="hidden" id="stepOrder" name ="stepOrder" th:value="${step.stepOrder}">
                 <button type="button" class="step-remove" data-remove-step aria-label="1단계 삭제">&times;</button>
             </div>
         </div>
@@ -91,19 +93,14 @@
         <h2>마무리</h2>
         <div class="form-row">
             <label for="recipeTip">팁 &amp; 노하우</label>
-            <textarea id="recipeTip" name="recipeTip" rows="2"
-                      placeholder="예: 새우는 오버쿡되지 않도록 투명해질 때까지만 볶아주세요."></textarea>
+            <textarea id="recipeTip" name="recipeTip" rows="2"  th:text="${recipe.recipeTip}"></textarea>
         </div>
         <div class="form-row">
             <label for="recipeTag">해시태그</label>
-            <input type="text" id="recipeTag" name="recipeTag" placeholder="예: #크림파스타 #새우 #집들이">
+            <input type="text" id="recipeTag" name="recipeTag" th:value="${recipe.recipeTag}">
         </div>
       </div>
 
-        <div class="form-actions">
-        <a href="main.html" class="ghost-btn">취소</a>
-        <button type="submit" class="primary-btn">등록 완료</button>
-      </div>
     </form>
   </section>
 </main>
