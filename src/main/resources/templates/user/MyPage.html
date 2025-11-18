@@ -35,7 +35,7 @@
                 <button class="slide-btn left" onclick="slideLeft()">&#10094;</button>
                 <div class="recipe-scroll" id="recipeScroll">
                     <div class="recipe-card-mypage" th:each="recipe : ${myRecipes}">
-                        <img th:src="${recipe.imgUrl}" alt="레시피 이미지">
+                        <img th:src="${recipe.imgUrl}" alt="레시피 이미지"  onclick="selectDetail(this.dataset.recipeId)">
                         <div class="recipe-info-mypage">
                             <p th:text="${recipe.title}">레시피 제목</p>
                         </div>
@@ -59,6 +59,23 @@
     function slideRight() {
         scrollContainer.scrollBy({ left: 300, behavior: 'smooth' });
     }
+
+    function selectDetail(recipeId) {
+        const form = document.createElement("form");
+        form.method = "GET";
+        form.action = "/recipe/detail";
+        form.target = "_self";
+
+        const hidden = document.createElement("input");
+        hidden.type = "hidden";
+        hidden.name = "recipeId";
+        hidden.value = recipeId;
+
+        form.appendChild(hidden);
+        document.body.appendChild(form);
+        form.submit();
+    }
+
 </script>
 </body>
 </html>
