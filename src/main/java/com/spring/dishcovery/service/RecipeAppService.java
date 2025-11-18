@@ -1,5 +1,6 @@
 package com.spring.dishcovery.service;
 
+import com.spring.dishcovery.entity.RecipeAppVo;
 import com.spring.dishcovery.entity.RecipeVo;
 import com.spring.dishcovery.mapper.RecipeAppMapper;
 import com.spring.dishcovery.util.FileUploadUtil;
@@ -22,6 +23,10 @@ public class RecipeAppService {
     @Autowired
     RecipeAppMapper recipeAppMapper;
 
+    public List<RecipeAppVo> getAppRecipes() {
+        return recipeAppMapper.getAppRecipes();
+    }
+
     public List<RecipeVo> getAllRecipes() {
         return recipeAppMapper.getAllRecipes();
     }
@@ -31,8 +36,6 @@ public class RecipeAppService {
     }
 
     public int SaveRecipeData(RecipeVo recipeVo) {
-
-
         int result;
 
         // recipeId 생성

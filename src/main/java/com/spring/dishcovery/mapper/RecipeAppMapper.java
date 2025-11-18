@@ -1,5 +1,6 @@
 package com.spring.dishcovery.mapper;
 
+import com.spring.dishcovery.entity.RecipeAppVo;
 import com.spring.dishcovery.entity.RecipeVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -8,6 +9,8 @@ import java.util.List;
 
 @Mapper
 public interface RecipeAppMapper {
+
+    List<RecipeAppVo> getAppRecipes();
 
     List<RecipeVo> getAllRecipes();
 

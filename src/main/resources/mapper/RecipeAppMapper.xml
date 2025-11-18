@@ -6,6 +6,25 @@
 <mapper namespace="com.spring.dishcovery.mapper.RecipeAppMapper">
 
 
+    <select id="getAppRecipes" resultType="com.spring.dishcovery.entity.RecipeAppVo">
+        SELECT RECIPE_ID
+             ,USER_ID
+             ,CATEGORY_ID
+             ,TITLE
+             ,RCP_DISC
+             ,COOK_TIME
+             ,COOK_DFCT
+             ,RGT_DATE
+             ,UPD_DATE
+             ,IMG_URL
+             ,RECIPE_INGR
+             ,RECIPE_TIP
+             ,RECIPE_TAG
+             ,VIEW_COUNT
+        FROM RECIPE_MASTER
+
+    </select>
+
     <select id="getAllRecipes" resultType="com.spring.dishcovery.entity.RecipeVo">
         SELECT RECIPE_ID
              ,USER_ID
@@ -92,13 +111,13 @@
                 #{rcpDisc},
                 #{cookTime},
                 #{cookDfct},
-                #{rgtDate},
-                #{updDate},
+                NOW(),
+                NOW(),
                 #{imgUrl},
                 #{recipeIngr},
                 #{recipeTip},
                 #{recipeTag}
-                                );
+              );
     </insert>
 
     <insert id="insertRecipeSteps"  parameterType="java.util.List">

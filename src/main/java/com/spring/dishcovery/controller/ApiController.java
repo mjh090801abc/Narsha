@@ -1,23 +1,28 @@
 package com.spring.dishcovery.controller;
 
+import com.spring.dishcovery.entity.CodeVO;
 import com.spring.dishcovery.entity.DataRequest;
 import com.spring.dishcovery.entity.UserEntity;
 import com.spring.dishcovery.service.ApiService;
+import com.spring.dishcovery.service.CodeService;
 import com.spring.dishcovery.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
+@RequiredArgsConstructor
 public class ApiController {
 
-    @Autowired
-    private ApiService apiService;
+    private final ApiService apiService;
+    private final CodeService codeService;
 
     @GetMapping("/hello")
     public String hello() {
@@ -57,6 +62,9 @@ public class ApiController {
 
     }
 
-
+    @GetMapping("/categoryList")
+    public List<CodeVO> getCategoriList() {
+        return codeService.codeList("CTG");
+    }
 
 }
