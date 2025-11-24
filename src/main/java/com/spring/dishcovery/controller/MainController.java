@@ -34,6 +34,7 @@ public class MainController {
         model.addAttribute("recipes", recipes);
         model.addAttribute("rcpClassNm", "seg-btn active");
         model.addAttribute("rankClassNm", "seg-btn");
+        model.addAttribute("lastClassNm", "seg-btn");
 
         return "mainPage";
     }
@@ -62,26 +63,44 @@ public class MainController {
     @GetMapping("/pageGubun")
     public String pageGubun(@RequestParam String gubun, Model model, HttpServletRequest request) {
 
+        List<RecipeVo> recipes = new ArrayList<>();
 
         String rcpClassNm = "";
         String rankClassNm = "";
+        String lastClassNm = "";
+        String url = "";
 
         if("recipe".equals(gubun)) {
             rcpClassNm = "seg-btn active";
             rankClassNm = "seg-btn";
-        }else{
+            lastClassNm = "seg-btn";
+
+            recipes = service.getAllRecipes();
+            url = "/mainPage";
+
+        }else if("rank".equals(gubun)){
             rcpClassNm = "seg-btn";
             rankClassNm = "seg-btn active";
+            lastClassNm = "seg-btn";
+
+            //recipes = service.getRankList();
+            url = "recipe/RankPage";
+        }else{
+            rcpClassNm = "seg-btn";
+            rankClassNm = "seg-btn";
+            lastClassNm = "seg-btn active";
+
+            recipes = service.getRoulleteData();
+            url = "recipe/RoulettePage";
         }
-        List<RecipeVo> recipes = new ArrayList<>();
-        recipes = service.getAllRecipes();
 
         model.addAttribute("recipes", recipes);
         model.addAttribute("gubun", gubun);
         model.addAttribute("rcpClassNm", rcpClassNm);
         model.addAttribute("rankClassNm", rankClassNm);
+        model.addAttribute("lastClassNm", lastClassNm);
 
-        return "mainPage";
+        return url;
     }
 
 

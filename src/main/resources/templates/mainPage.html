@@ -8,7 +8,7 @@
     <link rel="stylesheet" th:href="@{/css/mainPage.css}" />
 </head>
 <body>
-    <form id="mainForm" name="mainForm" method="get" th:action="@{//searchRecipe}">
+    <form id="mainForm" name="mainForm" method="get" th:action="@{/searchRecipe}">
         <div th:insert="fragments/header :: site-header"></div>
 
         <input type="hidden" id="recipeId" name="recipeId">
@@ -23,16 +23,20 @@
                 <button type="button"   th:class="${rankClassNm}"
                                         onclick="handleSegmentClick(this, '/pageGubun?gubun=rank')"
                                         role="tab" aria-selected="false">랭킹</button>
+                <button type="button"   th:class="${lastClassNm}"
+                                        onclick="handleSegmentClick(this, '/pageGubun?gubun=last')"
+                                        role="tab" aria-selected="false">룰렛추천</button>
             </div>
-            <div class="sorts" aria-label="정렬">
-              <span class="dot">·</span>
-              <button class="sort active"   data-sort="popular">인기순</button>
-              <span class="dot">·</span>
-              <button class="sort"  data-sort="recommend">추천순</button>
-              <span class="dot">·</span>
-              <button class="sort" data-sort="latest">최신순</button>
-            </div>
-          </section>
+<!--              -->
+<!--            <div class="sorts" aria-label="정렬">-->
+<!--              <span class="dot">·</span>-->
+<!--              <button class="sort active"   data-sort="popular">인기순</button>-->
+<!--              <span class="dot">·</span>-->
+<!--              <button class="sort"  data-sort="recommend">추천순</button>-->
+<!--              <span class="dot">·</span>-->
+<!--              <button class="sort" data-sort="latest">최신순</button>-->
+<!--            </div>-->
+          </section>-
 
           <section class="content container">
               <div class="recipe-grid" id="recipeListContainer">

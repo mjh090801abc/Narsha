@@ -31,6 +31,10 @@ public class RecipeAppService {
         return recipeAppMapper.getAllRecipes();
     }
 
+    public List<RecipeVo> getRoulleteData() {
+        return recipeAppMapper.getRoulleteData();
+    }
+
     public List<RecipeVo> getSearchRecipes(String searchName) {
         return recipeAppMapper.getSearchRecipes(searchName);
     }
