@@ -41,12 +41,10 @@
                 <input type="text" id="cookTime" name="cookTime" placeholder="예: 20분" required>
               </div>
               <div class="form-row">
-                <label for="recipeLevel">난이도</label>
-                <select id="recipeLevel" name="level" required>
+                <label for="cookDfct">난이도</label>
+                <select id="cookDfct" name="cookDfct" required>
                   <option value="" disabled selected>선택하세요</option>
-                  <option value="쉬움">쉬움</option>
-                  <option value="중간">중간</option>
-                  <option value="어려움">어려움</option>
+                    <option th:each="lv : ${levelList}" th:value="${lv.code}" th:text="${lv.codeName}"></option>
                 </select>
               </div>
             </div>

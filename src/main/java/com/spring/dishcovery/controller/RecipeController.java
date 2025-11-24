@@ -52,9 +52,11 @@ public class RecipeController {
     public String recipeWrite(Model model, HttpServletRequest request) {
 
         List<CodeVO> categoryList = codeService.codeList("CTG");
+        List<CodeVO> levelList = codeService.codeList("LV");
 
 
         model.addAttribute("categoryList", categoryList);
+        model.addAttribute("levelList", levelList);
 
         return "recipe/RecipeReg";
     }
