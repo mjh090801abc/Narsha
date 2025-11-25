@@ -14,6 +14,8 @@ public interface RecipeAppMapper {
 
     List<RecipeVo> getAllRecipes();
 
+    List<RecipeVo> getRankList();
+
     List<RecipeVo> getRoulleteData();
 
     List<RecipeVo> getSearchRecipes(String searchName);
