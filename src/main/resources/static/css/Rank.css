@@ -24,6 +24,10 @@
     position: relative; /* 자식 요소의 위치 지정을 위해 */
 }
 
+.rank-image{
+    width:120px;
+    height:120px;
+}
 /* 개별 랭킹 블록 기본 스타일 */
 .ranking-block {
     width: 150px;
