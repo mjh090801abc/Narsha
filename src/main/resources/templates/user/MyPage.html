@@ -20,7 +20,7 @@
                 <div class="profile-info">
                     <h2 th:text="${user.userId}"></h2>
                     <p th:text="${user.userMail}"></p>
-                    <button class="edit-btn">프로필 수정</button>
+                    <button type="button" class="edit-btn" onclick="alert('준비 중 입니다.')">프로필 수정</button>
                 </div>
             </div>
         </aside>
@@ -49,7 +49,7 @@
         <section class="favorite-content">
             <div class="my-recipes-container">
                 <h2>오늘의 추천 레시피</h2>
-                <a th:href="@{/recipeWrite}" class="add-btn">새로고침</a>
+                <a th:href="@{/myPage}" class="add-btn">새로고침</a>
             </div>
             <div class="slider-wrapper">
                 <button class="slide-btn left" onclick="slideLeft()">&#10094;</button>
@@ -93,6 +93,12 @@
 
     function slideRightSnd() {
         scrollContainerSnd.scrollBy({ left: 300, behavior: 'smooth' });
+    }
+
+    function confirmLogout(){
+        if(confirm("정말 로그아웃 하시겠습니까 ?")){
+            window.location.href = "/logout";
+        }
     }
 </script>
 </body>
