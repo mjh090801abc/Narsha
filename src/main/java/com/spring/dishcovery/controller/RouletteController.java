@@ -19,7 +19,6 @@ public class RouletteController {
     public List<RecipeVo>  roulette(Model model) {
         List<RecipeVo> recipes = recipeAppService.getAllRecipes();
 
-
         return recipes;
     }
 
