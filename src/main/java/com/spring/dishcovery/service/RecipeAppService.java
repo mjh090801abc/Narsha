@@ -30,9 +30,16 @@ public class RecipeAppService {
     public List<RecipeVo> getAllRecipes() {
         return recipeAppMapper.getAllRecipes();
     }
-  public List<RecipeVo> getRankList() {
+
+    public List<RecipeVo> getRankList() {
         return recipeAppMapper.getRankList();
     }
+
+    public RecipeVo getRankData(String rankId) {
+        return recipeAppMapper.getRankData(rankId);
+    }
+
+
 
     public List<RecipeVo> getRoulleteData() {
         return recipeAppMapper.getRoulleteData();
