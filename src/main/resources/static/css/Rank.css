@@ -1,0 +1,134 @@
+
+
+/* 기본 스타일 초기화 및 폰트 설정 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* 전체 컨텐츠를 담고 중앙에 배치하는 컨테이너 */
+.f-container {
+    display: flex;
+    gap: 70px; /* 중앙 블록과 오른쪽 목록 사이의 간격 조정 */
+    align-items: center; /* 세로 방향으로 중앙 정렬 */
+    padding: 20px;
+    margin-left: 23%;
+}
+
+/* 3개의 랭킹 블록 컨테이너 */
+.ranking-blocks-group {
+    display: flex;
+    align-items: flex-start; /* 블록들의 기준점을 상단으로 통일 */
+    gap: 15px; /* 블록들 사이의 간격 */
+    position: relative; /* 자식 요소의 위치 지정을 위해 */
+}
+
+/* 개별 랭킹 블록 기본 스타일 */
+.ranking-block {
+    width: 150px;
+    height: 150px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    padding: 10px;
+
+    /* 텍스트 배치를 위한 Flexbox */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    color: #333;
+    font-size: 14px;
+    /* 은은한 그림자를 추가하여 입체감 부여 (Figma 디자인 반영) */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    position: relative;
+    z-index: 1; /* 기본 블록 Z-index */
+}
+
+/* 1위 하이라이트 블록 스타일 */
+.highlight {
+    /* 이미지와 동일한 주황색 그라데이션 */
+    background: linear-gradient(to bottom, #ff9933, #ff6600);
+    color: white;
+    width: 170px; /* 1위는 더 크게 */
+    height: 170px;
+    z-index: 2; /* 1위 블록이 앞으로 나오게 설정 */
+    /* 1위 블록만 세로 중앙에 오도록 약간의 위치 조정 */
+    margin-top: -10px;
+    box-shadow: 0 8px 15px rgba(255, 102, 0, 0.3); /* 더 강조된 그림자 */
+    transition: all 0.3s; /* 애니메이션 효과 추가 */
+}
+
+/* DB 연동 예정 텍스트 스타일 */
+.rank-image-area {
+    font-weight: bold;
+    color: #999;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.highlight .rank-image-area {
+    color: white;
+}
+
+/* 순위 숫자 스타일 */
+.rank-number {
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+    font-size: 28px;
+    font-weight: 900; /* 매우 굵게 */
+    color: rgba(0, 0, 0, 0.1); /* 투명한 검은색 */
+}
+
+.highlight .rank-number {
+    color: rgba(255, 255, 255, 0.2); /* 하이라이트 블록의 숫자 색상 */
+}
+
+/* 1위 블록 상세 정보 스타일 */
+.rank-name-highlight {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 3px;
+    color: white;
+}
+
+.rank-floor-highlight {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+
+/* 오른쪽 Frame 1 목록 (DB 연결 영역) */
+.db-frame-list {
+    width: 180px; /* 폭 조정 */
+    height: 300px; /* 높이 고정 (이미지에 맞춰) */
+    border: 2px solid #0077ff; /* Figma와 동일한 파란색 테두리 */
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.frame-title {
+    color: #0077ff;
+    font-weight: bold;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.list-item {
+    width: 100%;
+    height: 25px; /* 기본 항목 높이 */
+    border: 1px solid #c0c0c0; /* 회색 테두리 */
+    border-radius: 3px;
+    background-color: #ffffff;
+}
+
+/* 마지막 긴 항목 스타일 */
+.large-item {
+    flex-grow: 1; /* 남은 공간을 모두 차지하도록 하여 긴 사각형을 재현 */
+    height: auto;
+}
