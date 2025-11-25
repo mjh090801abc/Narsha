@@ -70,6 +70,10 @@ public class MainController {
         String lastClassNm = "";
         String url = "";
 
+        RecipeVo fstVo = new RecipeVo();
+        RecipeVo sndVo = new RecipeVo();
+        RecipeVo trdVo = new RecipeVo();
+
         if("recipe".equals(gubun)) {
             rcpClassNm = "seg-btn active";
             rankClassNm = "seg-btn";
@@ -83,9 +87,13 @@ public class MainController {
             rankClassNm = "seg-btn active";
             lastClassNm = "seg-btn";
 
-            recipes = service.getRankList();
+           // recipes = service.getRankList();
+            fstVo = service.getRankData("1");
+            sndVo = service.getRankData("2");
+            trdVo = service.getRankData("3");
 
             url = "recipe/RankPage";
+
         }else{
             rcpClassNm = "seg-btn";
             rankClassNm = "seg-btn";
@@ -100,6 +108,9 @@ public class MainController {
         model.addAttribute("rcpClassNm", rcpClassNm);
         model.addAttribute("rankClassNm", rankClassNm);
         model.addAttribute("lastClassNm", lastClassNm);
+        model.addAttribute("fstVo", fstVo);
+        model.addAttribute("sndVo", sndVo);
+        model.addAttribute("trdVo", trdVo);
 
         return url;
     }
