@@ -83,7 +83,8 @@ public class MainController {
             rankClassNm = "seg-btn active";
             lastClassNm = "seg-btn";
 
-            //recipes = service.getRankList();
+            recipes = service.getRankList();
+
             url = "recipe/RankPage";
         }else{
             rcpClassNm = "seg-btn";
