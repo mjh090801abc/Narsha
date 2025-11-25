@@ -46,33 +46,41 @@
         <div class="ranking-blocks-group">
 
             <div class="ranking-block rank-2">
-                <div class="rank-image-area">사진</div>
-                <div class="rank-details">
-                    <div class="rank-name">1층</div>
-                    <div class="rank-floor">비비씨 이름</div>
+                <div class="rank-image-area">
+                    <img th:src="${sndVo.imgUrl}" class="rank-image">
                 </div>
-                <div class="rank-number">2</div>
+                <div class="rank-details">
+                    <div class="rank-name" th:text="${sndVo.title}"></div>
+                    <div class="rank-floor" th:text="${sndVo.rankStr}"></div>
+                </div>
+                <div class="rank-number" th:text="${sndVo.rankStr}"></div>
             </div>
 
             <div class="ranking-block rank-1 highlight">
-                <div class="rank-image-area">사진</div>
-                <div class="rank-details">
-                    <div class="rank-name-highlight">비비씨 이름</div>
-                    <div class="rank-floor-highlight">1층</div>
+                <div class="rank-image-area">
+                    <img th:src="${fstVo.imgUrl}" class="rank-image">
                 </div>
-                <div class="rank-number">1</div>
+                <div class="rank-details">
+                    <div class="rank-name-highlight" th:text="${fstVo.title}"></div>
+                    <div class="rank-floor-highlight" th:text="${fstVo.rankStr}"></div>
+                </div>
+                <div class="rank-number" th:text="${fstVo.rankStr}"></div>
             </div>
 
             <div class="ranking-block rank-3">
-                <div class="rank-image-area">사진</div>
-                <div class="rank-details">
-                    <div class="rank-name">3층</div>
-                    <div class="rank-floor">비비씨 이름</div>
+                <div class="rank-image-area">
+                    <img th:src="${trdVo.imgUrl}" class="rank-image">
                 </div>
-                <div class="rank-number">3</div>
+
+                <div class="rank-details">
+                    <div class="rank-name" th:text="${trdVo.title}"></div>
+                    <div class="rank-floor" th:text="${trdVo.rankStr}"></div>
+                </div>
+                <div class="rank-number"  th:text="${trdVo.rankStr}"></div>
             </div>
 
         </div>
+
 
         <div class="db-frame-list">
             <div class="frame-title">Frame 1</div>
