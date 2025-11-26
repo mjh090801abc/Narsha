@@ -9,6 +9,7 @@
     <link rel="stylesheet" th:href="@{/css/Rank.css}" />
 </head>
 <body>
+
 <form id="mainForm" name="mainForm" method="get" th:action="@{/searchRecipe}">
     <div th:insert="fragments/header :: site-header"></div>
 
@@ -24,6 +25,7 @@
                 <button type="button" th:class="${rankClassNm}"
                         onclick="handleSegmentClick(this, '/pageGubun?gubun=rank')"
                         role="tab" aria-selected="false">랭킹</button>
+
                 <button type="button" th:class="${lastClassNm}"
                         onclick="handleSegmentClick(this, '/pageGubun?gubun=last')"
                         role="tab" aria-selected="false">룰렛추천</button>
@@ -31,10 +33,13 @@
         </section>
     </main>
 
+    <!-- ===== 랭킹 & Frame 컨테이너 ===== -->
     <div class="f-container">
 
+        <!-- ===== 1~3위 블록 ===== -->
         <div class="ranking-blocks-group">
 
+            <!-- 2등 -->
             <div class="ranking-block rank-2">
                 <div class="rank-image-area">
                     <img th:src="${sndVo.imgUrl}" class="rank-image">
@@ -45,6 +50,7 @@
                 <div class="rank-number" th:text="${sndVo.rankStr}"></div>
             </div>
 
+            <!-- 1등 (강조) -->
             <div class="ranking-block rank-1 highlight">
                 <div class="rank-image-area">
                     <img th:src="${fstVo.imgUrl}" class="rank-image">
@@ -55,6 +61,7 @@
                 <div class="rank-number" th:text="${fstVo.rankStr}"></div>
             </div>
 
+            <!-- 3등 -->
             <div class="ranking-block rank-3">
                 <div class="rank-image-area">
                     <img th:src="${trdVo.imgUrl}" class="rank-image">
@@ -67,6 +74,7 @@
 
         </div>
 
+        <!-- ===== 오른쪽 Frame ===== -->
         <div class="db-frame-list">
             <div class="frame-title">Frame 1</div>
             <div class="list-item"></div>
