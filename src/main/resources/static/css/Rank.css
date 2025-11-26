@@ -5,19 +5,19 @@
     padding: 0;
 }
 
-/* ===== 전체 컨테이너 ===== */
+/* ===== 전체 랭킹 + Frame 컨테이너 ===== */
 .f-container {
     display: flex;
-    gap: 70px;
-    align-items: flex-start; /* Frame1과 정렬 유지 */
-    padding: 80px;
-    justify-content: flex-start; /* 원래처럼 왼쪽 정렬 */
+    gap: 50px; /* 랭킹과 Frame 간 간격 */
+    align-items: flex-start;
+    justify-content: center; /* 전체 가운데 정렬 */
+    padding: 80px 20px;
 }
 
-/* ===== 랭킹 그룹 컨테이너 ===== */
+/* ===== 랭킹 블록 그룹 ===== */
 .ranking-blocks-group {
     display: flex;
-    align-items: flex-end; /* 하단 기준 정렬 */
+    align-items: flex-end;
     gap: 20px;
 }
 
@@ -25,113 +25,106 @@
 .rank-image {
     width: 120px;
     height: 120px;
-    border-radius: 12px;
+    border-radius: 5px;
     object-fit: cover;
-    margin-bottom: 10px;
 }
 
-/* ===== 랭킹 블록 공통 ===== */
+/* ===== 랭킹 블록 기본 ===== */
 .ranking-block {
+    width: 150px;
+    height: 260px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    padding: 10px;
+
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+
     text-align: center;
-    border-radius: 10px;
-    padding: 12px;
+    color: #ff682e;
     font-weight: bold;
     font-size: 14px;
-    transition: all 0.4s ease;
+
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
-/* ===== 순위 숫자 ===== */
-.rank-number {
-    margin-top: 6px;
-    font-weight: 900;
-    text-align: center;
-}
-
-/* ===== 1등 ===== */
-.rank-1 {
-    width: 180px;
-    height: 320px;
-    background: linear-gradient(to bottom, #ffb84d, #ff6600);
+/* ===== 1위 강조 ===== */
+.highlight {
+    background: linear-gradient(to bottom, #ff9933, #ff6600);
     color: white;
+    width: 170px;
+    height: 310px;
+    box-shadow: 0 8px 15px rgba(255, 102, 0, 0.3);
+}
+
+.rank-1 {
+    transform: scale(1.08);
+    transition: all 0.3s ease;
     border: 2px solid #FFD700;
-    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.5);
-    transform: scale(1.08);
-    z-index: 3;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
 }
-.rank-1 .rank-number {
-    font-size: 36px;
-    color: rgba(255, 255, 255, 0.8);
-}
+
 .rank-1:hover {
-    transform: scale(1.13);
-    box-shadow: 0 12px 30px rgba(255, 215, 0, 0.6);
+    transform: scale(1.12);
+    box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
 }
 
-/* ===== 2등 ===== */
-.rank-2 {
-    width: 160px;
-    height: 290px;
-    background-color: #ffffff;
+.rank-1 .rank-number {
+    font-size: 34px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* ===== 공통 영역 스타일 ===== */
+.rank-image-area {
+    margin-bottom: 10px;
+}
+
+.highlight .rank-image-area {
+    color: white;
+}
+
+.rank-details {
+    margin-bottom: 8px;
+}
+
+.rank-number {
+    font-size: 26px;
+    font-weight: 900;
     color: #ff682e;
-    border: 2px solid #C0C0C0;
-    box-shadow: 0 6px 18px rgba(192, 192, 192, 0.4);
-    transform: scale(1.04);
-    z-index: 2;
-}
-.rank-2 .rank-number {
-    font-size: 32px;
-    color: rgba(192, 192, 192, 0.8);
-}
-.rank-2:hover {
-    transform: scale(1.08);
-    box-shadow: 0 8px 22px rgba(192, 192, 192, 0.5);
+    margin-top: 5px;
 }
 
-/* ===== 3등 ===== */
-.rank-3 {
-    width: 150px;
-    height: 260px;
-    background-color: #ffffff;
-    color: #ff682e;
-    border: 2px solid #CD7F32;
-    box-shadow: 0 4px 15px rgba(205, 127, 50, 0.3);
-    transform: scale(1);
-    z-index: 1;
-}
-.rank-3 .rank-number {
-    font-size: 28px;
-    color: rgba(205, 127, 50, 0.9);
-}
-.rank-3:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 18px rgba(205, 127, 50, 0.4);
+.highlight .rank-number {
+    color: white;
+    opacity: 0.7;
 }
 
-/* ===== 오른쪽 DB 리스트 (Frame1) ===== */
+/* ===== 오른쪽 DB Frame ===== */
 .db-frame-list {
     width: 180px;
     height: 300px;
     border: 2px solid #0077ff;
     border-radius: 5px;
     padding: 10px;
+
     display: flex;
     flex-direction: column;
     gap: 5px;
+    align-items: center; /* 제목과 내부 중앙정렬 */
 }
 
 .frame-title {
     color: #0077ff;
     font-weight: bold;
-    font-size: 12px;
-    margin-bottom: 5px;
+    font-size: 14px;
+    margin-bottom: 8px;
+    text-align: center;
 }
 
 .list-item {
-    width: 100%;
+    width: 90%;
     height: 25px;
     border: 1px solid #c0c0c0;
     border-radius: 3px;
@@ -140,4 +133,5 @@
 
 .large-item {
     flex-grow: 1;
+    width: 90%;
 }
