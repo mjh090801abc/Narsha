@@ -17,30 +17,20 @@
     <main class="page">
         <section class="controls container">
             <div class="segmented" role="tablist" aria-label="콘텐츠 종류">
-                <button type="button"   th:class="${rcpClassNm}"
+                <button type="button" th:class="${rcpClassNm}"
                         onclick="handleSegmentClick(this, '/pageGubun?gubun=recipe')"
                         role="tab" aria-selected="true">레시피</button>
 
-                <button type="button"   th:class="${rankClassNm}"
+                <button type="button" th:class="${rankClassNm}"
                         onclick="handleSegmentClick(this, '/pageGubun?gubun=rank')"
                         role="tab" aria-selected="false">랭킹</button>
-                <button type="button"   th:class="${lastClassNm}"
+                <button type="button" th:class="${lastClassNm}"
                         onclick="handleSegmentClick(this, '/pageGubun?gubun=last')"
                         role="tab" aria-selected="false">룰렛추천</button>
             </div>
-            <!--              -->
-            <!--            <div class="sorts" aria-label="정렬">-->
-            <!--              <span class="dot">·</span>-->
-            <!--              <button class="sort active"   data-sort="popular">인기순</button>-->
-            <!--              <span class="dot">·</span>-->
-            <!--              <button class="sort"  data-sort="recommend">추천순</button>-->
-            <!--              <span class="dot">·</span>-->
-            <!--              <button class="sort" data-sort="latest">최신순</button>-->
-            <!--            </div>-->
-        </section>-
-
-
+        </section>
     </main>
+
     <div class="f-container">
 
         <div class="ranking-blocks-group">
@@ -51,7 +41,6 @@
                 </div>
                 <div class="rank-details">
                     <div class="rank-name" th:text="${sndVo.title}"></div>
-                    <div class="rank-floor" th:text="${sndVo.rankStr}"></div>
                 </div>
                 <div class="rank-number" th:text="${sndVo.rankStr}"></div>
             </div>
@@ -62,7 +51,6 @@
                 </div>
                 <div class="rank-details">
                     <div class="rank-name-highlight" th:text="${fstVo.title}"></div>
-                    <div class="rank-floor-highlight" th:text="${fstVo.rankStr}"></div>
                 </div>
                 <div class="rank-number" th:text="${fstVo.rankStr}"></div>
             </div>
@@ -71,16 +59,13 @@
                 <div class="rank-image-area">
                     <img th:src="${trdVo.imgUrl}" class="rank-image">
                 </div>
-
                 <div class="rank-details">
                     <div class="rank-name" th:text="${trdVo.title}"></div>
-                    <div class="rank-floor" th:text="${trdVo.rankStr}"></div>
                 </div>
-                <div class="rank-number"  th:text="${trdVo.rankStr}"></div>
+                <div class="rank-number" th:text="${trdVo.rankStr}"></div>
             </div>
 
         </div>
-
 
         <div class="db-frame-list">
             <div class="frame-title">Frame 1</div>
