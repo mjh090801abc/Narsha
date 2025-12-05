@@ -142,7 +142,7 @@
              ,RECIPE_TAG
              ,VIEW_COUNT
         FROM RECIPE_MASTER
-       WHERE TITLE LIKE '%' ||  #{searchName} || '%'
+       WHERE TITLE LIKE CONCAT('%',#{searchName},'%')
 
     </select>
 

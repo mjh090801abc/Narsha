@@ -32,19 +32,64 @@ public class RecipeController {
 
     @GetMapping("/searchRecipe")
     public String searchRecipe(@RequestParam String searchName,
+                               @RequestParam String gubun,
                                Model model) {
 
 //        RecipeVo searchVo = new RecipeVo();
 //        searchVo.setSearchName(searchName);
 
         List<RecipeVo> recipes = new ArrayList<>();
-        recipes = service.getSearchRecipes(searchName);
+
+        String rcpClassNm = "";
+        String rankClassNm = "";
+        String lastClassNm = "";
+        String url = "";
+
+        RecipeVo fstVo = new RecipeVo();
+        RecipeVo sndVo = new RecipeVo();
+        RecipeVo trdVo = new RecipeVo();
+
+        if("recipe".equals(gubun)) {
+            rcpClassNm = "seg-btn active";
+            rankClassNm = "seg-btn";
+            lastClassNm = "seg-btn";
+
+            recipes = service.getSearchRecipes(searchName);
+            url = "/mainPage";
+
+        }else if("rank".equals(gubun)){
+            rcpClassNm = "seg-btn";
+            rankClassNm = "seg-btn active";
+            lastClassNm = "seg-btn";
+
+            // recipes = service.getRankList();
+            fstVo = service.getRankData("1");
+            sndVo = service.getRankData("2");
+            trdVo = service.getRankData("3");
+
+            url = "recipe/RankPage";
+
+        }else{
+            rcpClassNm = "seg-btn";
+            rankClassNm = "seg-btn";
+            lastClassNm = "seg-btn active";
+
+            recipes = service.getRoulleteData();
+            url = "recipe/RoulettePage";
+        }
 
 
         model.addAttribute("recipes", recipes);
         model.addAttribute("searchName", searchName);
+        model.addAttribute("gubun", gubun);
+        model.addAttribute("rcpClassNm", rcpClassNm);
+        model.addAttribute("rankClassNm", rankClassNm);
+        model.addAttribute("lastClassNm", lastClassNm);
+        model.addAttribute("fstVo", fstVo);
+        model.addAttribute("sndVo", sndVo);
+        model.addAttribute("trdVo", trdVo);
 
-        return "/mainPage";
+        return url;
     }
 
 

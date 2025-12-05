@@ -4,6 +4,36 @@ window.addEventListener('DOMContentLoaded', function(){
     if (msg) {
         alert(msg);
     }
+
+
+    const userIdInput = document.getElementById("login-userId");
+    const saveEmailCheckbox = document.getElementById("save-email");
+    const autoLoginCheckbox = document.getElementById("auto-login");
+    const form = document.getElementById("panel-login");
+
+    // 1) 저장된 아이디가 있으면 불러오기
+    const savedUserId = localStorage.getItem("savedUserId");
+    if (savedUserId) {
+        userIdInput.value = savedUserId;
+        saveEmailCheckbox.checked = true;
+    }
+
+    // 2) 체크 해제하면 아이디 삭제
+    saveEmailCheckbox.addEventListener("change", () => {
+        if (saveEmailCheckbox.checked) {
+            localStorage.setItem("savedUserId", userIdInput.value);
+        } else {
+            localStorage.removeItem("savedUserId");
+        }
+    });
+
+    // 입력할 때도 자동 저장
+    userIdInput.addEventListener("input", () => {
+        if (saveEmailCheckbox.checked) {
+            localStorage.setItem("savedUserId", userIdInput.value);
+        }
+    });
+
 });
 
 (function () {
