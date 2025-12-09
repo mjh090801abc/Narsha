@@ -23,5 +23,7 @@ public class RankController {
         model.addAttribute("recipes", recipes);
 
         return "recipe/RankPage";
+
+
     }
 }
