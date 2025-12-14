@@ -135,6 +135,42 @@ a{text-decoration:none; color:inherit}
     gap:10px;
 }
 
+.form-row-flex{
+    display:inline-flex;
+    gap:10px;
+}
+
+.form-row-flex label{
+    font-weight:700;
+    font-size:15px;
+}
+
+.form-row-flex input,
+.form-row-flex select,
+.form-row-flex textarea{
+    width:100%;
+    border:1.5px solid var(--line);
+    border-radius:14px;
+    padding:14px 16px;
+    font-size:15px;
+    font-family:inherit;
+    color:var(--text);
+    background:var(--surface);
+    transition:border-color .15s ease, box-shadow .15s ease;
+    margin-bottom: 20px;
+}
+
+.form-row-flex input:focus,
+.form-row-flex select:focus,
+.form-row-flex textarea:focus{
+    outline:none;
+    border-color:var(--brand);
+    box-shadow:0 0 0 3px rgba(255,107,66,.18);
+}
+
+.form-row-flex textarea{resize:vertical; min-height:110px}
+
+
 .form-row label{
     font-weight:700;
     font-size:15px;
@@ -165,6 +201,7 @@ a{text-decoration:none; color:inherit}
 
 .form-row textarea{resize:vertical; min-height:110px}
 
+
 .input-hint{
     font-size:13px;
     color:var(--muted);
@@ -192,6 +229,11 @@ a{text-decoration:none; color:inherit}
     border:1px solid rgba(255,107,66,.22);
     border-radius:18px;
     background:rgba(255,107,66,.05);
+
+}
+
+.listen-container{
+    align-items: flex-end;
 }
 
 .step-index{
@@ -351,4 +393,13 @@ a{text-decoration:none; color:inherit}
     height: 120px;
     border-radius: 10px;
     object-fit: cover;
+}
+
+.sound-icon{
+    display: inline-flex;
+    width:15px;
+    height: 15px;
+    margin-left:5px;
+    cursor:pointer;
+
 }

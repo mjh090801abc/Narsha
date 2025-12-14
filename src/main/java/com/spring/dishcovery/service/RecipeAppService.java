@@ -39,8 +39,6 @@ public class RecipeAppService {
         return recipeAppMapper.getRankData(rankId);
     }
 
-
-
     public List<RecipeVo> getRoulleteData() {
         return recipeAppMapper.getRoulleteData();
     }
@@ -118,6 +116,10 @@ public class RecipeAppService {
         recipeVo.setStepList(recipeAppMapper.selectStepList(recipeId));
 
         return recipeVo;
+    }
+
+    public RecipeVo getRecipeForTts(String recipeId) {
+        return recipeAppMapper.findById(recipeId);
     }
 
 

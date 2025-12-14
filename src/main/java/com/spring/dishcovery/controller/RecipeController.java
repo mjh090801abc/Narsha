@@ -5,18 +5,13 @@ import com.spring.dishcovery.config.CookieUtil;
 import com.spring.dishcovery.config.JwtUtil;
 import com.spring.dishcovery.entity.CodeVO;
 import com.spring.dishcovery.entity.RecipeVo;
-import com.spring.dishcovery.mapper.CodeMapper;
 import com.spring.dishcovery.service.CodeService;
 import com.spring.dishcovery.service.RecipeAppService;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -134,12 +129,15 @@ public class RecipeController {
         List<RecipeVo> stepList = new ArrayList<>();
 
         List<CodeVO> categoryList = codeService.codeList("CTG");
+        List<CodeVO> levelList = codeService.codeList("LV");
+
         recipe = service.getRecipeDataDetail(recipeId,userId);
         stepList = recipe.getStepList();
 
         model.addAttribute("recipe", recipe);
         model.addAttribute("categoryList", categoryList);
         model.addAttribute("stepList", stepList);
+        model.addAttribute("levelList",levelList);
 
         return "recipe/RecipeDetail";
 

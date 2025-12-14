@@ -16,8 +16,8 @@
 <main class="page">
 
   <section class="form-section container">
-    <form class="recipe-form" th:object="${recipe}" method="post" enctype="multipart/form-data">
-
+    <form class="recipe-form" th:object="${recipe}" method="get" enctype="multipart/form-data">
+      <input type="hidden" name="recipeId" th:value="${recipe.recipeId}">
       <div class="form-card">
         <h2>기본 정보</h2>
         <div class="form-grid">
@@ -37,12 +37,10 @@
             <input type="text" id="cookTime" name="cookTime"   th:value="${recipe.cookTime}">
           </div>
           <div class="form-row">
-            <label for="recipeLevel">난이도</label>
-            <select id="recipeLevel" name="level" required>
+            <label for="cookDfct">난이도</label>
+            <select id="cookDfct" name="cookDfct" required>
               <option value="" disabled selected>선택하세요</option>
-              <option value="쉬움">쉬움</option>
-              <option value="중간">중간</option>
-              <option value="어려움">어려움</option>
+              <option th:each="lv : ${levelList}" th:value="${lv.code}" th:text="${lv.codeName}" th:selected="${lv.code == recipe.cookDfct}"></option>
             </select>
           </div>
         </div>
@@ -61,8 +59,10 @@
       <div class="form-card">
         <h2>요리 소개와 준비물</h2>
         <div class="form-row">
-          <label for="rcpDisc">요리 소개</label>
-          <textarea id="rcpDisc" name="rcpDisc" rows="3" th:text="${recipe.rcpDisc}"    readonly> </textarea>
+            <label for="rcpDisc">요리 소개</label>
+
+            <textarea id="rcpDisc" name="rcpDisc" rows="3" th:text="${recipe.rcpDisc}"    readonly> </textarea>
+
         </div>
         <div class="form-row">
           <label for="recipeIngr">필수 재료</label>
@@ -73,7 +73,11 @@
       <div class="form-card">
         <div class="label-with-action">
             <h2>조리 단계</h2>
-            <button type="button" class="ghost-btn" data-add-step>단계 추가</button>
+            <div class="listen-container">
+                <button type="button" class="ghost-btn" data-add-step>단계 추가</button>
+                <button type="button" class="ghost-btn" onclick="startStepTTS()">🔊 읽기</button>
+                <button type="button" class="ghost-btn" onclick="stopStepTTS()">⏹ 중단</button>
+            </div>
         </div>
         <p class="card-hint">각 단계마다 자세히 작성하면 노출 확률이 높아져요.</p>
         <div class="step-list" data-step-list>
@@ -104,9 +108,7 @@
     <div class="toast" role="status" aria-live="polite" hidden>레시피 등록 요청이 전송되었습니다.</div>
 
     <script th:src="@{/js/register.js}"></script>
-    <script>
+    <script th:src="@{/js/step-tts.js}"></script>
 
-
-    </script>
-    </body>
+</body>
 </html>

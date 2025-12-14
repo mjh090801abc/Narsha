@@ -37,6 +37,7 @@ public class SecurityConfig {
                                         "/css/**",
                                         "/js/**",
                                         "/images/**",
+                                        "/recipe/**",
                                         "/api/**"
                                 ).permitAll()
                                 .anyRequest().permitAll() // 개발 중엔 전체 허용

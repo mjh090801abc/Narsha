@@ -40,4 +40,6 @@ public interface RecipeAppMapper {
     // 레시피 조회수 증가
     int updateViewCount(@Param("recipeId") String recipeId);
 
+    RecipeVo findById(@Param("recipeId") String recipeId);
+
 }

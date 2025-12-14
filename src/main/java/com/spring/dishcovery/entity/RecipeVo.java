@@ -26,6 +26,7 @@ public class RecipeVo {
     private String recipeTag;
     private String searchName;
     private String rankStr;
+    private String readContPath;
 
 
     private String[] stepDescriptions;
