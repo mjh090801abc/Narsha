@@ -53,6 +53,11 @@ public class MainController {
         List<RecipeVo> myRecipes = new ArrayList<>();
         myRecipes = service.getMyRecipes(userId);
 
+//        List<RecipeVo> edit_profile = new ArrayList<>();
+//        edit_profile = service.getMyRecipes(userId);
+//        edit_profile = service.getMyRecipes(user.getUserPswd());
+
+
 
         model.addAttribute("user", user);
         model.addAttribute("myRecipes", myRecipes);
