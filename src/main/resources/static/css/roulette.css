@@ -1,20 +1,51 @@
-body { text-align: center; font-family: sans-serif; }
+body {
+    text-align: center;
+    font-family: sans-serif;
+}
 
+/* 룰렛 영역 */
 .roulette {
     display: flex;
     justify-content: center;
     margin-top: 40px;
 }
 
+/* 룰렛 원 */
 .wheel {
     position: relative;
     width: 650px;
     height: 650px;
     border-radius: 50%;
     border: 16px solid #d75a34;
-    background: radial-gradient(circle, #ffffff 60%, #d3ac12);
+
+    /* ✅ 안쪽 완전 흰색 */
+    background: #ffffff;
+
     transition: transform 4s cubic-bezier(0.25, 0.1, 0.15, 1);
     overflow: visible;
+}
+
+/* ✅ 룰렛 구분선 (정확히 6개) */
+.wheel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: conic-gradient(
+            rgba(0,0,0,0.15) 0deg 1deg,
+            transparent 1deg 60deg,
+            rgba(0,0,0,0.15) 60deg 61deg,
+            transparent 61deg 120deg,
+            rgba(0,0,0,0.15) 120deg 121deg,
+            transparent 121deg 180deg,
+            rgba(0,0,0,0.15) 180deg 181deg,
+            transparent 181deg 240deg,
+            rgba(0,0,0,0.15) 240deg 241deg,
+            transparent 241deg 300deg,
+            rgba(0,0,0,0.15) 300deg 301deg,
+            transparent 301deg 360deg
+    );
+    pointer-events: none;
 }
 
 /* 슬롯 위치 */
@@ -27,14 +58,14 @@ body { text-align: center; font-family: sans-serif; }
     align-items: center;
 }
 
-/* 내부 정렬 */
+/* 슬롯 내부 */
 .slice-inner {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-/* 이미지 스타일 */
+/* 이미지 */
 .recipe-img {
     width: 130px;
     height: 130px;
@@ -43,40 +74,15 @@ body { text-align: center; font-family: sans-serif; }
     box-shadow: 0 3px 10px rgba(0,0,0,0.25);
 }
 
-/* 텍스트 */
+/* 제목 */
 .recipe-title {
     margin-top: 6px;
     font-size: 18px;
     font-weight: 600;
-    text-align: center;
     color: #333;
 }
 
-/* 슬롯 구분선 */
-.wheel::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-    background: repeating-conic-gradient(
-            from 0deg,
-            transparent 0deg 59deg,
-            rgba(0,0,0,0.12) 60deg 61deg
-    );
-}
-
-/* 포인터 */
-#pointer {
-    position: absolute;
-    top: -28px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 38px;
-    font-weight: bold;
-    color: #ff8a00;
-}
-
-/* 버튼 */
+/* 돌리기 버튼 */
 #spin-btn {
     margin-top: 30px;
     background: #E48E3D;
@@ -86,26 +92,19 @@ body { text-align: center; font-family: sans-serif; }
     padding: 16px 50px;
     border-radius: 40px;
     cursor: pointer;
-    transition: 0.2s;
 }
+
 #spin-btn:hover {
     background: #FF9D3E;
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
-/* 결과 */
-#result {
-    margin-top: 25px;
-    font-size: 22px;
-    font-weight: bold;
-    display: none;
-}
-
-/* 모달 팝업 */
+/* 모달 */
 .modal {
     position: fixed;
     top: 0; left: 0;
-    width: 100%; height: 100%;
+    width: 100%;
+    height: 100%;
     background: rgba(0,0,0,0.55);
     display: none;
     justify-content: center;
@@ -116,15 +115,14 @@ body { text-align: center; font-family: sans-serif; }
     background: white;
     padding: 28px;
     border-radius: 14px;
-    text-align: center;
     width: 320px;
 }
 
 .modal-content img {
     width: 180px;
     height: 180px;
-    object-fit: cover;
     border-radius: 14px;
+    object-fit: cover;
     margin: 15px 0;
 }
 
@@ -133,21 +131,7 @@ body { text-align: center; font-family: sans-serif; }
     border: none;
     padding: 12px 26px;
     font-size: 18px;
-    font-weight: 700;
     color: white;
     border-radius: 30px;
     cursor: pointer;
-    transition: 0.25s ease;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.18);
-}
-
-.modal-content button:hover {
-    background: #FF9D3E;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 14px rgba(0,0,0,0.25);
-}
-
-.modal-content button:active {
-    transform: translateY(0);
-    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
 }
