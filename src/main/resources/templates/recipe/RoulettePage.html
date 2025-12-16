@@ -20,31 +20,24 @@
 
     <main class="page">
 
-        <!-- 상단 탭 -->
         <section class="controls container">
-            <div class="segmented" role="tablist">
+            <div class="segmented">
                 <button type="button" th:class="${rcpClassNm}"
-                        onclick="handleSegmentClick(this, '/pageGubun?gubun=recipe')">
-                    레시피
-                </button>
-
+                        onclick="handleSegmentClick(this, '/pageGubun?gubun=recipe')">레시피</button>
                 <button type="button" th:class="${rankClassNm}"
-                        onclick="handleSegmentClick(this, '/pageGubun?gubun=rank')">
-                    랭킹
-                </button>
-
+                        onclick="handleSegmentClick(this, '/pageGubun?gubun=rank')">랭킹</button>
                 <button type="button" th:class="${lastClassNm}"
-                        onclick="handleSegmentClick(this, '/pageGubun?gubun=last')">
-                    룰렛추천
-                </button>
+                        onclick="handleSegmentClick(this, '/pageGubun?gubun=last')">룰렛추천</button>
             </div>
         </section>
 
         <!-- 룰렛 -->
         <div class="roulette">
-            <div id="wheel" class="wheel">
 
-                <!-- 슬롯 (6개 기준) -->
+            <!-- 🔺 주황색 화살표 (추가된 부분) -->
+            <div id="pointer"></div>
+
+            <div id="wheel" class="wheel">
                 <div th:each="recipe, stat : ${recipes}"
                      class="slice"
                      th:style="'transform: rotate(' + ${stat.index * (360 / recipes.size())} + 'deg) translate(230px);'">
@@ -53,7 +46,6 @@
                         <div class="recipe-title" th:text="${recipe.title}"></div>
                     </div>
                 </div>
-
             </div>
         </div>
 
