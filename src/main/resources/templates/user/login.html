@@ -70,5 +70,14 @@
 
 
 <script src="/js/login.js"></script>
+<script th:inline="javascript">
+/*<![CDATA[*/
+    const message = [[${message}]];
+    if(message){
+      alert(message);
+    }
+
+ /*]]>*/
+</script>
 </body>
 </html>
