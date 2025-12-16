@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dishcovery</title>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" th:href="@{/css/mainPage.css}" />
+  <link rel="stylesheet" th:href="@{/css/Rank.css}" />
+</head>
+<body>
+
+<form id="mainForm" name="mainForm" method="get" th:action="@{/searchRecipe}">
+  <div th:insert="fragments/header :: site-header"></div>
+
+  <input type="hidden" id="recipeId" name="recipeId">
+  <input type="hidden" id="gubun" name="gubun" value="rank">
+
+  <main class="page">
+    <section class="controls container">
+      <div class="segmented" role="tablist" aria-label="콘텐츠 종류">
+        <button type="button"   th:class="${rcpClassNm}"
+                onclick="handleSegmentClick(this, '/pageGubun?gubun=recipe')"
+                role="tab" aria-selected="true">레시피</button>
+
+        <button type="button"   th:class="${rankClassNm}"
+                onclick="handleSegmentClick(this, '/pageGubun?gubun=rank')"
+                role="tab" aria-selected="false">랭킹</button>
+        <button type="button"   th:class="${lastClassNm}"
+                onclick="handleSegmentClick(this, '/pageGubun?gubun=last')"
+                role="tab" aria-selected="false">룰렛추천</button>
+        <button type="button"   th:class="${aiClassNm}"
+                onclick="handleSegmentClick(this, '/pageGubun?gubun=ai')"
+                role="tab" aria-selected="false">AI추천</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== 랭킹 & Frame 컨테이너 ===== -->
+  <div class="f-container">
+
+    <!-- ===== 1~3위 블록 ===== -->
+    <div class="ranking-blocks-group">
+
+      <!-- 2등 -->
+      <div class="ranking-block rank-2">
+        <div class="rank-image-area">
+          <img th:src="${sndVo.imgUrl}" class="rank-image">
+        </div>
+        <div class="rank-details">
+          <div class="rank-name" th:text="${sndVo.title}"></div>
+        </div>
+        <div class="rank-number" th:text="${sndVo.rankStr}"></div>
+      </div>
+
+      <!-- 1등 (강조) -->
+      <div class="ranking-block rank-1 highlight">
+        <div class="rank-image-area">
+          <img th:src="${fstVo.imgUrl}" class="rank-image">
+        </div>
+        <div class="rank-details">
+          <div class="rank-name-highlight" th:text="${fstVo.title}"></div>
+        </div>
+        <div class="rank-number" th:text="${fstVo.rankStr}"></div>
+      </div>
+
+      <!-- 3등 -->
+      <div class="ranking-block rank-3">
+        <div class="rank-image-area">
+          <img th:src="${trdVo.imgUrl}" class="rank-image">
+        </div>
+        <div class="rank-details">
+          <div class="rank-name" th:text="${trdVo.title}"></div>
+        </div>
+        <div class="rank-number" th:text="${trdVo.rankStr}"></div>
+      </div>
+
+    </div>
+
+    <!-- ===== 4~10위 리스트 박스 ===== -->
+    <div class="rank-list-box">
+      <div class="rank-list-title">4 ~ 10위</div>
+      <div th:each="rankList : ${rankList}">
+        <div class="rank-list-item" th:text="${rankList.rankStr}">
+        </div>
+        <!-- 여기는 나중에 DB에서 반복문으로 채우면 됨 -->
+
+      </div>
+
+    </div>
+
+</form>
+
+<script th:src="@{/js/mainPage.js}"></script>
+</body>
+</html>
