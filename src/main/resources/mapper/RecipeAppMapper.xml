@@ -66,6 +66,44 @@
            LIMIT 3
     </select>
 
+    <select id="selectRankListSnd" resultType="com.spring.dishcovery.entity.RecipeVo">
+
+        SELECT RECIPE_ID
+             ,USER_ID
+             ,CATEGORY_ID
+             ,TITLE
+             ,RCP_DISC
+             ,COOK_TIME
+             ,COOK_DFCT
+             ,RGT_DATE
+             ,UPD_DATE
+             ,IMG_URL
+             ,RECIPE_INGR
+             ,RECIPE_TIP
+             ,RECIPE_TAG
+             ,VIEW_COUNT
+             ,CONCAT(RANK_STR, '위- ',TITLE ) RANK_STR
+        FROM (SELECT RECIPE_ID
+                   ,USER_ID
+                   ,CATEGORY_ID
+                   ,TITLE
+                   ,RCP_DISC
+                   ,COOK_TIME
+                   ,COOK_DFCT
+                   ,RGT_DATE
+                   ,UPD_DATE
+                   ,IMG_URL
+                   ,RECIPE_INGR
+                   ,RECIPE_TIP
+                   ,RECIPE_TAG
+                   ,VIEW_COUNT
+                   ,ROW_NUMBER() OVER (ORDER BY VIEW_COUNT DESC) RANK_STR
+              FROM RECIPE_MASTER
+             ) RCP
+        WHERE RANK_STR BETWEEN 4 AND 10
+
+    </select>
+
     <select id="getRankData" parameterType="string" resultType="com.spring.dishcovery.entity.RecipeVo">
 
        SELECT RECIPE_ID
