@@ -14,6 +14,7 @@ window.addEventListener('DOMContentLoaded', function(){
     // 1) 저장된 아이디가 있으면 불러오기
     const savedUserId = localStorage.getItem("savedUserId");
     if (savedUserId) {
+
         userIdInput.value = savedUserId;
         saveEmailCheckbox.checked = true;
     }
