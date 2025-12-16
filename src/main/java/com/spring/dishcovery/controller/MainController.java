@@ -35,6 +35,8 @@ public class MainController {
         model.addAttribute("rcpClassNm", "seg-btn active");
         model.addAttribute("rankClassNm", "seg-btn");
         model.addAttribute("lastClassNm", "seg-btn");
+        model.addAttribute("ai" +
+                "ClassNm", "seg-btn");
 
         return "mainPage";
     }
@@ -79,6 +81,7 @@ public class MainController {
         String rcpClassNm = "";
         String rankClassNm = "";
         String lastClassNm = "";
+        String aiClassNm = "";
         String url = "";
 
         RecipeVo fstVo = new RecipeVo();
@@ -89,6 +92,7 @@ public class MainController {
             rcpClassNm = "seg-btn active";
             rankClassNm = "seg-btn";
             lastClassNm = "seg-btn";
+            aiClassNm = "seg-btn";
 
             recipes = service.getAllRecipes();
             url = "/mainPage";
@@ -97,6 +101,7 @@ public class MainController {
             rcpClassNm = "seg-btn";
             rankClassNm = "seg-btn active";
             lastClassNm = "seg-btn";
+            aiClassNm = "seg-btn";
 
            // recipes = service.getRankList();
             fstVo = service.getRankData("1");
@@ -107,13 +112,21 @@ public class MainController {
 
             url = "recipe/RankPage";
 
-        }else{
+        }else if("last".equals(gubun)){
             rcpClassNm = "seg-btn";
             rankClassNm = "seg-btn";
             lastClassNm = "seg-btn active";
+            aiClassNm = "seg-btn";
 
             recipes = service.getRoulleteData();
             url = "recipe/RoulettePage";
+        }else{
+            rcpClassNm = "seg-btn";
+            rankClassNm = "seg-btn";
+            lastClassNm = "seg-btn";
+            aiClassNm = "seg-btn active";
+
+            url = "recipe/AiChatPage";
         }
 
         model.addAttribute("recipes", recipes);
@@ -121,6 +134,7 @@ public class MainController {
         model.addAttribute("rcpClassNm", rcpClassNm);
         model.addAttribute("rankClassNm", rankClassNm);
         model.addAttribute("lastClassNm", lastClassNm);
+        model.addAttribute("aiClassNm", aiClassNm);
         model.addAttribute("fstVo", fstVo);
         model.addAttribute("sndVo", sndVo);
         model.addAttribute("trdVo", trdVo);
