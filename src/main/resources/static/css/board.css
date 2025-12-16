@@ -1,28 +1,19 @@
-* {
-    box-sizing: border-box;
-    font-family: "Apple SD Gothic Neo", sans-serif;
-}
-
-body {
-    margin: 0;
-    background: #fafafa;
-    color: #333;
-}
 
 /* 헤더 */
 .board-header {
     width: 100%;
     padding: 24px 0;
     text-align: center;
-    background: white;
+    background: transparent;
     border-bottom: 1px solid #eee;
 }
 
 .logo {
-    font-size: 28px;
+    font-size: 34px;
     font-weight: 900;
     color: #ff6b42;
-    letter-spacing: -0.5px;
+    letter-spacing:.2px;
+    text-decoration: none;
 }
 
 /* 컨테이너 */

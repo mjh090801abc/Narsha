@@ -19,8 +19,8 @@
                 <div class="profile-info">
                     <h2 th:text="${user.userId}"></h2>
                     <p th:text="${user.userMail}"></p>
-                    <button type="button" class="edit-btn" onclick="alert('준비 중 입니다.')">프로필 수정</button>
-                    <button type="button" class="edit-btn" onclick="alert('준비 중 입니다.')">게시판</button>
+                    <button type="button" class="edit-btn" th:onclick="'location.href=\'' + @{/profileEdit(userId=${user.userId})} + '\';'">프로필 수정</button>
+                    <button type="button" class="edit-btn" onclick="location.href='/board/boardList'">게시판</button>
                 </div>
             </div>
         </aside>
@@ -96,6 +96,15 @@
 
 
 <script>
+
+    /*<![CDATA[*/
+    const successMessage = [[${success}]];
+
+    if (successMessage) {
+        alert(successMessage);
+    }
+    /*]]>*/
+
     const scrollContainer = document.getElementById('recipeScroll');
 
     function slideLeft() {

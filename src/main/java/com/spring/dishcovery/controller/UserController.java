@@ -68,7 +68,7 @@ public class UserController {
             gubun = "signup";
             redirectAttributes.addAttribute("gubun", gubun); // 리다이렉트할 때 담아가는 파라메타(gubun)의 그릇 역할
             redirectAttributes.addFlashAttribute("msg", "회원가입이 실패하였습니다.");
-            return "redirect:/ㄹ";
+            return "redirect:/dishcovery_login";
         }
     }
 
@@ -98,4 +98,34 @@ public class UserController {
         return "redirect:/dishcovery_login";
 
     }
+
+    @GetMapping("/profileEdit")
+    public String profileEdit(@RequestParam String userId, Model model) {
+
+        UserEntity user = userService.findByUserId(userId);
+
+
+        model.addAttribute("user", user);
+
+        return "/user/profileEdit";
+
+    }
+
+    @PostMapping("/updateProfile")
+    public String updateProfile(@ModelAttribute UserEntity user, RedirectAttributes redirectAttributes) {
+
+        boolean pwResult = userService.changePassword(user);
+
+        if (!pwResult) {
+            redirectAttributes.addFlashAttribute("error", "현재 비밀번호가 올바르지 않습니다.");
+            redirectAttributes.addAttribute("userId", user.getUserId());
+            return "redirect:/profileEdit";
+        }else{
+            redirectAttributes.addFlashAttribute("success", "회원정보가 변경되었습니다.");
+            redirectAttributes.addAttribute("userName", user.getUserName());
+            return "redirect:/myPage";
+        }
+
+    }
+
 }

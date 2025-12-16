@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>프로필 수정 | Dishcovery</title>
+    <link rel="stylesheet" th:href="@{/css/mainPage.css}">
+    <link rel="stylesheet" th:href="@{/css/board.css}">
+</head>
+
+<body>
+<header class="topbar">
+    <div th:insert="fragments/header :: site-header"></div>
+</header>
+
+<!-- 전체 레이아웃 동일하게 유지 -->
+<main class="container">
+
+    <!-- 왼쪽 프로필 카드 그대로 사용 -->
+    <main class="board-container">
+
+        <h1 class="board-title">게시판</h1>
+
+        <div class="board-list">
+
+            <div class="board-item">
+                <div class="board-item-title">룰렛 추천 기능 질문 있습니다</div>
+
+                <div class="board-item-info">
+                    <span>2025.01.15</span>
+                    <span>조회수 32</span>
+                </div>
+
+                <div class="board-item-actions">
+                    <button class="comment-btn">
+                        💬 댓글 3
+                    </button>
+                </div>
+            </div>
+
+            <div class="board-item">
+                <div class="board-item-title">레시피 검색이 안돼요</div>
+
+                <div class="board-item-info">
+                    <span>2025.01.14</span>
+                    <span>조회수 18</span>
+                </div>
+
+                <div class="board-item-actions">
+                    <button class="comment-btn">
+                        💬 댓글 1
+                    </button>
+                </div>
+            </div>
+
+            <div class="board-item">
+                <div class="board-item-title">추천 알고리즘 기준이 궁금해요</div>
+
+                <div class="board-item-info">
+                    <span>2025.01.13</span>
+                    <span>조회수 54</span>
+                </div>
+
+                <div class="board-item-actions">
+                    <button class="comment-btn">
+                        💬 댓글 7
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <a href="/board/boardWrite" class="write-btn">+</a>
+
+</main>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    const errorMessage = [[${error}]];
+    const successMessage = [[${success}]];
+
+    if (errorMessage) {
+        alert(errorMessage);
+    }
+
+    if (successMessage) {
+        alert(successMessage);
+    }
+    /*]]>*/
+
+    function validatePassword() {
+        const currentPw = document.getElementById("currentPw").value.trim();
+        const newPw = document.getElementById("newPw").value.trim();
+        const newPwCheck = document.getElementById("newPwCheck").value.trim();
+
+        if (!currentPw) {
+            alert("현재 비밀번호를 입력해주세요.");
+            return false;
+        }
+
+        if (newPw.length < 8 || newPw.length > 20) {
+            alert("새 비밀번호는 8~20자여야 합니다.");
+            return false;
+        }
+
+        if (newPw !== newPwCheck) {
+            alert("새 비밀번호가 서로 일치하지 않습니다.");
+            return false;
+        }
+
+        if (currentPw === newPw) {
+            alert("기존 비밀번호와 다른 비밀번호를 사용해주세요.");
+            return false;
+        }
+
+        return true; // 서버로 제출
+    }
+
+    function previewProfileImage(input) {
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                document.getElementById("profilePreview").src = e.target.result;
+                document.getElementById("sideProfilePreview").src = e.target.result;
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function confirmLogout(){
+        if(confirm("정말 로그아웃 하시겠습니까 ?")){
+            window.location.href = "/logout";
+        }
+    }
+
+</script>
+
+
+</body>
+</html>

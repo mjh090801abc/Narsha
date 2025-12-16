@@ -13,6 +13,13 @@ public interface UserMapper {
     public UserEntity findByUserId(String userId);
 
     public List<UserEntity> findRecommUser(String userId);
+
+    public void updateProfile(UserEntity user);
+
+    public void updateProfileWithoutPwd(UserEntity user);
+
+    public String findPasswordByUserId(String userId);
+
 }
 
 

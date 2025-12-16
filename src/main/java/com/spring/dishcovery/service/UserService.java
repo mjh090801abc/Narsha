@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -51,6 +52,39 @@ public class UserService {
         return userMapper.findRecommUser(userId);
 
     }
+
+    @Transactional
+    public boolean changePassword(UserEntity user) {
+
+        boolean result = false;
+
+        if ((user.getCurrentPw() == null || user.getCurrentPw().trim().isEmpty()) && (user.getNewPw() == null || user.getNewPw().trim().isEmpty()) ){
+            // 비밀번호가 없을 때 처리
+            userMapper.updateProfileWithoutPwd(user);
+
+            result = true;
+
+        }else{
+
+            String userPswd = userMapper.findPasswordByUserId(user.getUserId());
+
+            // 기존 비밀번호 확인
+            if (!passwordEncoder.matches(user.getCurrentPw(), userPswd)) {
+                result = false;
+            }
+            // 새 비밀번호 암호화
+            String newEncodedPw = passwordEncoder.encode(user.getNewPw());
+            user.setNewPw(newEncodedPw);
+
+            userMapper.updateProfile(user);
+
+            result = true;
+
+        }
+
+        return result;
+    }
+
 
 
 

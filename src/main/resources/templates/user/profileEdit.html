@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>프로필 수정 | Dishcovery</title>
+    <link rel="stylesheet" th:href="@{/css/mainPage.css}">
+    <link rel="stylesheet" th:href="@{/css/profileEditCss.css}">
+    <link rel="stylesheet" th:href="@{/css/myPage.css}">
+</head>
+
+<body>
+<header class="topbar">
+    <div th:insert="fragments/header :: site-header"></div>
+</header>
+
+<!-- 전체 레이아웃 동일하게 유지 -->
+<main class="mypage-layout container">
+
+    <!-- 왼쪽 프로필 카드 그대로 사용 -->
+    <aside class="profile-section">
+        <div class="profile-card">
+            <img class="profile-img"
+                 id="sideProfilePreview"
+                 src="/images/temp/temp_profile.jpeg"
+                 alt="프로필 이미지">
+
+            <div class="profile-info">
+                <h2 th:text="${user.userId}"></h2>
+                <p th:text="${user.userMail}"></p>
+            </div>
+        </div>
+    </aside>
+
+    <!-- 오른쪽 편집 영역 -->
+    <section class="edit-card">
+        <h2>프로필 수정</h2>
+
+        <form th:action="@{/updateProfile}" method="post" enctype="multipart/form-data">
+
+            <div class="edit-form profile-edit-grid">
+
+                <!-- 프로필 이미지 수정 -->
+                <div class="profile-img-edit">
+                    <img id="profilePreview"
+                         th:src="${user.userImgPath != null ? user.userImgPath : '/images/temp/temp_profile.jpeg'}"
+                         alt="프로필 이미지">
+
+                    <label for="profileImg" class="img-change-btn">
+                        사진 변경
+                    </label>
+                    <input type="file"
+                           id="profileImg"
+                           name="profileImg"
+                           accept="image/*"
+                           hidden
+                           onchange="previewProfileImage(this)">
+                </div>
+
+                <!-- 기존 정보 -->
+                <div class="profile-inputs">
+                    <label for="userId">아이디</label>
+                    <input id="userId" name="userId" type="text"
+                           th:value="${user.userId}" readonly>
+
+                    <label for="userMail">이메일</label>
+                    <input id="userMail" name="userMail" type="email"
+                           th:value="${user.userMail}">
+
+                    <label for="userName">이름</label>
+                    <input id="userName" name="userName" type="text"
+                           th:value="${user.userName}">
+                </div>
+
+            </div>
+
+
+            <div class="password-section">
+                <h3>비밀번호 변경</h3>
+
+                <label for="currentPw">현재 비밀번호</label>
+                <input type="password" id="currentPw" name="currentPw" placeholder="현재 비밀번호 입력">
+
+                <label for="newPw">새 비밀번호</label>
+                <input type="password" id="newPw" name="newPw" placeholder="8~20자 새 비밀번호">
+
+                <label for="newPwCheck">새 비밀번호 확인</label>
+                <input type="password" id="newPwCheck" name="newPwCheck" placeholder="다시 한번 입력">
+            </div>
+
+            <div class="btn-area">
+                <button type="button" class="cancel-btn" onclick="location.href='/myPage'">취소</button>
+                <button type="submit" class="save-btn">저장</button>
+            </div>
+
+        </form>
+    </section>
+</main>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    const errorMessage = [[${error}]];
+    const successMessage = [[${success}]];
+
+    if (errorMessage) {
+        alert(errorMessage);
+    }
+
+    if (successMessage) {
+        alert(successMessage);
+    }
+    /*]]>*/
+
+    function validatePassword() {
+        const currentPw = document.getElementById("currentPw").value.trim();
+        const newPw = document.getElementById("newPw").value.trim();
+        const newPwCheck = document.getElementById("newPwCheck").value.trim();
+
+        if (!currentPw) {
+            alert("현재 비밀번호를 입력해주세요.");
+            return false;
+        }
+
+        if (newPw.length < 8 || newPw.length > 20) {
+            alert("새 비밀번호는 8~20자여야 합니다.");
+            return false;
+        }
+
+        if (newPw !== newPwCheck) {
+            alert("새 비밀번호가 서로 일치하지 않습니다.");
+            return false;
+        }
+
+        if (currentPw === newPw) {
+            alert("기존 비밀번호와 다른 비밀번호를 사용해주세요.");
+            return false;
+        }
+
+        return true; // 서버로 제출
+    }
+
+    function previewProfileImage(input) {
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                document.getElementById("profilePreview").src = e.target.result;
+                document.getElementById("sideProfilePreview").src = e.target.result;
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function confirmLogout(){
+        if(confirm("정말 로그아웃 하시겠습니까 ?")){
+            window.location.href = "/logout";
+        }
+    }
+
+</script>
+
+
+</body>
+</html>

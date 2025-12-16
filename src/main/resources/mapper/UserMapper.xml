@@ -43,4 +43,30 @@
 
     </select>
 
+    <select id="findPasswordByUserId" resultType="string">
+        SELECT USER_PSWD
+        FROM USER_MASTER
+        WHERE USER_ID = #{userId}
+    </select>
+
+    <update id="updateProfile" parameterType="com.spring.dishcovery.entity.UserEntity">
+
+        UPDATE USER_MASTER
+        SET USER_MAIL = #{userMail}
+          ,USER_NAME = #{userName}
+          ,USER_PSWD = #{newPw}
+        WHERE USER_ID = #{userId}
+
+    </update>
+
+    <update id="updateProfileWithoutPwd" parameterType="com.spring.dishcovery.entity.UserEntity">
+
+        UPDATE USER_MASTER
+           SET USER_MAIL = #{userMail}
+              ,USER_NAME = #{userName}
+         WHERE USER_ID = #{userId}
+
+    </update>
+
+
 </mapper>
