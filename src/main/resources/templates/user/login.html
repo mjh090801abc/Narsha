@@ -72,9 +72,15 @@
 <script src="/js/login.js"></script>
 <script th:inline="javascript">
 /*<![CDATA[*/
-    const message = [[${message}]];
+    const message = [[${msg}]];
+    const loginMessage = [[${loginMessage}]];
+
     if(message){
       alert(message);
+    }
+
+    if(loginMessage){
+      alert(loginMessage);
     }
 
  /*]]>*/

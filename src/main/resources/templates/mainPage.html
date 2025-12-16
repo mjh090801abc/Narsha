@@ -63,5 +63,15 @@
 
 
     <script th:src="@{/js/mainPage.js}"></script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        const message = [[${msg}]];
+
+        if (message) {
+            alert(message);
+        }
+
+    </script>
+
 </body>
 </html>

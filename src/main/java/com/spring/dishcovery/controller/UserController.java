@@ -61,14 +61,15 @@ public class UserController {
 
         if (result > 0) {
             gubun = "login";
+            redirectAttributes.addAttribute("gubun", gubun); // 리다이렉트할 때 담아가는 파라메타(gubun)의 그릇 역할
             redirectAttributes.addFlashAttribute("msg", "회원가입이 완료되었습니다.");
+            return "redirect:/dishcovery_login";
         } else {
             gubun = "signup";
+            redirectAttributes.addAttribute("gubun", gubun); // 리다이렉트할 때 담아가는 파라메타(gubun)의 그릇 역할
             redirectAttributes.addFlashAttribute("msg", "회원가입이 실패하였습니다.");
+            return "redirect:/ㄹ";
         }
-
-        redirectAttributes.addAttribute("gubun", gubun); // 리다이렉트할 때 담아가는 파라메타(gubun)의 그릇 역할
-        return "redirect:/dishcovery_login";
     }
 
     @PostMapping("/userLogin")
@@ -89,11 +90,12 @@ public class UserController {
             jwtCookie.setMaxAge(3600); // 1시간
             response.addCookie(jwtCookie);
 
+            redirectAttributes.addFlashAttribute("msg", user.getUserName()+" 님 환영합니다.");
             return "redirect:/MainPage";
         }else
             redirectAttributes.addAttribute("gubun", "login");
-            redirectAttributes.addFlashAttribute("msg", "로그인 실패 아이디 또는 비밀번호 화인.");
-            return "redirect:/dishcovery_login";
+        redirectAttributes.addFlashAttribute("msg", "아이디 또는 비밀번호 화인해 주세요.");
+        return "redirect:/dishcovery_login";
 
-        }
+    }
 }

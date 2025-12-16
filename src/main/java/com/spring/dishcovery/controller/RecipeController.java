@@ -128,7 +128,7 @@ public class RecipeController {
         if(token != null) {
             userId = jwtUtil.getUserIdFromToken(token);
         }else{
-            redirectAttributes.addFlashAttribute("message", "로그인 하세요");
+            redirectAttributes.addFlashAttribute("msg", "로그인이 필요한 서비스입니다.");
             redirectAttributes.addAttribute("gubun", gubun);
 
             return "redirect:/dishcovery_login";
