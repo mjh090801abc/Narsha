@@ -39,6 +39,7 @@ public class RecipeController {
         String rcpClassNm = "";
         String rankClassNm = "";
         String lastClassNm = "";
+        String aiClassNm = "";
         String url = "";
 
         RecipeVo fstVo = new RecipeVo();
@@ -49,6 +50,7 @@ public class RecipeController {
             rcpClassNm = "seg-btn active";
             rankClassNm = "seg-btn";
             lastClassNm = "seg-btn";
+            aiClassNm = "seg-btn";
 
             recipes = service.getSearchRecipes(searchName);
             url = "/mainPage";
@@ -57,6 +59,7 @@ public class RecipeController {
             rcpClassNm = "seg-btn";
             rankClassNm = "seg-btn active";
             lastClassNm = "seg-btn";
+            aiClassNm = "seg-btn";
 
             // recipes = service.getRankList();
             fstVo = service.getRankData("1");
@@ -64,14 +67,25 @@ public class RecipeController {
             trdVo = service.getRankData("3");
 
             url = "recipe/RankPage";
-
-        }else{
+        }else if("last".equals(gubun)){
             rcpClassNm = "seg-btn";
             rankClassNm = "seg-btn";
             lastClassNm = "seg-btn active";
+            aiClassNm = "seg-btn";
 
-            recipes = service.getRoulleteData();
-            url = "recipe/RoulettePage";
+            // recipes = service.getRankList();
+            fstVo = service.getRankData("1");
+            sndVo = service.getRankData("2");
+            trdVo = service.getRankData("3");
+
+            url = "recipe/RankPage";
+        }else{
+            rcpClassNm = "seg-btn";
+            rankClassNm = "seg-btn";
+            lastClassNm = "seg-btn";
+            aiClassNm = "seg-btn active";
+
+            url = "recipe/AiChatPage";
         }
 
 
@@ -81,6 +95,7 @@ public class RecipeController {
         model.addAttribute("rcpClassNm", rcpClassNm);
         model.addAttribute("rankClassNm", rankClassNm);
         model.addAttribute("lastClassNm", lastClassNm);
+        model.addAttribute("aiClassNm", aiClassNm);
         model.addAttribute("fstVo", fstVo);
         model.addAttribute("sndVo", sndVo);
         model.addAttribute("trdVo", trdVo);
@@ -128,7 +143,7 @@ public class RecipeController {
         if(token != null) {
             userId = jwtUtil.getUserIdFromToken(token);
         }else{
-            redirectAttributes.addFlashAttribute("msg", "로그인이 필요한 서비스입니다.");
+            redirectAttributes.addFlashAttribute("loginMessage", "로그인이 필요한 서비스입니다.");
             redirectAttributes.addAttribute("gubun", gubun);
 
             return "redirect:/dishcovery_login";
