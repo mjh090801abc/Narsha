@@ -69,6 +69,7 @@ public class MainController {
     public String pageGubun(@RequestParam String gubun, Model model, HttpServletRequest request) {
 
         List<RecipeVo> recipes = new ArrayList<>();
+        List<RecipeVo> rankList = new ArrayList<>();
 
         String rcpClassNm = "";
         String rankClassNm = "";
@@ -97,6 +98,8 @@ public class MainController {
             sndVo = service.getRankData("2");
             trdVo = service.getRankData("3");
 
+            rankList = service.selectRankListSnd();
+
             url = "recipe/RankPage";
 
         }else{
@@ -116,6 +119,7 @@ public class MainController {
         model.addAttribute("fstVo", fstVo);
         model.addAttribute("sndVo", sndVo);
         model.addAttribute("trdVo", trdVo);
+        model.addAttribute("rankList", rankList);
 
         return url;
     }
