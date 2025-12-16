@@ -20,6 +20,7 @@ public class RankController {
     public String Rank(Model model) {
         List<RecipeVo> recipes = recipeAppService.getAllRecipes();
 
+
         model.addAttribute("recipes", recipes);
 
         return "recipe/RankPage";
