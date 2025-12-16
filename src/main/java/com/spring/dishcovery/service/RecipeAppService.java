@@ -35,6 +35,10 @@ public class RecipeAppService {
         return recipeAppMapper.getRankList();
     }
 
+    public List<RecipeVo> selectRankListSnd() {
+        return recipeAppMapper.selectRankListSnd();
+    }
+
     public RecipeVo getRankData(String rankId) {
         return recipeAppMapper.getRankData(rankId);
     }
