@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -117,13 +118,20 @@ public class RecipeController {
     }
 
     @GetMapping("/recipe/detail")
-    public String recipeDetail(@RequestParam String recipeId, Model model,HttpServletRequest request) {
+    public String recipeDetail(@RequestParam String recipeId, Model model, HttpServletRequest request, RedirectAttributes redirectAttributes) {
 
         RecipeVo recipe = new RecipeVo();
         String userId ="";
+        String gubun ="login";
         String token = cookieUtil.getTokenFromCookies(request, "JWT_TOKEN");
+
         if(token != null) {
             userId = jwtUtil.getUserIdFromToken(token);
+        }else{
+            redirectAttributes.addFlashAttribute("message", "로그인 하세요");
+            redirectAttributes.addAttribute("gubun", gubun);
+
+            return "redirect:/dishcovery_login";
         }
 
         List<RecipeVo> stepList = new ArrayList<>();
