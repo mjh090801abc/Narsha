@@ -34,11 +34,11 @@
           </div>
           <div class="form-row">
             <label for="cookTime">조리 시간</label>
-            <input type="text" id="cookTime" name="cookTime"   th:value="${recipe.cookTime}">
+            <input type="text" id="cookTime" name="cookTime"   th:value="${recipe.cookTime}" readonly="readonly">
           </div>
           <div class="form-row">
             <label for="cookDfct">난이도</label>
-            <select id="cookDfct" name="cookDfct" required>
+            <select id="cookDfct" name="cookDfct" disabled>
               <option value="" disabled selected>선택하세요</option>
               <option th:each="lv : ${levelList}" th:value="${lv.code}" th:text="${lv.codeName}" th:selected="${lv.code == recipe.cookDfct}"></option>
             </select>
