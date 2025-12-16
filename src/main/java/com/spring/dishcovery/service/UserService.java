@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -43,6 +45,11 @@ public class UserService {
 
     public UserEntity findByUserId(String userId) {
         return  userMapper.findByUserId(userId);
+    }
+
+    public List<UserEntity> findRecommUser(String userId) {
+        return userMapper.findRecommUser(userId);
+
     }
 
 

@@ -2,9 +2,31 @@
 /* 로고/검색창 통일은 header fragment에서 이미 처리 */
 
 .roulette {
-    display: flex;
-    justify-content: center;
-    margin-top: 40px;
+    position: relative;
+}
+
+#wheel {
+    width: 460px;
+    height: 460px;
+    border-radius: 50%;
+    position: relative;
+    margin: 0 auto;
+    transition: transform 4s cubic-bezier(.17,.67,.12,1);
+}
+
+/* 화살표 */
+.roulette-pointer {
+    position: absolute;
+    bottom: -18px;   /* ⬇️ 아래 */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+
+    width: 0;
+    height: 0;
+    border-left: 18px solid transparent;
+    border-right: 18px solid transparent;
+    border-top: 32px solid #ff4d4f; /* ⬇️ 아래를 향함 */
 }
 
 .wheel {

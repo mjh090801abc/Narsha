@@ -53,6 +53,10 @@ public class MainController {
         List<RecipeVo> myRecipes = new ArrayList<>();
         myRecipes = service.getMyRecipes(userId);
 
+
+        List<UserEntity> userList = new ArrayList<>();
+        userList = userService.findRecommUser(userId);
+
 //        List<RecipeVo> edit_profile = new ArrayList<>();
 //        edit_profile = service.getMyRecipes(userId);
 //        edit_profile = service.getMyRecipes(user.getUserPswd());
@@ -61,6 +65,7 @@ public class MainController {
 
         model.addAttribute("user", user);
         model.addAttribute("myRecipes", myRecipes);
+        model.addAttribute("userList", userList);
 
         return "user/MyPage";
     }

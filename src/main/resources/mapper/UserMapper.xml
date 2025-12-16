@@ -28,4 +28,19 @@
         WHERE USER_ID = #{userId}
     </select>
 
+    <select id="findRecommUser" parameterType="string" resultType="com.spring.dishcovery.entity.UserEntity">
+
+        SELECT USER_ID,
+               USER_NAME,
+               USER_PSWD,
+               USER_MAIL,
+               JOIN_DATE,
+               USER_IMG_PATH
+        FROM USER_MASTER
+        WHERE USER_ID != #{userId}
+        ORDER BY RAND()
+            LIMIT 5
+
+    </select>
+
 </mapper>
