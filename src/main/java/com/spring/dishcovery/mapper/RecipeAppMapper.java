@@ -16,6 +16,8 @@ public interface RecipeAppMapper {
 
     List<RecipeVo> getRankList();
 
+    List<RecipeVo> selectRankListSnd();
+
     RecipeVo getRankData(String rankId);
 
     List<RecipeVo> getRoulleteData();
