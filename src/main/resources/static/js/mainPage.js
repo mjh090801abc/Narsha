@@ -156,10 +156,13 @@ function spin() {
 
     // 회전 각도 계산
     const spinRotations = 360 * 5; // 5바퀴 회전
-    const targetAngle = targetIndex * sliceDeg;
+
+    // 목표 레시피의 중심 각도 (angleStep/2 오프셋 반영)
+    const targetAngle = targetIndex * sliceDeg + sliceDeg / 2;
 
     // 12시 방향(위쪽 화살표)에 정확히 맞추기 위한 각도 계산
-    const finalRotation = currentRotation + spinRotations + (360 - targetAngle + sliceDeg / 2);
+    // 목표 레시피가 위(12시)에 오도록 회전
+    const finalRotation = currentRotation + spinRotations + (360 - targetAngle);
 
     console.log(`최종 회전 각도: ${finalRotation}도`);
 
