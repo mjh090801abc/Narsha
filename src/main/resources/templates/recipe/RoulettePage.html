@@ -2,59 +2,67 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dishcovery</title>
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" th:href="@{/css/mainPage.css}" />
-    <link rel="stylesheet" th:href="@{/css/roulette.css}" />
+
+    <link rel="stylesheet" th:href="@{/css/mainPage.css}">
+    <link rel="stylesheet" th:href="@{/css/roulette.css}">
 </head>
 <body>
-<form id="mainForm" name="mainForm" method="get">
+
+<form id="mainForm" method="get">
     <div th:insert="fragments/header :: site-header"></div>
 
-    <input type="hidden" id="recipeId" name="recipeId">
-    <input type="hidden" id="gubun" name="gubun" value="last">
-
     <main class="page">
-        <section class="controls container">
-            <div class="segmented" role="tablist" aria-label="콘텐츠 종류">
-                <button type="button"   th:class="${rcpClassNm}"
-                        onclick="handleSegmentClick(this, '/pageGubun?gubun=recipe')"
-                        role="tab" aria-selected="true">레시피</button>
 
-                <button type="button"   th:class="${rankClassNm}"
-                        onclick="handleSegmentClick(this, '/pageGubun?gubun=rank')"
-                        role="tab" aria-selected="false">랭킹</button>
-                <button type="button"   th:class="${lastClassNm}"
-                        onclick="handleSegmentClick(this, '/pageGubun?gubun=last')"
-                        role="tab" aria-selected="false">룰렛추천</button>
-                <button type="button"   th:class="${aiClassNm}"
-                        onclick="handleSegmentClick(this, '/pageGubun?gubun=ai')"
-                        role="tab" aria-selected="false">AI추천</button>
+        <!-- 상단 탭 -->
+        <section class="controls container">
+            <div class="segmented">
+                <button type="button"
+                        th:class="${rcpClassNm}"
+                        onclick="handleSegmentClick(this,'/pageGubun?gubun=recipe')">레시피</button>
+                <button type="button"
+                        th:class="${rankClassNm}"
+                        onclick="handleSegmentClick(this,'/pageGubun?gubun=rank')">랭킹</button>
+                <button type="button"
+                        th:class="${lastClassNm}"
+                        onclick="handleSegmentClick(this,'/pageGubun?gubun=last')">룰렛추천</button>
+                <button type="button"
+                        th:class="${aiClassNm}"
+                        onclick="handleSegmentClick(this,'/pageGubun?gubun=ai')">AI추천</button>
             </div>
         </section>
 
+        <!-- 룰렛 -->
         <div class="roulette">
+
+            <!-- 🔺 화살표 (위쪽, 예쁜 스타일) -->
             <div class="roulette-pointer"></div>
+
             <div id="wheel" class="wheel">
+
                 <!-- 구분선 -->
                 <div id="wheel-lines" class="wheel-lines"></div>
 
+                <!-- 레시피 (서버에서 이미 최대 6개만 내려온 상태) -->
                 <div th:each="recipe, stat : ${recipes}"
                      class="slice"
-                     th:attr="data-recipe-id=${recipe.recipeId}"
-                     th:style="'transform: rotate(' + ${stat.index * (360 / recipes.size())} + 'deg) translate(230px);'">
+                     th:data-recipe-id="${recipe.recipeId}"
+                     th:style="'transform: rotate(' + ${stat.index * (360 / recipes.size())} + 'deg) translateY(-240px);'">
+
                     <div class="slice-inner">
-                        <img th:src="${recipe.imgUrl}" class="recipe-img" alt="음식 이미지"/>
+                        <img th:src="${recipe.imgUrl}" class="recipe-img">
                         <div class="recipe-title" th:text="${recipe.title}"></div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- 버튼 -->
         <div class="spin-btn">
             <button type="button" id="spin-btn" onclick="spin()">돌리기!</button>
         </div>
 
+        <!-- 결과 모달 -->
         <div id="modal" class="modal">
             <div class="modal-content">
                 <h2>🎉 레시피!</h2>
@@ -64,6 +72,7 @@
                 <button type="button" onclick="closeModal()">닫기</button>
             </div>
         </div>
+
     </main>
 </form>
 

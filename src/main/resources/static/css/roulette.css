@@ -1,42 +1,18 @@
-
-/* 로고/검색창 통일은 header fragment에서 이미 처리 */
-
 .roulette {
     position: relative;
+    margin-top: 40px;
 }
 
-#wheel {
-    width: 460px;
-    height: 460px;
-    border-radius: 50%;
-    position: relative;
-    margin: 0 auto;
-    transition: transform 4s cubic-bezier(.17,.67,.12,1);
-}
-
-/* 화살표 */
-.roulette-pointer {
-    position: absolute;
-    bottom: -18px;   /* ⬇️ 아래 */
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 100;
-
-    width: 0;
-    height: 0;
-    border-left: 18px solid transparent;
-    border-right: 18px solid transparent;
-    border-top: 32px solid #ff4d4f; /* ⬇️ 아래를 향함 */
-}
-
+/* 룰렛 원 */
 .wheel {
     position: relative;
-    width: 650px;
-    height: 650px;
+    width: 520px;
+    height: 520px;
+    margin: 0 auto;
     border-radius: 50%;
-    border: 16px solid #d75a34;
-    background: radial-gradient(circle, #ffffff 85%, #f2f2f2);
-    transition: transform 4s cubic-bezier(0.25, 0.1, 0.15, 1);
+    border: 14px solid #d75a34;
+    background: radial-gradient(circle, #ffffff 80%, #f0f0f0);
+    transition: transform 4s cubic-bezier(.17,.67,.12,1);
 }
 
 /* 구분선 */
@@ -53,40 +29,62 @@
     left: 50%;
     width: 2px;
     height: 50%;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), transparent);
+    background: linear-gradient(to bottom, rgba(0,0,0,0.35), transparent);
     transform-origin: top center;
 }
 
-/* 룰렛 슬라이스 */
-.slice {
+/* 화살표 (진짜 룰렛처럼 위쪽) */
+.roulette-pointer {
     position: absolute;
-    top: 38%;
-    left: 40%;
-    transform-origin: center;
-    display: flex;
-    align-items: center;
+    top: -10px;          /* 룰렛 위에 딱 붙임 */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+
+    width: 0;
+    height: 0;
+    border-left: 16px solid transparent;
+    border-right: 16px solid transparent;
+    border-top: 28px solid #ff6b42; /* 🔻 아래 방향 */
 }
 
+/* 슬라이스 */
+.slice {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform-origin: center center;
+}
+
+/* 내부 정렬 */
 .slice-inner {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+/* 이미지 (원 안에 딱 맞게) */
 .recipe-img {
-    width: 130px;
-    height: 130px;
-    border-radius: 20px;
+    width: 100px;
+    height: 100px;
+    border-radius: 16px;
     object-fit: cover;
     box-shadow: 0 3px 10px rgba(0,0,0,0.25);
 }
 
+
+/* 제목 */
 .recipe-title {
     margin-top: 6px;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
     text-align: center;
     color: #333;
+}
+
+/* 버튼 */
+.spin-btn {
+    text-align: center;
 }
 
 #spin-btn {
@@ -107,13 +105,12 @@
 /* 모달 */
 .modal {
     position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+    inset: 0;
     background: rgba(0,0,0,0.55);
     display: none;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
+    z-index: 999;
 }
 
 .modal-content {
@@ -127,7 +124,6 @@
 .modal-content img {
     width: 180px;
     height: 180px;
-    object-fit: cover;
     border-radius: 14px;
     margin: 15px 0;
 }
@@ -146,7 +142,4 @@
 
 .modal-content button:hover {
     background: #FF9D3E;
-}
-.spin-btn{
-    text-align: center;
 }
