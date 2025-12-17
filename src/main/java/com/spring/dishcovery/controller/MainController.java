@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,8 +36,7 @@ public class MainController {
         model.addAttribute("rcpClassNm", "seg-btn active");
         model.addAttribute("rankClassNm", "seg-btn");
         model.addAttribute("lastClassNm", "seg-btn");
-        model.addAttribute("ai" +
-                "ClassNm", "seg-btn");
+        model.addAttribute("aiClassNm", "seg-btn");
 
         return "mainPage";
     }
@@ -73,7 +73,7 @@ public class MainController {
     }
 
     @GetMapping("/pageGubun")
-    public String pageGubun(@RequestParam String gubun, Model model, HttpServletRequest request) {
+    public String pageGubun(@RequestParam String gubun, Model model, HttpServletRequest request, RedirectAttributes redirectAttributes) {
 
         List<RecipeVo> recipes = new ArrayList<>();
         List<RecipeVo> rankList = new ArrayList<>();
@@ -87,6 +87,8 @@ public class MainController {
         RecipeVo fstVo = new RecipeVo();
         RecipeVo sndVo = new RecipeVo();
         RecipeVo trdVo = new RecipeVo();
+
+       String token = cookieUtil.getTokenFromCookies(request, "JWT_TOKEN");
 
         if("recipe".equals(gubun)) {
             rcpClassNm = "seg-btn active";
@@ -126,7 +128,17 @@ public class MainController {
             lastClassNm = "seg-btn";
             aiClassNm = "seg-btn active";
 
-            url = "recipe/AiChatPage";
+            if(token != null) {
+                url = "recipe/AiChatPage";
+            }else{
+
+                gubun = "login";
+                redirectAttributes.addFlashAttribute("loginMessage", "로그인이 필요한 서비스입니다.");
+                redirectAttributes.addAttribute("gubun", gubun);
+
+                return "redirect:/dishcovery_login";
+            }
+
         }
 
         model.addAttribute("recipes", recipes);
