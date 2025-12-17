@@ -60,8 +60,8 @@ function positionRecipes() {
     const angleStep = 360 / count;
 
     visibleSlices.forEach((slice, i) => {
-        // 각도 계산 (12시 방향부터 시작, -90도 오프셋)
-        const angle = (i * angleStep - 90) * (Math.PI / 180);
+        // 각도 계산 - 구분선 사이 중앙에 배치하기 위해 angleStep/2 만큼 오프셋 추가
+        const angle = (i * angleStep + angleStep / 2 - 90) * (Math.PI / 180);
 
         // 원형 좌표 계산 (삼각함수 사용)
         const x = radius * Math.cos(angle);
