@@ -2,7 +2,7 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Dishcovery</title>
+    <title>Dishcovery - 룰렛 추천</title>
 
     <link rel="stylesheet" th:href="@{/css/mainPage.css}">
     <link rel="stylesheet" th:href="@{/css/roulette.css}">
@@ -10,72 +10,95 @@
 <body>
 
 <form id="mainForm" method="get">
+    <!-- 헤더 -->
     <div th:insert="fragments/header :: site-header"></div>
 
     <main class="page">
 
-        <!-- 상단 탭 -->
+        <!-- 상단 탭 메뉴 -->
         <section class="controls container">
             <div class="segmented">
                 <button type="button"
                         th:class="${rcpClassNm}"
-                        onclick="handleSegmentClick(this,'/pageGubun?gubun=recipe')">레시피</button>
+                        onclick="handleSegmentClick(this,'/pageGubun?gubun=recipe')">
+                    레시피
+                </button>
                 <button type="button"
                         th:class="${rankClassNm}"
-                        onclick="handleSegmentClick(this,'/pageGubun?gubun=rank')">랭킹</button>
+                        onclick="handleSegmentClick(this,'/pageGubun?gubun=rank')">
+                    랭킹
+                </button>
                 <button type="button"
                         th:class="${lastClassNm}"
-                        onclick="handleSegmentClick(this,'/pageGubun?gubun=last')">룰렛추천</button>
+                        onclick="handleSegmentClick(this,'/pageGubun?gubun=last')">
+                    룰렛추천
+                </button>
                 <button type="button"
                         th:class="${aiClassNm}"
-                        onclick="handleSegmentClick(this,'/pageGubun?gubun=ai')">AI추천</button>
+                        onclick="handleSegmentClick(this,'/pageGubun?gubun=ai')">
+                    AI추천
+                </button>
             </div>
         </section>
 
-        <!-- 룰렛 -->
+        <!-- 룰렛 영역 -->
         <div class="roulette">
 
-            <!-- 🔺 화살표 (위쪽, 예쁜 스타일) -->
+            <!-- 위쪽 화살표 포인터 -->
             <div class="roulette-pointer"></div>
 
+            <!-- 룰렛 휠 -->
             <div id="wheel" class="wheel">
 
-                <!-- 구분선 -->
+                <!-- 구분선 컨테이너 (JavaScript에서 동적 생성) -->
                 <div id="wheel-lines" class="wheel-lines"></div>
 
-                <!-- 레시피 (서버에서 이미 최대 6개만 내려온 상태) -->
+                <!-- 레시피 아이템들 (서버에서 전달) -->
                 <div th:each="recipe, stat : ${recipes}"
                      class="slice"
                      th:data-recipe-id="${recipe.recipeId}"
-                     th:style="'transform: rotate(' + ${stat.index * (360 / recipes.size())} + 'deg) translateY(-240px);'">
+                     th:data-img-url="${recipe.imgUrl}"
+                     th:data-title="${recipe.title}">
 
                     <div class="slice-inner">
-                        <img th:src="${recipe.imgUrl}" class="recipe-img">
+                        <img th:src="${recipe.imgUrl}"
+                             th:alt="${recipe.title}"
+                             class="recipe-img">
                         <div class="recipe-title" th:text="${recipe.title}"></div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- 버튼 -->
+        <!-- 돌리기 버튼 -->
         <div class="spin-btn">
-            <button type="button" id="spin-btn" onclick="spin()">돌리기!</button>
+            <button type="button" id="spin-btn" onclick="spin()">
+                돌리기! 🎲
+            </button>
         </div>
 
         <!-- 결과 모달 -->
         <div id="modal" class="modal">
             <div class="modal-content">
-                <h2>🎉 레시피!</h2>
-                <img id="modalImg">
+                <h2>🎉 오늘의 추천 레시피!</h2>
+                <img id="modalImg" alt="선택된 레시피">
                 <p id="modalTitle"></p>
-                <button type="button" onclick="openDetail()">상세보기</button>
-                <button type="button" onclick="closeModal()">닫기</button>
+                <div class="modal-buttons">
+                    <button type="button" class="btn-detail" onclick="openDetail()">
+                        상세보기
+                    </button>
+                    <button type="button" class="btn-close" onclick="closeModal()">
+                        닫기
+                    </button>
+                </div>
             </div>
         </div>
 
     </main>
 </form>
 
+<!-- JavaScript 로드 -->
 <script th:src="@{/js/mainPage.js}"></script>
+
 </body>
 </html>
