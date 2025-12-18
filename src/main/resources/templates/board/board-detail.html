@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>게시글 상세 | Dishcovery</title>
+  <link rel="stylesheet" th:href="@{/css/mainPage.css}">
+  <link rel="stylesheet" th:href="@{/css/board.css}">
+</head>
+
+<body>
+<header class="topbar">
+  <div th:insert="fragments/header :: site-header"></div>
+</header>
+
+<main class="container">
+  <main class="board-container">
+
+    <!-- 게시글 상세 -->
+    <div class="detail-box">
+      <div class="detail-header">
+        <h1 class="detail-title" th:text="${board.title}">제목</h1>
+
+        <div class="detail-info">
+          <span class="detail-writer" th:text="${board.writer}">작성자</span>
+          <span class="detail-date" th:text="${#temporals.format(board.createdAt, 'yyyy.MM.dd HH:mm')}">2025.01.15 14:30</span>
+          <span class="detail-view">조회 <span th:text="${board.viewCount}">0</span></span>
+        </div>
+      </div>
+
+      <div class="detail-content" th:text="${board.content}">
+        내용
+      </div>
+
+      <!-- 작성자만 보이는 수정/삭제 버튼 -->
+      <div class="detail-actions" th:if="${session.userId == board.writer}">
+        <button type="button" class="edit-btn" th:onclick="|location.href='/board/boardEdit?boardId=' + ${board.boardId}|">수정</button>
+        <button type="button" class="delete-btn" onclick="deleteBoard()">삭제</button>
+      </div>
+    </div>
+
+    <!-- 댓글 섹션 -->
+    <div class="comment-section">
+      <h3 class="comment-title">댓글 <span th:text="${#lists.size(comments)}">0</span></h3>
+
+      <!-- 댓글 작성 -->
+      <div class="comment-write">
+        <textarea id="commentContent" placeholder="댓글을 입력하세요"></textarea>
+        <button type="button" class="comment-submit-btn" onclick="writeComment()">등록</button>
+      </div>
+
+      <!-- 댓글 목록 -->
+      <div class="comment-list">
+        <div class="comment-item" th:each="comment : ${comments}">
+          <div class="comment-header">
+            <span class="comment-writer" th:text="${comment.writer}">작성자</span>
+            <span class="comment-date" th:text="${#temporals.format(comment.createdAt, 'yyyy.MM.dd HH:mm')}">2025.01.15</span>
+          </div>
+          <div class="comment-content" th:text="${comment.content}">댓글 내용</div>
+
+          <!-- 작성자만 보이는 삭제 버튼 -->
+          <button type="button"
+                  class="comment-delete-btn"
+                  th:if="${session.userId == comment.writer}"
+                  th:onclick="|deleteComment(${comment.commentId})|">삭제</button>
+        </div>
+
+        <div class="comment-empty" th:if="${#lists.isEmpty(comments)}">
+          등록된 댓글이 없습니다.
+        </div>
+      </div>
+    </div>
+
+    <!-- 목록 버튼 -->
+    <div class="back-btn-container">
+      <button type="button" class="back-btn" onclick="location.href='/board/boardList'">목록</button>
+    </div>
+
+  </main>
+</main>
+
+<script th:inline="javascript">
+  const boardId = [[${board.boardId}]];
+
+  // 댓글 작성
+  function writeComment() {
+    const content = document.getElementById('commentContent').value.trim();
+
+    if (!content) {
+      alert('댓글 내용을 입력해주세요.');
+      return;
+    }
+
+    fetch('/board/commentWrite', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: `boardId=${boardId}&content=${encodeURIComponent(content)}`
+    })
+            .then(response => response.json())
+            .then(data => {
+              if (data.success) {
+                alert(data.message);
+                location.reload();
+              }
+            });
+  }
+
+  // 댓글 삭제
+  function deleteComment(commentId) {
+    if (!confirm('댓글을 삭제하시겠습니까?')) {
+      return;
+    }
+
+    fetch('/board/commentDelete', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: `commentId=${commentId}`
+    })
+            .then(response => response.json())
+            .then(data => {
+              if (data.success) {
+                alert(data.message);
+                location.reload();
+              }
+            });
+  }
+
+  // 게시글 삭제
+  function deleteBoard() {
+    if (!confirm('게시글을 삭제하시겠습니까?')) {
+      return;
+    }
+
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = '/board/boardDelete';
+
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = 'boardId';
+    input.value = boardId;
+
+    form.appendChild(input);
+    document.body.appendChild(form);
+    form.submit();
+  }
+</script>
+
+</body>
+</html>ㅋ
