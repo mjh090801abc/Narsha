@@ -3,6 +3,8 @@ const input = document.getElementById('user-input');
 const sendBtn = document.getElementById('send-btn');
 const recipesDiv = document.getElementById('recipes');
 
+let isStreaming = false;
+
 /* 메시지 추가 */
 function addMessage(text, type) {
     const msg = document.createElement('div');
@@ -19,40 +21,53 @@ function addMessage(text, type) {
     return bubble;
 }
 
+/* ✅ 이전 대화 로드 (USER + AI 전부 표시) */
 async function loadHistory() {
-    const res = await fetch(`/api/chat/history?userId=${userId}`);
-    const list = await res.json();
+    try {
+        const res = await fetch(`/api/chat/history?userId=${userId}`);
+        const list = await res.json();
 
-    list.forEach(m => {
-        // ✅ user 메시지만 출력
-        if (m.role === 'user') {
-            addMessage(m.content, 'user');
-        }
-    });
+        list.forEach(m => {
+            addMessage(
+                m.content,
+                m.role === 'user' ? 'user' : 'bot'
+            );
+        });
+    } catch (e) {
+        console.error(e);
+    }
 }
 
-/* 전송 */
-sendBtn.addEventListener('click', sendMessage);
-input.addEventListener('keydown', e => {
-    if (e.key === 'Enter') sendMessage();
+/* 전송 이벤트 */
+sendBtn.addEventListener('click', () => {
+    if (!isStreaming) sendMessage();
+});
+
+input.addEventListener('keyup', e => {
+    if (e.key === 'Enter') {
+        e.preventDefault(); // ⭐ form submit 방지
+        if (!isStreaming) sendMessage();
+    }
 });
 
 async function sendMessage() {
     const text = input.value.trim();
     if (!text) return;
+
+    isStreaming = true;
     input.value = '';
 
-    // ✅ user 메시지 즉시 출력
+    /* user 메시지 즉시 출력 */
     addMessage(text, 'user');
 
-    // 저장
+    /* DB 저장 */
     await fetch('/api/chat/send', {
         method: 'POST',
         headers: {'Content-Type':'application/json'},
         body: JSON.stringify({ userId, message: text })
     });
 
-    // ✅ bot 말풍선은 stream 전용
+    /* bot 말풍선 (stream 전용) */
     const botBubble = addMessage('', 'bot');
 
     const es = new EventSource(`/api/chat/stream?userId=${userId}`);
@@ -66,8 +81,9 @@ async function sendMessage() {
 
     es.addEventListener('end', () => {
         es.close();
+        isStreaming = false;
 
-        // 레시피 JSON 파싱 (있을 때만)
+        /* 레시피 JSON 파싱 */
         try {
             const start = acc.indexOf('[');
             if (start !== -1) {
@@ -79,7 +95,10 @@ async function sendMessage() {
         }
     });
 
-    es.onerror = () => es.close();
+    es.onerror = () => {
+        es.close();
+        isStreaming = false;
+    };
 }
 
 /* 레시피 카드 */

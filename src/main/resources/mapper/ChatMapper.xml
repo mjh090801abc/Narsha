@@ -17,10 +17,16 @@
         </insert>
 
         <select id="findByUserId" resultMap="ChatMap" parameterType="String">
-            SELECT id, user_id, role, content, created_at
-            FROM chat_history
-            WHERE user_id = #{userId}
-            ORDER BY created_at ASC
+            SELECT ele.id,
+                   ele.user_id,
+                   ele.role,
+                   ele.content,
+                   ele.created_at
+              FROM (SELECT id, user_id, role, content, created_at
+                    FROM chat_history
+                    WHERE user_id = #{userId}
+                    ORDER BY created_at DESC LIMIT 2) ele
+            ORDER BY created_at
         </select>
     </mapper>
 

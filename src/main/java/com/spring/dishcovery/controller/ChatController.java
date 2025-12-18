@@ -60,6 +60,7 @@ public class ChatController {
     @GetMapping("/api/chat/history")
     @ResponseBody
     public List<ChatMessage> history(@RequestParam String userId){
+
         return chatService.getHistory(userId);
     }
 
@@ -119,7 +120,8 @@ public class ChatController {
                             if (!content.isMissingNode()) {
                                 String part = content.asText();
                                 assistantFull.append(part);
-                                emitter.send(SseEmitter.event().name("message").data(part));
+                                //emitter.send(SseEmitter.event().name("message").data(part));
+                                emitter.send(SseEmitter.event().data(part));
                             }
                         }
                     }
