@@ -6,7 +6,10 @@
     <title>Dishcovery</title>
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" th:href="@{/css/mainPage.css}" />
+
     <style>
+        body { background:#f6f7fb; }
+
         .chat-container {
             max-width: 900px;
             margin: 30px auto;
@@ -37,30 +40,25 @@
             margin-bottom: 16px;
         }
 
-        .message.ai {
-            justify-content: flex-start;
-        }
-
-        .message.user {
-            justify-content: flex-end;
-        }
+        .message.bot { justify-content: flex-start; }
+        .message.user { justify-content: flex-end; }
 
         .bubble {
             max-width: 65%;
             padding: 14px 18px;
             border-radius: 16px;
-            line-height: 1.5;
             font-size: 15px;
+            line-height: 1.5;
         }
 
-        .ai .bubble {
+        .bot .bubble {
             background: #f3f4f6;
             border-top-left-radius: 4px;
         }
 
         .user .bubble {
             background: #ff6b42;
-            color:#ffffff;
+            color: #fff;
             border-top-right-radius: 4px;
         }
 
@@ -73,7 +71,7 @@
 
         .chat-input input {
             flex: 1;
-            padding: 12px 14px;
+            padding: 12px;
             border-radius: 12px;
             border: 1px solid #ddd;
             font-size: 15px;
@@ -88,118 +86,72 @@
             cursor: pointer;
         }
 
-        .chat-input button:hover {
-            opacity: 0.9;
-        }
-
-        /* 추천 카드 */
         .recipe-recommend {
-            margin-top: 10px;
-            padding: 14px;
-            border-radius: 12px;
-            background: #fff;
-            border: 1px solid #eee;
+            /*border-top: 1px solid #eee;*/
+            padding: 16px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
+            gap: 12px;
         }
 
-        .recipe-recommend img {
+        .recipe-card {
+            border: 1px solid #eee;
+            border-radius: 12px;
+            padding: 10px;
+            background: #fff;
+        }
+
+        .recipe-card img {
             width: 100%;
             border-radius: 10px;
-            margin-bottom: 8px;
-        }
-
-        .recipe-recommend h4 {
-            margin: 6px 0;
-            font-size: 16px;
         }
     </style>
-
 </head>
+
 <body>
-<form id="mainForm" name="mainForm" method="get" th:action="@{/searchRecipe}">
-    <div th:insert="fragments/header :: site-header"></div>
 
-    <input type="hidden" id="recipeId" name="recipeId">
-    <input type="hidden" id="gubun" name="gubun" value="recipe">
+<main class="chat-container">
 
-    <main class="page">
-        <section class="controls container">
-            <div class="segmented" role="tablist" aria-label="콘텐츠 종류">
-                <button type="button"   th:class="${rcpClassNm}"
-                        onclick="handleSegmentClick(this, '/pageGubun?gubun=recipe')"
-                        role="tab" aria-selected="true">레시피</button>
+    <div class="chat-header">
+        🤖 Dishcovery AI 레시피 추천
+    </div>
 
-                <button type="button"   th:class="${rankClassNm}"
-                        onclick="handleSegmentClick(this, '/pageGubun?gubun=rank')"
-                        role="tab" aria-selected="false">랭킹</button>
-                <button type="button"   th:class="${lastClassNm}"
-                        onclick="handleSegmentClick(this, '/pageGubun?gubun=last')"
-                        role="tab" aria-selected="false">룰렛추천</button>
-                <button type="button"   th:class="${aiClassNm}"
-                        onclick="handleSegmentClick(this, '/pageGubun?gubun=ai')"
-                        role="tab" aria-selected="false">AI추천</button>
+    <!-- 채팅 메시지 -->
+    <div class="chat-messages" id="chat-box">
+        <div class="message bot">
+            <div class="bubble">
+                안녕하세요 😊<br>
+                가지고 있는 재료나 먹고 싶은 메뉴를 알려주세요!
             </div>
-        </section>
+        </div>
+    </div>
 
-        <main class="chat-container">
+<!--    &lt;!&ndash; 레시피 결과 &ndash;&gt;-->
+    <div id="recipes" class="recipe-recommend"></div>
 
-            <div class="chat-header">
-                🤖 Dishcovery AI 레시피 추천
-            </div>
+    <!-- 입력 -->
+    <div class="chat-input">
+        <input type="text" id="user-input" placeholder="재료나 원하는 메뉴를 입력하세요">
+        <button type="button" id="send-btn">전송</button>
+    </div>
 
-            <div class="chat-messages" id="chatMessages">
+</main>
 
-                <!-- AI 첫 인사 -->
-                <div class="message ai">
-                    <div class="bubble">
-                        안녕하세요 😊<br>
-                        가지고 있는 재료나 먹고 싶은 메뉴를 알려주세요!
-                    </div>
-                </div>
-
-                <!-- 예시 사용자 -->
-                <div class="message user">
-                    <div class="bubble">
-                        닭가슴살이랑 계란 있어요
-                    </div>
-                </div>
-
-                <!-- AI 응답 + 추천 -->
-                <div class="message ai">
-                    <div class="bubble">
-                        좋아요! 이런 레시피는 어떠세요?
-
-                        <div class="recipe-recommend">
-                            <img src="/images/temp/recipe_sample.jpg" alt="레시피">
-                            <h4>닭가슴살 계란 볶음</h4>
-                            <p>간단하고 단백질 가득한 메뉴입니다 🍳</p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- 입력창 -->
-            <div class="chat-input">
-                <input type="text" placeholder="재료나 원하는 메뉴를 입력하세요">
-                <button>전송</button>
-            </div>
-
-        </main>
-
-    </main>
-</form>
-
-
-<script th:src="@{/js/mainPage.js}"></script>
 <script th:inline="javascript">
     /*<![CDATA[*/
-    const message = [[${msg}]];
+    const userId = /*[[${userId}]]*/ 1;
+    /*]]>*/
 
-    if (message) {
-        alert(message);
+
+    function confirmLogout(){
+        if(confirm("정말 로그아웃 하시겠습니까 ?")){
+            window.location.href = "/logout";
+        }
     }
 
 </script>
+
+<script src="/js/chat.js"></script>
 
 </body>
 </html>
