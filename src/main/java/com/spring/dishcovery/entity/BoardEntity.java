@@ -15,5 +15,4 @@ public class BoardEntity {
     private String writer;
     private LocalDateTime createdAt;
     private Integer viewCount;
-
 }
