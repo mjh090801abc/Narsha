@@ -23,7 +23,12 @@
     </insert>
 
     <select id="findByUserId" parameterType="string" resultType="com.spring.dishcovery.entity.UserEntity">
-        SELECT USER_ID, USER_NAME, USER_PSWD, USER_MAIL, JOIN_DATE
+        SELECT USER_ID,
+               USER_NAME,
+               USER_PSWD,
+               USER_MAIL,
+               JOIN_DATE,
+               USER_IMG_PATH
         FROM USER_MASTER
         WHERE USER_ID = #{userId}
     </select>
@@ -68,5 +73,34 @@
 
     </update>
 
+    <update id="updateUserInfo" parameterType="com.spring.dishcovery.entity.UserEntity">
+
+        UPDATE USER_MASTER
+        SET USER_MAIL = #{userMail}
+          ,USER_NAME = #{userName}
+        WHERE USER_ID = #{userId}
+
+    </update>
+
+    <!-- 프로필 이미지 수정 -->
+    <update id="updateProfileImage" parameterType="com.spring.dishcovery.entity.UserEntity">
+        UPDATE USER_MASTER
+        SET USER_IMG_PATH = #{userImgPath}
+        WHERE USER_ID = #{userId}
+    </update>
+
+    <!-- 기존 비밀번호 조회 -->
+    <select id="selectPassword" resultType="string">
+        SELECT USER_PSWD
+        FROM USER_MASTER
+        WHERE USER_ID = #{userId}
+    </select>
+
+    <!-- 비밀번호 변경 -->
+    <update id="updatePassword" parameterType="com.spring.dishcovery.entity.UserEntity">
+        UPDATE USER_MASTER
+          SET USER_PSWD = #{newPw}
+        WHERE USER_ID = #{userId}
+    </update>
 
 </mapper>

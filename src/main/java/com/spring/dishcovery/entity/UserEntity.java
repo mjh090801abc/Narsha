@@ -21,6 +21,6 @@ public class UserEntity {
     private String newPwCheck;
    // private String profileImg;
 
-    List<MultipartFile> profileImg;;
+    private MultipartFile profileImg;
 
 }

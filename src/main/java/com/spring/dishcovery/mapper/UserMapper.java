@@ -20,6 +20,14 @@ public interface UserMapper {
 
     public String findPasswordByUserId(String userId);
 
+    public void updateUserInfo(String userId, String userMail, String userName);
+
+    public void updateProfileImage(String userId, String userImgPath);
+
+    public String selectPassword(String userId);
+
+    public void updatePassword(String userId, String newPw);
+
 }
 
 
