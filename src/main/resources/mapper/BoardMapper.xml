@@ -2,42 +2,69 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spring.dishcovery.mapper.BoardMapper">
 
+    <!-- 게시글 작성 -->
     <insert id="insertBoard">
         INSERT INTO board (
-        title,
-        content,
-        writer,
-        created_at
+            title,
+            content,
+            writer,
+            created_at
         ) VALUES (
-        #{title},
-        #{content},
-        #{writer},
-        NOW()
-        )
+                     #{title},
+                     #{content},
+                     #{writer},
+                     NOW()
+                 )
     </insert>
 
+    <!-- 게시글 목록 조회 -->
     <select id="selectBoardList"
             resultType="com.spring.dishcovery.entity.BoardEntity">
         SELECT
-        board_id,
-        title,
-        content,
-        writer,
-        created_at
+            board_id,
+            title,
+            content,
+            writer,
+            created_at,
+            view_count
         FROM board
         ORDER BY board_id DESC
     </select>
 
+    <!-- 게시글 상세 조회 -->
     <select id="selectBoardById"
             resultType="com.spring.dishcovery.entity.BoardEntity">
         SELECT
-        board_id,
-        title,
-        content,
-        writer,
-        created_at
+            board_id,
+            title,
+            content,
+            writer,
+            created_at,
+            view_count
         FROM board
         WHERE board_id = #{boardId}
     </select>
+
+    <!-- 게시글 수정 -->
+    <update id="updateBoard">
+        UPDATE board
+        SET
+            title = #{title},
+            content = #{content}
+        WHERE board_id = #{boardId}
+    </update>
+
+    <!-- 게시글 삭제 -->
+    <delete id="deleteBoard">
+        DELETE FROM board
+        WHERE board_id = #{boardId}
+    </delete>
+
+    <!-- 조회수 증가 -->
+    <update id="increaseViewCount">
+        UPDATE board
+        SET view_count = view_count + 1
+        WHERE board_id = #{boardId}
+    </update>
 
 </mapper>
