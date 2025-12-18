@@ -35,5 +35,20 @@
     </main>
 </main>
 
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    const errorMessage = [[${error}]];
+    const successMessage = [[${success}]];
+
+    if (errorMessage) {
+        alert(errorMessage);
+    }
+
+    if (successMessage) {
+        alert(successMessage);
+    }
+    /*]]>*/
+</script>
+
 </body>
 </html>
