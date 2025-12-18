@@ -14,4 +14,6 @@ public class BoardEntity {
     private String content;
     private String writer;
     private LocalDateTime createdAt;
+    private Integer viewCount;  // 조회수 추가
+
 }
