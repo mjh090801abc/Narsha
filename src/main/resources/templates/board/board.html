@@ -8,43 +8,41 @@
 </head>
 
 <body>
-<header class="topbar">
-    <div th:insert="fragments/header :: site-header"></div>
-</header>
+    <header class="topbar">
+        <div th:insert="fragments/header :: site-header"></div>
+    </header>
 
-<main class="container">
+    <form id="mainForm" name="mainForm">
 
-    <main class="board-container">
 
-        <h1 class="board-title">게시판</h1>
+        <main class="container">
 
-        <div class="board-list">
+            <main class="board-container">
+                <h1 class="board-title">게시판</h1>
+                <div class="board-list">
+                    <!-- DB에서 가져온 게시글 목록 -->
+                    <div class="board-item"
+                         th:each="item : ${boardList}"
+                         th:onclick="|location.href='/board/boardDetail?boardId=' + ${item.board.boardId}|">
 
-            <!-- DB에서 가져온 게시글 목록 -->
-            <div class="board-item"
-                 th:each="item : ${boardList}"
-                 th:onclick="|location.href='/board/boardDetail?boardId=' + ${item.board.boardId}|">
+                        <div class="board-item-title" th:text="${item.board.title}">제목</div>
 
-                <div class="board-item-title" th:text="${item.board.title}">제목</div>
+                        <div class="board-item-info">
+                            <span th:text="${#temporals.format(item.board.createdAt, 'yyyy.MM.dd')}">2025.01.15</span>
+                            <span>조회수 <span th:text="${item.board.viewCount}">0</span></span>
+                        </div>
 
-                <div class="board-item-info">
-                    <span th:text="${#temporals.format(item.board.createdAt, 'yyyy.MM.dd')}">2025.01.15</span>
-                    <span>조회수 <span th:text="${item.board.viewCount}">0</span></span>
+                        <div class="board-item-actions">
+                            <button class="comment-btn">
+                                💬 댓글 <span th:text="${item.commentCount}">0</span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="board-item-actions">
-                    <button class="comment-btn">
-                        💬 댓글 <span th:text="${item.commentCount}">0</span>
-                    </button>
-                </div>
-            </div>
-
-        </div>
-    </main>
-
-    <a href="/board/boardWrite" class="write-btn">+</a>
-
-</main>
+            </main>
+            <a href="/board/boardWrite" class="write-btn">+</a>
+        </main>
+    </form>
 
 <script th:inline="javascript">
     /*<![CDATA[*/
