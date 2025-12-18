@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.dishcovery.mapper.BoardMapper">
+
+    <insert id="insertBoard">
+        INSERT INTO board (
+        title,
+        content,
+        writer,
+        created_at
+        ) VALUES (
+        #{title},
+        #{content},
+        #{writer},
+        NOW()
+        )
+    </insert>
+
+    <select id="selectBoardList"
+            resultType="com.spring.dishcovery.entity.BoardEntity">
+        SELECT
+        board_id,
+        title,
+        content,
+        writer,
+        created_at
+        FROM board
+        ORDER BY board_id DESC
+    </select>
+
+    <select id="selectBoardById"
+            resultType="com.spring.dishcovery.entity.BoardEntity">
+        SELECT
+        board_id,
+        title,
+        content,
+        writer,
+        created_at
+        FROM board
+        WHERE board_id = #{boardId}
+    </select>
+
+</mapper>
