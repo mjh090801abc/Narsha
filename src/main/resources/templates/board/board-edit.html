@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>글 수정 | Dishcovery</title>
+  <link rel="stylesheet" th:href="@{/css/mainPage.css}">
+  <link rel="stylesheet" th:href="@{/css/board.css}" />
+</head>
+<body>
+
+<header class="topbar">
+  <div th:insert="fragments/header :: site-header"></div>
+</header>
+
+<main class="container">
+  <main class="board-container">
+
+    <h1 class="board-title">게시글 수정</h1>
+
+    <form action="/board/boardEdit" method="post">
+      <input type="hidden" name="boardId" th:value="${board.boardId}">
+
+      <div class="write-box">
+        <label>제목</label>
+        <input type="text"
+               name="title"
+               th:value="${board.title}"
+               placeholder="제목을 입력하세요">
+
+        <label>내용</label>
+        <textarea name="content"
+                  placeholder="내용을 입력하세요"
+                  th:text="${board.content}"></textarea>
+
+        <div class="write-actions">
+          <button type="button" class="cancel-btn" onclick="history.back()">취소</button>
+          <button type="submit" class="submit-btn">수정</button>
+        </div>
+      </div>
+    </form>
+
+  </main>
+</main>
+
+</body>
+</html>
